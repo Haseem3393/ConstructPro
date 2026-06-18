@@ -1,0 +1,239 @@
+Day 1
+HTML Tags
+1. HTML Elements
+Inline Element
+Content 
+Irikkure
+ 
+Alavukku
+ 
+Mattum
+ than 
+Space 
+edukkum
+Width and Height Set Panna
+ 
+Mudiyathu
+\
+Span ,
+ a , 
+img
+ , b
+Block Elements
+Full Width 
+A
+yum
+ 
+Edukkum
+New Line le Start 
+A
+ahum
+Width and Height Set 
+Pannalaam
+DIV,
+ 
+P,
+ H
+1,
+ Section
+Inline Block
+Width and Height Set 
+Pannalaam
+2. HTML Tags
+Basic tags
+ 
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+&lt;a&gt; - 
+A
+nchor 
+T
+ag
+ 
+oru
+ page le 
+irunthu
+ 
+innoru
+ 
+pagr
+ 
+kku
+ change 
+aahureththukku
+ easy access 
+kku
+&lt;H1 – H6&gt;
+ - 
+Heading Tag
+Hea
+ding use 
+panrethukku
+&lt;p&gt; - 
+P
+aragraph Tag
+P
+aragraph use 
+panrethukku
+&lt;b&gt; - 
+Bold Tag
+ / 
+&lt;St
+rong&gt;
+ - Strong Tag
+Bold panni 
+kaatturethukku
+&lt;
+i
+&gt; - 
+Italic
+ Tag
+ / 
+&lt;
+em
+&gt;
+ Emphasize Tag
+Italic style le show 
+pannum
+&lt;mark&gt; - 
+Mark Tag
+Higlight
+ panni 
+kaatturethukku
+&lt;small&gt; - 
+Small Tag
+Small panni 
+kaatturethukku
+&lt;del&gt; 
+- 
+Delete Tag
+Like price change 
+pannum
+ 
+poathu
+ 
+$200
+ $150
+&lt;ins&gt; - 
+Inserted Tag
+Underline panni 
+kaatturethukku
+Day 2
+Version Controller
+Main Function
+Git 
+init
+ 
+(
+Initialize 
+panre
+)
+Git 
+add .
+ 
+(untraced le 
+irikkiraththa
+ 
+track 
+panre
+)
+Git commit -m “message” 
+(add 
+pannaththa
+ commit 
+panre
+)
+Next commit 
+panre
+Branches 
+iruntha
+ branches 
+create 
+panre
+    Git checkout -b 
+name
+Git log
+ --
+oneline
+ 
+(
+commit 
+pannaththa
+ check panni 
+paakkure
+)
+Git checkout 
+branch 
+name
+  
+(
+bran
+ch change 
+aahure
+)
+Git checkout 
+commit id
+ 
+(
+commit change 
+aahurethukku
+)
+Day 4
+PHP
+1. CRUD
+If (
+isset
+ 
+)
+$
+nameValue
+ = $-P
+OST[‘name’]
+$
+phone
+Value
+ = $-POST[‘phone’]
+$
+address
+Value
+ = $-POST[‘address’]
+e
+cho 
+$
+nameValue
+ 
+ec
+ho 
+$
+phoneValue
+ 
+                  
+echo 
+$
+addressValue
+Table show 
+pannuthal
+   Describe 
+basic-crud
+ 
+Note
+ – URL parameter
+Question
+Why name attribute 
+mattum
+ database 
+poahuthu
+ ,
+ id 
+poahatha
+Server 
+kku
+ function 
+kku
+ 

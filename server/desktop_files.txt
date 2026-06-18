@@ -1,0 +1,49 @@
+
+
+    Directory: C:\Users\User\OneDrive\Desktop
+
+
+Mode                 LastWriteTime         Length Name                                 
+----                 -------------         ------ ----                                 
+d-----         3/30/2026   7:26 PM                Bootstrap                            
+d-----         6/18/2026   3:23 PM                construction-pm                      
+d-----         6/16/2026   1:59 PM                Crud Node                            
+d-----          5/5/2026  11:48 AM                D-Tailw                              
+d-----         5/20/2026   3:21 PM                FInal JS                             
+d-----         3/31/2026   7:26 PM                Java Script                          
+d-----         3/31/2026   2:17 PM                JS                                   
+d-----         5/12/2026  11:45 AM                kalmunai-ds-system                   
+d-----          4/9/2026   1:49 PM                Laraval                              
+d-----         5/26/2026   9:25 AM                Level 3                              
+d-----         2/12/2026   9:19 AM                New folder                           
+d-----          5/4/2026   2:18 PM                New folder (2)                       
+d-----         5/12/2026  12:25 PM                New folder (3)                       
+d-----          6/9/2026   9:13 AM                Next                                 
+d-----          6/9/2026   7:37 PM                POS                                  
+d-----          5/5/2026  12:01 PM                Practical Tailwind                   
+d-----         6/11/2026   9:52 AM                React                                
+d-----         4/16/2026   9:42 AM                React Practice                       
+d-----         6/11/2026   4:41 PM                Student                              
+d-----         6/16/2026  11:31 AM                Super-market                         
+d-----          4/1/2026  11:09 AM                Tailwind Basic                       
+d-----          4/6/2026  11:52 AM                Tailwind Intermediate                
+d-----         4/23/2026   9:37 AM                Tailwind Project                     
+d-----         5/14/2026  11:20 AM                Vite                                 
+-a----         6/11/2026   2:05 PM          19357 Abdul Makaf Abdul Munaf Haseem.docx  
+-a----         5/13/2026   4:50 PM          86216 Abdul Makaf Abdul Munaf Haseem.pdf   
+-a----          6/7/2026   1:34 PM           2398 Antigravity.lnk                      
+-a----         4/20/2026   2:05 PM           2267 ClickUp.lnk                          
+-a----         1/14/2026   4:00 PM           1339 Desklog-Client.lnk                   
+-a---l        12/16/2025  12:53 PM           2372 GitHub Desktop.lnk                   
+-a---l        12/16/2025   2:55 PM         144359 Haseem.jpeg                          
+-a---l        12/22/2025  10:43 AM          21094 Internship.docx                      
+-a----         5/14/2026   2:28 PM            633 Laragon.lnk                          
+-a----        12/30/2025   2:10 PM           6892 Learn PHP.doc                        
+-a---l        11/28/2024   9:30 PM           2484 Mohammed (Haseem) - Chrome.lnk       
+-a----         6/17/2026  10:49 AM           1934 Postman.lnk                          
+-a----         5/21/2026   5:27 PM          66123 Project.docx                         
+-a----          5/5/2026   3:27 PM          25117 Token.pdf                            
+-a---l          5/5/2024   8:56 AM           2451 Word.lnk                             
+-a----        12/15/2025  12:00 PM           1934 Zoom Workplace - Copy.lnk            
+
+
