@@ -52,25 +52,25 @@ const ChequesPage: React.FC = () => {
     switch (status) {
       case 'CLEARED':
         return (
-          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-green-500/10 text-green-400 border border-green-500/25">
+          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/22">
             Cleared
           </span>
         )
       case 'BOUNCED':
         return (
-          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-rose-500/10 text-rose-455 border border-rose-500/25 animate-bounce">
+          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-rose-500/10 text-rose-400 border border-rose-500/22 animate-pulse">
             Bounced
           </span>
         )
       case 'CANCELLED':
         return (
-          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-zinc-800 text-zinc-500 border border-zinc-750">
+          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-slate-800/50 text-slate-400 border border-slate-700/30">
             Cancelled
           </span>
         )
       default:
         return (
-          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-amber-500/10 text-amber-400 border border-amber-500/20">
+          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-amber-500/10 text-amber-400 border border-amber-500/22">
             Issued
           </span>
         )
@@ -90,16 +90,16 @@ const ChequesPage: React.FC = () => {
     <SidebarLayout>
       <div className="space-y-6">
         {/* Header */}
-        <div className="border-b border-zinc-800 pb-5 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+        <div className="border-b border-[#1a2535] pb-5 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
           <div>
-            <h1 className="text-3xl font-extrabold text-white">Cheques Register</h1>
-            <p className="text-zinc-400 text-sm mt-1">Manage corporate cheque payments, bank clearings, and transaction statuses</p>
+            <h1 className="text-3xl font-black text-white tracking-tight">Cheques Register</h1>
+            <p className="text-slate-400 text-xs font-semibold mt-1">Manage corporate cheque payments, bank clearings, and transaction statuses</p>
           </div>
 
           {isEditable && (
             <Link
               to="/cheques/new"
-              className="inline-flex items-center justify-center px-4 py-2.5 bg-violet-600 hover:bg-violet-700 text-white rounded-lg transition-colors font-bold text-xs uppercase tracking-wider shadow-lg shadow-violet-600/10 shrink-0"
+              className="inline-flex items-center justify-center px-4 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-xl transition-all font-bold text-xs uppercase tracking-wider shadow-lg shadow-blue-500/10 shrink-0"
             >
               <Plus className="h-4 w-4 mr-2" /> Issue Cheque
             </Link>
@@ -107,15 +107,15 @@ const ChequesPage: React.FC = () => {
         </div>
 
         {/* Filter Toolbar */}
-        <div className="bg-[#14161f] border border-zinc-800 rounded-xl p-4 shadow-xl">
+        <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-4 shadow-xl">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl">
             {/* Status Filter */}
             <div>
-              <label className="block text-[9px] font-black text-zinc-500 uppercase tracking-widest mb-1.5">Filter Status</label>
+              <label className="block text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1.5">Filter Status</label>
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3 py-2 text-xs font-semibold text-zinc-350 focus:outline-none focus:border-violet-600 cursor-pointer"
+                className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2 text-xs font-semibold text-slate-350 focus:outline-none focus:border-blue-500/60 transition-all cursor-pointer"
               >
                 <option value="">All Statuses</option>
                 <option value="ISSUED">Issued (Uncleared)</option>
@@ -127,11 +127,11 @@ const ChequesPage: React.FC = () => {
 
             {/* Bank Filter */}
             <div>
-              <label className="block text-[9px] font-black text-zinc-500 uppercase tracking-widest mb-1.5">Filter Bank</label>
+              <label className="block text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1.5">Filter Bank</label>
               <select
                 value={bankFilter}
                 onChange={(e) => setBankFilter(e.target.value)}
-                className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3 py-2 text-xs font-semibold text-zinc-350 focus:outline-none focus:border-violet-600 cursor-pointer"
+                className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2 text-xs font-semibold text-slate-350 focus:outline-none focus:border-blue-500/60 transition-all cursor-pointer"
               >
                 <option value="">All Banks</option>
                 {bankNamesList.map((b) => (
@@ -144,24 +144,24 @@ const ChequesPage: React.FC = () => {
 
         {/* Cheques list table */}
         {isLoading ? (
-          <div className="flex flex-col items-center justify-center py-20 space-y-3 bg-[#14161f] border border-zinc-800 rounded-xl shadow-xl">
-            <Loader2 className="h-8 w-8 text-violet-500 animate-spin" />
-            <p className="text-xs text-zinc-400 font-medium">Synchronizing cheques journal...</p>
+          <div className="flex flex-col items-center justify-center py-20 space-y-3 bg-[#0d1526] border border-[#1a2535] rounded-xl shadow-xl">
+            <Loader2 className="h-8 w-8 text-blue-500 animate-spin" />
+            <p className="text-xs text-slate-400 font-semibold">Synchronizing cheques journal...</p>
           </div>
         ) : isError ? (
-          <div className="p-16 text-center text-rose-455 bg-[#14161f] border border-rose-500/20 rounded-xl shadow-xl">
+          <div className="p-16 text-center text-rose-455 bg-[#0d1526] border border-rose-500/22 rounded-xl shadow-xl">
             Failed to load cheques logs.
           </div>
         ) : !cheques || cheques.length === 0 ? (
-          <div className="p-16 text-center text-zinc-550 text-xs font-semibold bg-[#14161f] border border-zinc-800 rounded-xl shadow-xl">
+          <div className="p-16 text-center text-slate-500 text-xs font-semibold bg-[#0d1526] border border-[#1a2535] rounded-xl shadow-xl">
             No cheque records registered.
           </div>
         ) : (
-          <div className="bg-[#14161f] border border-zinc-800 rounded-xl overflow-hidden shadow-xl">
+          <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl overflow-hidden shadow-xl">
             <div className="overflow-x-auto w-full">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="text-[10px] text-zinc-500 font-bold tracking-wider uppercase bg-[#181a24]/30 border-b border-zinc-800">
+                  <tr className="text-[10px] text-slate-500 font-bold tracking-wider uppercase bg-white/[0.005] border-b border-[#1a2535]">
                     <th className="py-3.5 px-6">CHEQUE NO</th>
                     <th className="py-3.5 px-4">BANK</th>
                     <th className="py-3.5 px-4">PAYEE NAME</th>
@@ -171,17 +171,17 @@ const ChequesPage: React.FC = () => {
                     <th className="py-3.5 px-6">STATUS</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-zinc-800/60 text-xs">
+                <tbody className="divide-y divide-[#1a2535] text-xs">
                   {cheques.map((c) => (
-                    <tr key={c.id} className="hover:bg-[#1a1c27]/20 transition-colors">
+                    <tr key={c.id} className="hover:bg-white/[0.02] transition-colors">
                       {/* Cheque No */}
                       <td className="py-4 px-6 font-extrabold text-white">{c.chequeNo}</td>
 
                       {/* Bank */}
-                      <td className="py-4 px-4 text-zinc-300 font-semibold">{c.bank}</td>
+                      <td className="py-4 px-4 text-slate-300 font-semibold">{c.bank}</td>
 
                       {/* Payee */}
-                      <td className="py-4 px-4 text-zinc-300 font-medium">{c.payee}</td>
+                      <td className="py-4 px-4 text-slate-300 font-medium">{c.payee}</td>
 
                       {/* Amount */}
                       <td className="py-4 px-4 text-right text-white font-black text-sm">
@@ -189,16 +189,16 @@ const ChequesPage: React.FC = () => {
                       </td>
 
                       {/* Date */}
-                      <td className="py-4 px-4 text-zinc-400 font-medium">{formatDate(c.issueDate)}</td>
+                      <td className="py-4 px-4 text-slate-400 font-medium">{formatDate(c.issueDate)}</td>
 
                       {/* Linked Payable */}
-                      <td className="py-4 px-4 text-zinc-450 font-medium max-w-[150px] truncate" title={c.payable?.description || ''}>
+                      <td className="py-4 px-4 text-slate-400 font-medium max-w-[150px] truncate" title={c.payable?.description || ''}>
                         {c.payable ? (
                           <span>
                             Bill Ref: {c.payable.reference || c.payable.id.slice(-6).toUpperCase()}
                           </span>
                         ) : (
-                          <span className="text-zinc-600 font-semibold italic">Unlinked payment</span>
+                          <span className="text-slate-500 font-semibold italic">Unlinked payment</span>
                         )}
                       </td>
 
@@ -210,7 +210,7 @@ const ChequesPage: React.FC = () => {
                               value={c.status}
                               onChange={(e) => handleStatusChange(c.id, e.target.value)}
                               disabled={updateStatusMutation.isPending}
-                              className="bg-[#1c1d26] border border-zinc-800 rounded px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wide focus:outline-none focus:border-violet-650 cursor-pointer text-zinc-200"
+                              className="bg-[#0b1220] border border-[#1a2535] rounded px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wide focus:outline-none focus:border-blue-500/60 cursor-pointer text-slate-200"
                             >
                               <option value="ISSUED">Issued</option>
                               <option value="CLEARED">Cleared</option>

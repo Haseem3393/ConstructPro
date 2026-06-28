@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import prisma from '../config/database'
+import { logAudit } from '../utils/audit'
 
 export const getAttendanceByDate = async (req: Request, res: Response) => {
   try {
@@ -139,6 +140,8 @@ export const saveAttendance = async (req: Request, res: Response) => {
         })
       }
     }
+
+    await logAudit(user?.id, user?.name || 'System', 'CREATE', 'Attendance', `Saved/updated attendance for project ID: ${projectId} on date ${date}`)
 
     res.json({ message: 'Attendance saved successfully', records: savedRecords })
   } catch (error) {
@@ -364,6 +367,8 @@ export const updateAttendanceRecord = async (req: Request, res: Response) => {
         },
       })
     }
+
+    await logAudit(user?.id, user?.name || 'System', 'UPDATE', 'Attendance', `Updated attendance record ID: ${id} (new totalPay: ${updated.totalPay})`)
 
     res.json({ message: 'Attendance record updated successfully', record: updated })
   } catch (error) {

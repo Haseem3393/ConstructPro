@@ -62,16 +62,16 @@ const PayablesPage: React.FC = () => {
     <SidebarLayout>
       <div className="space-y-6">
         {/* Header */}
-        <div className="border-b border-zinc-800 pb-5 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+        <div className="border-b border-[#1a2535] pb-5 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
           <div>
-            <h1 className="text-3xl font-extrabold text-white">Accounts Payable</h1>
-            <p className="text-zinc-400 text-sm mt-1">Track pending invoices, sub-contractor bills, and outstanding payables liabilities</p>
+            <h1 className="text-3xl font-black text-white tracking-tight">Accounts Payable</h1>
+            <p className="text-slate-400 text-xs font-semibold mt-1">Track pending invoices, sub-contractor bills, and outstanding payables liabilities</p>
           </div>
 
           {isEditable && (
             <Link
               to="/payables/new"
-              className="inline-flex items-center justify-center px-4 py-2.5 bg-violet-600 hover:bg-violet-700 text-white rounded-lg transition-colors font-bold text-xs uppercase tracking-wider shadow-lg shadow-violet-600/10 shrink-0"
+              className="inline-flex items-center justify-center px-4 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-xl transition-all font-bold text-xs uppercase tracking-wider shadow-lg shadow-blue-500/10 shrink-0"
             >
               <Plus className="h-4 w-4 mr-2" /> New Payable
             </Link>
@@ -79,30 +79,30 @@ const PayablesPage: React.FC = () => {
         </div>
 
         {/* Outstanding Liability metrics */}
-        <div className="bg-[#14161f] border border-zinc-800 rounded-xl p-5 shadow-xl flex items-center justify-between">
+        <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-5 shadow-xl flex items-center justify-between">
           <div className="space-y-1">
-            <span className="block text-[9px] font-black text-zinc-550 uppercase tracking-widest">Total Outstanding Liabilities</span>
+            <span className="block text-[9px] font-black text-slate-500 uppercase tracking-widest">Total Outstanding Liabilities</span>
             <span className="block text-3xl font-black text-rose-455">
               {isLoading ? (
-                <Loader2 className="h-6 w-6 animate-spin text-violet-500 inline-block" />
+                <Loader2 className="h-6 w-6 animate-spin text-blue-500 inline-block" />
               ) : (
                 formatCurrency(data?.totalOutstanding || 0)
               )}
             </span>
           </div>
-          <div className="p-3 rounded-lg bg-rose-500/10 text-rose-450 border border-rose-500/15">
+          <div className="p-3 rounded-xl bg-rose-500/10 text-rose-400 border border-rose-500/22">
             <ShieldAlert className="h-6 w-6" />
           </div>
         </div>
 
         {/* Filter Toolbar */}
-        <div className="bg-[#14161f] border border-zinc-800 rounded-xl p-4 shadow-xl">
+        <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-4 shadow-xl">
           <div className="max-w-xs">
-            <label className="block text-[9px] font-black text-zinc-500 uppercase tracking-widest mb-1.5">Filter by Invoice Status</label>
+            <label className="block text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1.5">Filter by Invoice Status</label>
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3 py-2 text-xs font-semibold text-zinc-350 focus:outline-none focus:border-violet-600 cursor-pointer"
+              className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2 text-xs font-semibold text-slate-350 focus:outline-none focus:border-blue-500/60 transition-all cursor-pointer"
             >
               <option value="">All Statuses</option>
               <option value="PENDING">Pending (Unpaid)</option>
@@ -114,24 +114,24 @@ const PayablesPage: React.FC = () => {
 
         {/* Payables List Table */}
         {isLoading ? (
-          <div className="flex flex-col items-center justify-center py-20 space-y-3 bg-[#14161f] border border-zinc-800 rounded-xl shadow-xl">
-            <Loader2 className="h-8 w-8 text-violet-500 animate-spin" />
-            <p className="text-xs text-zinc-400 font-medium">Synchronizing invoices...</p>
+          <div className="flex flex-col items-center justify-center py-20 space-y-3 bg-[#0d1526] border border-[#1a2535] rounded-xl shadow-xl">
+            <Loader2 className="h-8 w-8 text-blue-500 animate-spin" />
+            <p className="text-xs text-slate-400 font-semibold">Synchronizing invoices...</p>
           </div>
         ) : isError ? (
-          <div className="p-16 text-center text-rose-455 bg-[#14161f] border border-rose-500/20 rounded-xl shadow-xl">
+          <div className="p-16 text-center text-rose-455 bg-[#0d1526] border border-rose-500/22 rounded-xl shadow-xl">
             Failed to load payables invoices.
           </div>
         ) : !data?.payables || data.payables.length === 0 ? (
-          <div className="p-16 text-center text-zinc-550 text-xs font-semibold bg-[#14161f] border border-zinc-800 rounded-xl shadow-xl">
+          <div className="p-16 text-center text-slate-500 text-xs font-semibold bg-[#0d1526] border border-[#1a2535] rounded-xl shadow-xl">
             No accounts payables records found.
           </div>
         ) : (
-          <div className="bg-[#14161f] border border-zinc-800 rounded-xl overflow-hidden shadow-xl">
+          <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl overflow-hidden shadow-xl">
             <div className="overflow-x-auto w-full">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="text-[10px] text-zinc-500 font-bold tracking-wider uppercase bg-[#181a24]/30 border-b border-zinc-800">
+                  <tr className="text-[10px] text-slate-500 font-bold tracking-wider uppercase bg-white/[0.005] border-b border-[#1a2535]">
                     <th className="py-3.5 px-6">PAYEE (SUPPLIER / SUBCONTRACTOR)</th>
                     <th className="py-3.5 px-4">PROJECT</th>
                     <th className="py-3.5 px-4">DESCRIPTION / REF</th>
@@ -140,27 +140,27 @@ const PayablesPage: React.FC = () => {
                     <th className="py-3.5 px-6">STATUS</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-zinc-800/60 text-xs">
+                <tbody className="divide-y divide-[#1a2535] text-xs">
                   {data.payables.map((p) => {
                     const payeeName = p.supplier?.name || p.subcontractor?.name || 'Generic Payee'
                     const payeeType = p.supplier ? 'Supplier' : 'Subcontractor'
 
                     return (
-                      <tr key={p.id} className="hover:bg-[#1a1c27]/20 transition-colors">
+                      <tr key={p.id} className="hover:bg-white/[0.02] transition-colors">
                         {/* Payee */}
                         <td className="py-3.5 px-6 font-semibold">
-                          <span className="block text-zinc-200">{payeeName}</span>
-                          <span className="block text-[9px] text-zinc-550 font-bold uppercase tracking-wider mt-0.5">{payeeType}</span>
+                          <span className="block text-slate-200">{payeeName}</span>
+                          <span className="block text-[9px] text-slate-500 font-bold uppercase tracking-wider mt-0.5">{payeeType}</span>
                         </td>
 
                         {/* Project */}
-                        <td className="py-3.5 px-4 text-zinc-300 font-semibold">{p.project?.name}</td>
+                        <td className="py-3.5 px-4 text-slate-300 font-semibold">{p.project?.name}</td>
 
                         {/* Description / Reference */}
-                        <td className="py-3.5 px-4 text-zinc-400 max-w-[200px] truncate leading-normal" title={p.description || ''}>
-                          <span className="block text-zinc-300 font-medium truncate">{p.description || 'No description'}</span>
+                        <td className="py-3.5 px-4 text-slate-400 max-w-[200px] truncate leading-normal" title={p.description || ''}>
+                          <span className="block text-slate-300 font-medium truncate">{p.description || 'No description'}</span>
                           {p.reference && (
-                            <span className="inline-block mt-0.5 text-[9px] font-black text-violet-400 uppercase bg-violet-500/5 border border-violet-500/10 px-1.5 rounded">
+                            <span className="inline-block mt-0.5 text-[9px] font-black text-blue-405 bg-blue-500/10 border border-blue-500/22 px-1.5 py-0.2 rounded-lg">
                               Ref: {p.reference}
                             </span>
                           )}
@@ -172,7 +172,7 @@ const PayablesPage: React.FC = () => {
                         </td>
 
                         {/* Due Date */}
-                        <td className="py-3.5 px-4 text-zinc-400 font-medium">{formatDate(p.dueDate)}</td>
+                        <td className="py-3.5 px-4 text-slate-400 font-medium">{formatDate(p.dueDate)}</td>
 
                         {/* Status */}
                         <td className="py-3.5 px-6">

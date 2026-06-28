@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import prisma from '../config/database'
+import { logAudit } from '../utils/audit'
 
 export const getMaterials = async (req: Request, res: Response) => {
   try {
@@ -136,6 +137,8 @@ export const createProjectMaterial = async (req: Request, res: Response) => {
       },
     })
 
+    await logAudit(req.user?.id, req.user?.name || 'System', 'CREATE', 'Material', `Created material: ${material.name} in project ID: ${projectId}`)
+
     res.status(201).json(material)
   } catch (error) {
     console.error('Error creating project material:', error)
@@ -215,6 +218,8 @@ export const recordStockIn = async (req: Request, res: Response) => {
       return { material: updatedMaterial, transaction, expense: expenseRecord }
     })
 
+    await logAudit(user?.id, user?.name || 'System', 'CREATE', 'MaterialTransaction', `Recorded Stock In: ${quantityNum} ${material.unit} of ${material.name} in project ID: ${projectId}`)
+
     res.json(result)
   } catch (error) {
     console.error('Error recording stock-in:', error)
@@ -275,6 +280,8 @@ export const recordStockOut = async (req: Request, res: Response) => {
       return { material: updatedMaterial, transaction }
     })
 
+    await logAudit(user?.id, user?.name || 'System', 'CREATE', 'MaterialTransaction', `Recorded Stock Out: ${quantityNum} ${material.unit} of ${material.name} in project ID: ${projectId}`)
+
     res.json(result)
   } catch (error) {
     console.error('Error recording stock-out:', error)
@@ -309,6 +316,8 @@ export const updateProjectMaterial = async (req: Request, res: Response) => {
       },
     })
 
+    await logAudit(req.user?.id, req.user?.name || 'System', 'UPDATE', 'Material', `Updated material: ${updatedMaterial.name} in project ID: ${projectId}`)
+
     res.json(updatedMaterial)
   } catch (error) {
     console.error('Error updating material:', error)
@@ -332,6 +341,8 @@ export const deleteProjectMaterial = async (req: Request, res: Response) => {
     await prisma.material.delete({
       where: { id: materialId },
     })
+
+    await logAudit(req.user?.id, req.user?.name || 'System', 'DELETE', 'Material', `Deleted material ID: ${materialId} in project ID: ${projectId}`)
 
     res.json({ message: 'Material deleted successfully' })
   } catch (error) {

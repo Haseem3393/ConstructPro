@@ -5,6 +5,7 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 enum UserRole {
@@ -115,6 +116,7 @@ model Project {
   payables      Payable[]
   contracts     Contract[]
   changeOrders  ChangeOrder[]
+  documents     Document[]
 }
 
 
@@ -533,6 +535,7 @@ model Subcontractor {
   email     String?
   address   String?
   payables  Payable[]
+  contracts Contract[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 }
@@ -660,5 +663,73 @@ model ChangeOrder {
 
   @@index([projectId])
   @@index([contractId])
+}
+
+model Document {
+  id                 String   @id @default(cuid())
+  name               String
+  type               String   // PDF, Blueprint, Contract, etc.
+  url                String
+  sharedWithClient   Boolean  @default(false)
+  
+  projectId          String
+  project            Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@index([projectId])
+}
+
+model CompanySettings {
+  id          String   @id @default("company-settings")
+  name        String   @default("Munaf & Sons Contractors")
+  logoUrl     String?
+  address     String   @default("Kandy Road, Colombo")
+  phone       String   @default("+94 11 234 5678")
+  email       String   @default("info@munafandsons.com")
+  vatNo       String   @default("VAT-1234567-89")
+  currency    String   @default("LKR")
+  workingDays String   @default("Mon-Sat")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model CategorySetting {
+  id        String   @id @default(cuid())
+  type      String   // ITEM_TYPE, UNIT, BRAND, ITEM_CATEGORY, EXPENSE_CATEGORY
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([type, name])
+}
+
+model RolePermission {
+  id          String   @id @default(cuid())
+  role        String   @unique // ADMIN, PROJECT_MANAGER, SUPERVISOR, CLIENT
+  permissions Json     // permission matrix JSON
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  timestamp DateTime @default(now())
+  userId    String?
+  userName  String
+  action    String   // CREATE, UPDATE, DELETE
+  module    String   // Project, Expense, Material, etc.
+  details   String
+  createdAt DateTime @default(now())
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  type      String   // BUDGET_EXCEEDED, BUDGET_WARNING, TASK_OVERDUE, LOW_STOCK, MILESTONE_COMPLETED, PAYMENT_DUE
+  message   String
+  read      Boolean  @default(false)
+  userId    String?  // targeted to specific user
+  createdAt DateTime @default(now())
 }
 

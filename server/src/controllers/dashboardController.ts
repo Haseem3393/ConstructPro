@@ -130,8 +130,9 @@ export const getFinancialStats = async (req: Request, res: Response) => {
 
     const categories = { LABOUR: 0, MATERIAL: 0, EQUIPMENT: 0, OTHER: 0 }
     expenses.forEach(e => {
-      if (categories[e.category] !== undefined) {
-        categories[e.category] += e.amount
+      const cat = e.category as string
+      if (cat === 'LABOUR' || cat === 'MATERIAL' || cat === 'EQUIPMENT') {
+        categories[cat as keyof typeof categories] += e.amount
       } else {
         categories.OTHER += e.amount
       }

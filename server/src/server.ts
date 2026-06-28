@@ -16,7 +16,14 @@ import supplierRoutes from './routes/supplier'
 import machineryRoutes from './routes/machinery'
 import financeRoutes from './routes/finance'
 import subcontractorRoutes from './routes/subcontractor'
+import contractRoutes from './routes/contract'
+import paymentRoutes from './routes/payment'
+import changeOrderRoutes from './routes/changeOrder'
+import settingsRoutes from './routes/settings'
+import auditLogRoutes from './routes/auditLog'
+import notificationRoutes from './routes/notification'
 import prisma from './config/database'
+
 
 
 dotenv.config()
@@ -53,6 +60,13 @@ app.use('/api/suppliers', supplierRoutes)
 app.use('/api/machinery', machineryRoutes)
 app.use('/api/finance', financeRoutes)
 app.use('/api/subcontractors', subcontractorRoutes)
+app.use('/api/contracts', contractRoutes)
+app.use('/api/payments', paymentRoutes)
+app.use('/api/change-orders', changeOrderRoutes)
+app.use('/api/settings', settingsRoutes)
+app.use('/api/audit-logs', auditLogRoutes)
+app.use('/api/notifications', notificationRoutes)
+
 
 
 // 404 handler
@@ -90,6 +104,6 @@ app.listen(PORT, async () => {
   console.log(`🚀 Server running on port ${PORT}`)
   console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`)
   console.log(`🔗 API URL: http://localhost:${PORT}`)
-  await seedSubcontractors()
+  // await seedSubcontractors()
 })
 

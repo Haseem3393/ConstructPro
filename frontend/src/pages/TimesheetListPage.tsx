@@ -49,25 +49,25 @@ const TimesheetListPage: React.FC = () => {
     switch (status) {
       case 'APPROVED':
         return (
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded text-[9px] font-black uppercase bg-green-500/10 text-green-400 border border-green-500/20">
+          <span className="inline-flex items-center px-2.5 py-0.5 rounded text-[9px] font-black uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/22">
             <CheckCircle2 className="h-3 w-3 mr-1" /> Approved
           </span>
         )
       case 'REJECTED':
         return (
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded text-[9px] font-black uppercase bg-rose-500/10 text-rose-400 border border-rose-500/20">
+          <span className="inline-flex items-center px-2.5 py-0.5 rounded text-[9px] font-black uppercase bg-rose-500/10 text-rose-455 border border-rose-500/22">
             <AlertCircle className="h-3 w-3 mr-1" /> Rejected
           </span>
         )
       case 'SUBMITTED':
         return (
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded text-[9px] font-black uppercase bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+          <span className="inline-flex items-center px-2.5 py-0.5 rounded text-[9px] font-black uppercase bg-blue-500/10 text-blue-405 border border-blue-500/22">
             <Clock className="h-3 w-3 mr-1" /> Submitted
           </span>
         )
       default:
         return (
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded text-[9px] font-black uppercase bg-zinc-500/10 text-zinc-400 border border-zinc-500/20">
+          <span className="inline-flex items-center px-2.5 py-0.5 rounded text-[9px] font-black uppercase bg-slate-500/10 text-slate-400 border border-slate-500/22">
             <FileText className="h-3 w-3 mr-1" /> Draft
           </span>
         )
@@ -125,10 +125,10 @@ const TimesheetListPage: React.FC = () => {
     <SidebarLayout>
       <div className="space-y-6">
         {/* Page Header */}
-        <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b border-zinc-800 pb-5">
+        <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b border-[#1a2535] pb-5">
           <div>
-            <h1 className="text-3xl font-extrabold text-white">Weekly Timesheets</h1>
-            <p className="text-zinc-400 text-sm mt-1">Submit, review, and approve worker weekly timesheets</p>
+            <h1 className="text-3xl font-black text-white tracking-tight">Weekly Timesheets</h1>
+            <p className="text-slate-400 text-xs font-semibold mt-1">Submit, review, and approve worker weekly timesheets</p>
           </div>
           
           {(user?.role === 'ADMIN' || user?.role === 'SUPERVISOR' || user?.role === 'PROJECT_MANAGER') && (
@@ -137,7 +137,7 @@ const TimesheetListPage: React.FC = () => {
                 setCreateError('')
                 setIsCreateOpen(true)
               }}
-              className="inline-flex items-center justify-center px-4 py-2.5 bg-violet-600 hover:bg-violet-700 text-white rounded-lg text-xs font-bold uppercase tracking-wider transition-colors shadow-lg shadow-violet-600/10"
+              className="inline-flex items-center justify-center px-4 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-200 shadow-md shadow-blue-500/10 hover:shadow-blue-500/25"
             >
               <Plus className="h-4 w-4 mr-2" />
               Generate Timesheet
@@ -146,17 +146,17 @@ const TimesheetListPage: React.FC = () => {
         </div>
 
         {/* Filters Panel */}
-        <div className="bg-[#14161f] border border-zinc-800 rounded-xl p-6 shadow-xl space-y-4">
-          <h3 className="text-zinc-450 text-xs font-bold uppercase tracking-widest flex items-center">
-            <Filter className="h-4 w-4 mr-1.5 text-zinc-550" /> Filter Timesheets
+        <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-6 shadow-xl space-y-4">
+          <h3 className="text-slate-400 text-xs font-bold uppercase tracking-widest flex items-center">
+            <Filter className="h-4 w-4 mr-1.5 text-slate-550" /> Filter Timesheets
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Project</label>
+              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-wider mb-2">Project</label>
               <select
                 value={selectedProject}
                 onChange={(e) => setSelectedProject(e.target.value)}
-                className="w-full bg-[#1c1d26] border border-zinc-800 rounded-lg px-3 py-2 text-xs text-zinc-350 focus:outline-none focus:border-violet-600"
+                className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold"
               >
                 <option value="">All Projects</option>
                 {projects?.map((p) => (
@@ -168,11 +168,11 @@ const TimesheetListPage: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Status</label>
+              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-wider mb-2">Status</label>
               <select
                 value={selectedStatus}
                 onChange={(e) => setSelectedStatus(e.target.value)}
-                className="w-full bg-[#1c1d26] border border-zinc-800 rounded-lg px-3 py-2 text-xs text-zinc-350 focus:outline-none focus:border-violet-600"
+                className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold"
               >
                 <option value="">All Statuses</option>
                 <option value="DRAFT">Draft</option>
@@ -185,27 +185,27 @@ const TimesheetListPage: React.FC = () => {
         </div>
 
         {/* Timesheets Table Card */}
-        <div className="bg-[#14161f] border border-zinc-800 rounded-xl overflow-hidden shadow-xl">
-          <div className="px-6 py-4 border-b border-zinc-800 bg-[#171924]/30 flex justify-between items-center">
-            <h3 className="font-bold text-sm text-zinc-350">Weekly Periods Registry</h3>
-            {isFetching && <Loader2 className="h-4 w-4 text-violet-500 animate-spin" />}
+        <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl overflow-hidden shadow-xl">
+          <div className="px-6 py-4 border-b border-[#1a2535] bg-white/[0.01] flex justify-between items-center">
+            <h3 className="font-bold text-sm text-slate-350">Weekly Periods Registry</h3>
+            {isFetching && <Loader2 className="h-4 w-4 text-blue-500 animate-spin" />}
           </div>
 
           {isLoading ? (
             <div className="flex flex-col items-center justify-center py-20 space-y-3">
-              <Loader2 className="h-10 w-10 text-violet-500 animate-spin" />
-              <p className="text-zinc-500 text-sm font-medium">Loading timesheets...</p>
+              <Loader2 className="h-10 w-10 text-blue-500 animate-spin" />
+              <p className="text-slate-500 text-sm font-medium">Loading timesheets...</p>
             </div>
           ) : !timesheets || timesheets.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-16 space-y-3">
-              <ClipboardList className="h-12 w-12 text-zinc-700" />
-              <p className="text-zinc-500 text-sm font-medium">No weekly timesheets found.</p>
+              <ClipboardList className="h-12 w-12 text-slate-700" />
+              <p className="text-slate-500 text-sm font-medium">No weekly timesheets found.</p>
             </div>
           ) : (
             <div className="overflow-x-auto w-full">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="text-[10px] text-zinc-400 font-black tracking-widest uppercase bg-[#181a24]/50 border-b border-zinc-800">
+                  <tr className="text-[10px] text-slate-400 font-black tracking-widest uppercase bg-white/[0.01] border-b border-[#1a2535]">
                     <th className="py-4 px-6">WEEK PERIOD</th>
                     <th className="py-4 px-4">PROJECT</th>
                     <th className="py-4 px-4">STATUS</th>
@@ -214,20 +214,20 @@ const TimesheetListPage: React.FC = () => {
                     <th className="py-4 px-6 text-right w-28">ACTIONS</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-zinc-800/60 text-xs">
+                <tbody className="divide-y divide-[#1a2535] text-xs">
                   {timesheets.map((ts) => (
-                    <tr key={ts.id} className="hover:bg-[#1a1c27]/30 transition-colors">
+                    <tr key={ts.id} className="hover:bg-white/[0.02] transition-colors">
                       <td className="py-4 px-6 font-bold text-white">
                         <div className="flex items-center space-x-2">
-                          <Calendar className="h-3.5 w-3.5 text-violet-400 shrink-0" />
+                          <Calendar className="h-3.5 w-3.5 text-blue-450 shrink-0" />
                           <span>
                             {formatDate(ts.startDate)} - {formatDate(ts.endDate)}
                           </span>
                         </div>
                       </td>
-                      <td className="py-4 px-4 font-bold text-zinc-200">
+                      <td className="py-4 px-4 font-bold text-slate-200">
                         {ts.project?.name}
-                        <span className="block text-[10px] text-zinc-550 font-normal">{ts.project?.location}</span>
+                        <span className="block text-[10px] text-slate-500 font-normal">{ts.project?.location}</span>
                       </td>
                       <td className="py-4 px-4">
                         {getStatusBadge(ts.status)}
@@ -235,13 +235,13 @@ const TimesheetListPage: React.FC = () => {
                       <td className="py-4 px-4 text-center font-bold text-zinc-300">
                         {ts.totalHours} hrs
                       </td>
-                      <td className="py-4 px-4 text-zinc-400">
+                      <td className="py-4 px-4 text-slate-400">
                         {ts.submittedBy?.name || 'System'}
                       </td>
                       <td className="py-4 px-6 text-right">
                         <Link
                           to={`/timesheets/${ts.id}`}
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-zinc-850 hover:bg-[#1a1c24] text-zinc-300 hover:text-white border border-zinc-800 rounded font-bold text-[10px] uppercase tracking-wider transition-colors"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#0b1220] hover:bg-[#111d33] text-slate-300 hover:text-white border border-[#1a2535] rounded-xl font-bold text-[10px] uppercase tracking-wider transition-colors"
                         >
                           View Details
                           <ArrowRight className="h-3 w-3" />
@@ -258,13 +258,14 @@ const TimesheetListPage: React.FC = () => {
 
       {/* Generate Timesheet Modal */}
       {isCreateOpen && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-[#14161f] border border-zinc-800 rounded-xl max-w-md w-full overflow-hidden shadow-2xl animate-in zoom-in-95 duration-200">
-            <div className="px-6 py-4 border-b border-zinc-800 flex justify-between items-center">
-              <h3 className="font-extrabold text-sm text-white uppercase tracking-wider">Generate Timesheet</h3>
+        <div className="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-[#0d1526] border border-[#1a2535] rounded-2xl max-w-md w-full overflow-hidden shadow-2xl relative animate-in zoom-in-95 duration-200">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-blue-500 via-blue-400 to-transparent" />
+            <div className="px-6 py-4 border-b border-[#1a2535] bg-white/[0.01] flex justify-between items-center">
+              <h3 className="font-black text-sm text-white uppercase tracking-wider">Generate Timesheet</h3>
               <button
                 onClick={() => setIsCreateOpen(false)}
-                className="p-1 text-zinc-400 hover:text-white bg-zinc-900 border border-zinc-800 rounded"
+                className="p-1.5 rounded-lg bg-white/[0.04] text-slate-500 hover:text-white transition-colors"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -272,18 +273,18 @@ const TimesheetListPage: React.FC = () => {
 
             <form onSubmit={handleCreateTimesheet} className="p-6 space-y-4">
               {createError && (
-                <div className="p-3 bg-rose-500/10 border border-rose-500/20 text-rose-400 rounded text-xs font-bold">
+                <div className="p-3.5 bg-rose-500/10 border border-rose-500/20 text-rose-455 rounded-xl text-xs font-semibold">
                   {createError}
                 </div>
               )}
 
               <div>
-                <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Project</label>
+                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Project</label>
                 <select
                   value={newProjectId}
                   onChange={(e) => setNewProjectId(e.target.value)}
                   required
-                  className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3 py-2.5 text-xs text-zinc-300 focus:outline-none focus:border-violet-600 font-semibold"
+                  className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.02] transition-all font-semibold"
                 >
                   <option value="">Select Project</option>
                   {projects?.map((p) => (
@@ -295,37 +296,37 @@ const TimesheetListPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-1.5">Week Start Date (Must be a Monday)</label>
+                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1.5">Week Start Date (Must be a Monday)</label>
                 <input
                   type="date"
                   value={newStartDate}
                   onChange={(e) => setNewStartDate(e.target.value)}
                   required
-                  className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3 py-2.5 text-xs text-zinc-300 focus:outline-none focus:border-violet-600 font-semibold"
+                  className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.02] transition-all font-semibold"
                 />
               </div>
 
-              <div className="p-3.5 bg-violet-600/5 border border-violet-500/10 rounded-lg">
-                <p className="text-[10px] text-violet-400 font-semibold leading-relaxed">
+              <div className="p-3.5 bg-blue-500/5 border border-blue-500/10 rounded-xl">
+                <p className="text-[10px] text-blue-400 font-semibold leading-relaxed">
                   Note: Generating a timesheet will scan daily attendance check-ins between Monday and Sunday for the selected week, compiling them into a single ledger for approval.
                 </p>
               </div>
 
               {/* Action Buttons */}
-              <div className="pt-2 border-t border-zinc-855 flex gap-2">
+              <div className="pt-2 border-t border-[#1a2535] flex gap-2">
                 <button
                   type="button"
                   onClick={() => setIsCreateOpen(false)}
-                  className="flex-1 py-2.5 bg-[#1b1c25] border border-zinc-800 text-zinc-400 rounded-lg font-bold text-xs uppercase tracking-wider hover:text-white transition-colors"
+                  className="flex-1 py-2.5 bg-[#0b1220] hover:bg-[#111d33] border border-[#1a2535] text-slate-350 rounded-xl font-bold text-xs uppercase tracking-wider hover:text-white transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={createTimesheetMutation.isPending}
-                  className="flex-1 py-2.5 bg-violet-600 hover:bg-violet-700 text-white rounded-lg font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-colors disabled:opacity-50"
+                  className="flex-1 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-xl font-black text-xs uppercase tracking-wider flex items-center justify-center transition-all duration-200 shadow-md shadow-blue-500/10 hover:shadow-blue-500/25 disabled:opacity-50"
                 >
-                  {createTimesheetMutation.isPending ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <Plus className="h-4 w-4 mr-2" />}
+                  {createTimesheetMutation.isPending ? <Loader2 className="h-4 w-4 mr-2 animate-spin text-blue-500" /> : <Plus className="h-4 w-4 mr-2" />}
                   Generate
                 </button>
               </div>

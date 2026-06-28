@@ -82,9 +82,12 @@ const WorkerEditPage: React.FC = () => {
   if (isWorkerLoading) {
     return (
       <SidebarLayout>
-        <div className="flex flex-col items-center justify-center py-32 space-y-4">
-          <Loader2 className="h-10 w-10 text-violet-500 animate-spin" />
-          <p className="text-zinc-400 font-medium">Fetching worker profile state...</p>
+        <div className="flex flex-col items-center justify-center py-40 space-y-4">
+          <div className="relative">
+            <Loader2 className="h-10 w-10 text-blue-500 animate-spin" />
+            <div className="absolute inset-0 rounded-full blur-xl bg-blue-500/20 animate-pulse" />
+          </div>
+          <p className="text-slate-400 font-medium text-sm">Fetching worker profile state...</p>
         </div>
       </SidebarLayout>
     )
@@ -93,14 +96,14 @@ const WorkerEditPage: React.FC = () => {
   if (error || !worker) {
     return (
       <SidebarLayout>
-        <div className="bg-rose-500/10 border border-rose-500/30 rounded-lg p-6 max-w-lg mx-auto text-center">
-          <p className="text-rose-400 font-bold mb-2">Error loading configurations</p>
-          <p className="text-zinc-400 text-sm mb-4">
+        <div className="bg-rose-500/8 border border-rose-500/20 text-rose-455 p-6 rounded-2xl text-center max-w-lg mx-auto relative mt-16 z-10">
+          <p className="font-bold mb-2 text-base">Error loading configurations</p>
+          <p className="text-slate-500 text-xs mb-5">
             {(error as any)?.response?.data?.error || 'Worker not found.'}
           </p>
           <Link
             to="/workers"
-            className="inline-flex items-center text-xs text-blue-400 hover:text-blue-300 font-bold uppercase tracking-wider"
+            className="inline-flex items-center text-xs text-blue-450 hover:text-blue-400 font-bold uppercase tracking-wider transition-colors"
           >
             <ArrowLeft className="h-4 w-4 mr-1.5" /> Back to workers
           </Link>
@@ -113,31 +116,31 @@ const WorkerEditPage: React.FC = () => {
     <SidebarLayout>
       <div className="space-y-6 max-w-2xl mx-auto">
         {/* Header */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 border-b border-[#1a2535] pb-5">
           <button
             onClick={() => navigate(-1)}
-            className="p-2 bg-[#14161f] border border-zinc-800 rounded-lg text-zinc-400 hover:text-white transition-colors"
+            className="p-2.5 bg-[#0d1526] border border-[#1a2535] rounded-xl text-slate-400 hover:text-white transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
           <div>
-            <h1 className="text-3xl font-extrabold text-white">Configure Worker</h1>
-            <p className="text-zinc-400 text-sm mt-1">Modify worker status, daily wages, or contact metadata</p>
+            <h1 className="text-2xl font-black text-white tracking-tight">Configure Worker</h1>
+            <p className="text-slate-500 text-xs font-medium mt-1">Modify worker status, daily wages, or contact metadata</p>
           </div>
         </div>
 
         {/* Edit Form */}
-        <div className="bg-[#14161f] border border-zinc-800 rounded-xl overflow-hidden shadow-xl p-6">
+        <div className="bg-[#0d1526] border border-[#1a2535] rounded-2xl overflow-hidden shadow-xl p-6">
           <form onSubmit={handleSubmit} className="space-y-5">
             {formError && (
-              <div className="p-3 bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs rounded font-semibold">
+              <div className="p-3.5 bg-rose-500/8 border border-rose-500/20 text-rose-455 text-xs rounded-xl flex items-center gap-2 font-semibold">
                 {formError}
               </div>
             )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1.5">
+                <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">
                   Tradesman Name *
                 </label>
                 <input
@@ -145,18 +148,18 @@ const WorkerEditPage: React.FC = () => {
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-4 py-2.5 text-sm text-zinc-300 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1.5">
+                <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">
                   Trade Skill Category *
                 </label>
                 <select
                   value={trade}
                   onChange={(e) => setTrade(e.target.value)}
-                  className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-4 py-2.5 text-sm text-zinc-300 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-350 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
                 >
                   {trades.map((t) => (
                     <option key={t} value={t}>{t}</option>
@@ -165,7 +168,7 @@ const WorkerEditPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1.5">
+                <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">
                   Base Daily Wage (Rs.) *
                 </label>
                 <input
@@ -175,32 +178,32 @@ const WorkerEditPage: React.FC = () => {
                   step="50"
                   value={dailyWage}
                   onChange={(e) => setDailyWage(e.target.value)}
-                  className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-4 py-2.5 text-sm text-zinc-300 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1.5">
+                <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">
                   Contact Phone Number
                 </label>
                 <input
                   type="text"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-4 py-2.5 text-sm text-zinc-300 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1.5">
+              <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">
                 Home Address
               </label>
               <textarea
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 rows={3}
-                className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-4 py-2.5 text-sm text-zinc-300 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
               />
             </div>
 
@@ -210,26 +213,26 @@ const WorkerEditPage: React.FC = () => {
                 id="active"
                 checked={active}
                 onChange={(e) => setActive(e.target.checked)}
-                className="h-4 w-4 bg-[#1b1c25] border-zinc-800 text-blue-600 focus:ring-blue-600 focus:ring-opacity-25 rounded cursor-pointer"
+                className="h-4 w-4 bg-[#0b1220] border-[#1a2535] text-blue-500 focus:ring-blue-500 focus:ring-opacity-25 rounded cursor-pointer"
               />
-              <label htmlFor="active" className="text-xs font-bold text-zinc-400 uppercase tracking-widest cursor-pointer select-none">
+              <label htmlFor="active" className="text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] cursor-pointer select-none">
                 Active status in active trade registry
               </label>
             </div>
 
             {/* Action buttons */}
-            <div className="flex justify-end space-x-3 border-t border-zinc-800 pt-5 mt-6">
+            <div className="flex justify-end space-x-3 border-t border-[#1a2535] pt-5 mt-6">
               <button
                 type="button"
                 onClick={() => navigate(-1)}
-                className="px-4 py-2 border border-zinc-800 text-zinc-350 hover:bg-zinc-850 rounded-lg text-xs font-bold uppercase tracking-wider transition-colors"
+                className="px-4 py-2.5 border border-[#1a2535] text-slate-350 hover:bg-[#111d33] rounded-xl text-xs font-bold uppercase tracking-wider transition-colors"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={updateWorkerMutation.isPending}
-                className="flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold uppercase tracking-wider transition-colors disabled:opacity-50"
+                className="flex items-center px-5 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-200 shadow-md shadow-blue-500/10 hover:shadow-blue-500/25 disabled:opacity-50"
               >
                 {updateWorkerMutation.isPending ? (
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />

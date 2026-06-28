@@ -81,7 +81,7 @@ const CreatePayablePage: React.FC = () => {
         <div className="flex items-center">
           <Link
             to="/payables"
-            className="inline-flex items-center text-xs font-bold text-zinc-400 hover:text-white uppercase tracking-wider transition-colors"
+            className="inline-flex items-center text-xs font-bold text-slate-400 hover:text-white uppercase tracking-wider transition-colors"
           >
             <ArrowLeft className="h-4 w-4 mr-1.5" />
             Back to Payables
@@ -89,31 +89,31 @@ const CreatePayablePage: React.FC = () => {
         </div>
 
         {/* Header */}
-        <div className="border-b border-zinc-800 pb-5">
-          <h1 className="text-3xl font-extrabold text-white">Create Accounts Payable</h1>
-          <p className="text-zinc-400 text-sm mt-1">Register supplier invoices or sub-contractor liabilities to compile overall outstanding payables</p>
+        <div className="border-b border-[#1a2535] pb-5">
+          <h1 className="text-3xl font-black text-white tracking-tight">Create Accounts Payable</h1>
+          <p className="text-slate-400 text-xs font-semibold mt-1">Register supplier invoices or sub-contractor liabilities to compile overall outstanding payables</p>
         </div>
 
         {/* Form Card */}
-        <div className="bg-[#14161f] border border-zinc-800 rounded-xl p-6 shadow-xl">
+        <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-6 shadow-xl">
           <form onSubmit={handleSubmit} className="space-y-4">
             {formError && (
-              <div className="p-3 bg-rose-500/10 border border-rose-500/20 text-rose-400 rounded text-xs font-bold">
+              <div className="p-3 bg-rose-500/10 border border-rose-500/22 text-rose-455 rounded text-xs font-bold">
                 {formError}
               </div>
             )}
 
             {/* Payee Type Toggle */}
             <div>
-              <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Payee Classification *</label>
-              <div className="grid grid-cols-2 gap-2 bg-[#1b1c25] p-1 rounded-lg border border-zinc-800">
+              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Payee Classification *</label>
+              <div className="grid grid-cols-2 gap-2 bg-[#0b1220] p-1 rounded-xl border border-[#1a2535]">
                 <button
                   type="button"
                   onClick={() => {
                     setPayeeType('SUPPLIER')
                     setSubcontractorId('')
                   }}
-                  className={`py-2 text-xs font-bold rounded-md transition-all ${payeeType === 'SUPPLIER' ? 'bg-violet-650 text-white shadow' : 'text-zinc-450 hover:text-zinc-200'}`}
+                  className={`py-2 text-xs font-bold rounded-lg transition-all cursor-pointer ${payeeType === 'SUPPLIER' ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/10' : 'text-slate-400 hover:text-slate-200'}`}
                 >
                   Material Supplier
                 </button>
@@ -123,7 +123,7 @@ const CreatePayablePage: React.FC = () => {
                     setPayeeType('SUBCONTRACTOR')
                     setSupplierId('')
                   }}
-                  className={`py-2 text-xs font-bold rounded-md transition-all ${payeeType === 'SUBCONTRACTOR' ? 'bg-violet-650 text-white shadow' : 'text-zinc-450 hover:text-zinc-200'}`}
+                  className={`py-2 text-xs font-bold rounded-lg transition-all cursor-pointer ${payeeType === 'SUBCONTRACTOR' ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/10' : 'text-slate-400 hover:text-slate-200'}`}
                 >
                   Subcontractor Agency
                 </button>
@@ -133,12 +133,12 @@ const CreatePayablePage: React.FC = () => {
             {/* Payee Select Dropdown */}
             {payeeType === 'SUPPLIER' ? (
               <div>
-                <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Select Supplier Payee *</label>
+                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Select Supplier Payee *</label>
                 <select
                   value={supplierId}
                   onChange={(e) => setSupplierId(e.target.value)}
                   required
-                  className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3 py-2.5 text-xs text-zinc-350 focus:outline-none focus:border-violet-600 font-semibold cursor-pointer"
+                  className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2.5 text-xs text-slate-300 focus:outline-none focus:border-blue-500/60 transition-all font-semibold cursor-pointer"
                 >
                   <option value="">Select Supplier</option>
                   {suppliers?.map((s) => (
@@ -148,12 +148,12 @@ const CreatePayablePage: React.FC = () => {
               </div>
             ) : (
               <div>
-                <label className="block text-[10px] font-black text-zinc-455 uppercase tracking-widest mb-2">Select Subcontractor Payee *</label>
+                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Select Subcontractor Payee *</label>
                 <select
                   value={subcontractorId}
                   onChange={(e) => setSubcontractorId(e.target.value)}
                   required
-                  className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3 py-2.5 text-xs text-zinc-350 focus:outline-none focus:border-violet-600 font-semibold cursor-pointer"
+                  className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2.5 text-xs text-slate-300 focus:outline-none focus:border-blue-500/60 transition-all font-semibold cursor-pointer"
                 >
                   <option value="">Select Subcontractor</option>
                   {subcontractors?.map((s) => (
@@ -165,12 +165,12 @@ const CreatePayablePage: React.FC = () => {
 
             {/* Project Select */}
             <div>
-              <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Charge Project context *</label>
+              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Charge Project context *</label>
               <select
                 value={projectId}
                 onChange={(e) => setProjectId(e.target.value)}
                 required
-                className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3 py-2.5 text-xs text-zinc-350 focus:outline-none focus:border-violet-600 font-semibold cursor-pointer"
+                className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2.5 text-xs text-slate-300 focus:outline-none focus:border-blue-500/60 transition-all font-semibold cursor-pointer"
               >
                 <option value="">Select Project</option>
                 {isProjectsLoading ? (
@@ -186,7 +186,7 @@ const CreatePayablePage: React.FC = () => {
             {/* Amount and Due Date */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[10px] font-black text-zinc-455 uppercase tracking-widest mb-2">Liability Amount (LKR) *</label>
+                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Liability Amount (LKR) *</label>
                 <input
                   type="number"
                   required
@@ -195,58 +195,58 @@ const CreatePayablePage: React.FC = () => {
                   placeholder="e.g. 50000"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
-                  className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3.5 py-2.5 text-xs text-zinc-300 focus:outline-none focus:border-violet-600 font-semibold"
+                  className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold"
                 />
               </div>
 
               <div>
-                <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Payment Due Date *</label>
+                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Payment Due Date *</label>
                 <input
                   type="date"
                   required
                   value={dueDate}
                   onChange={(e) => setDueDate(e.target.value)}
-                  className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3.5 py-2.5 text-xs text-zinc-300 focus:outline-none focus:border-violet-600 font-semibold cursor-pointer"
+                  className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold cursor-pointer"
                 />
               </div>
             </div>
 
             {/* Reference */}
             <div>
-              <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Invoice / Bill Reference Number</label>
+              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Invoice / Bill Reference Number</label>
               <input
                 type="text"
                 placeholder="e.g. BILL-C3-009"
                 value={reference}
                 onChange={(e) => setReference(e.target.value)}
-                className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3.5 py-2.5 text-xs text-zinc-300 focus:outline-none focus:border-violet-600 font-semibold"
+                className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold"
               />
             </div>
 
             {/* Description */}
             <div>
-              <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Invoice Description / Bill Notes</label>
+              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Invoice Description / Bill Notes</label>
               <textarea
                 rows={3}
                 placeholder="Details of payable (e.g. sand delivery invoice, piling subcontract installment, etc.)"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3.5 py-2.5 text-xs text-zinc-300 focus:outline-none focus:border-violet-600 font-semibold"
+                className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold"
               />
             </div>
 
             {/* Action Buttons */}
-            <div className="pt-4 border-t border-zinc-850 flex gap-2">
+            <div className="pt-4 border-t border-[#1a2535] flex gap-2">
               <Link
                 to="/payables"
-                className="flex-1 py-3 bg-[#1b1c25] border border-zinc-800 text-zinc-455 hover:text-white rounded-lg font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-colors"
+                className="flex-1 py-3 bg-[#0b1220] border border-[#1a2535] text-slate-400 hover:text-white rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-all"
               >
                 Cancel
               </Link>
               <button
                 type="submit"
                 disabled={createPayableMutation.isPending}
-                className="flex-1 py-3 bg-violet-600 hover:bg-violet-700 text-white rounded-lg font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-colors disabled:opacity-50"
+                className="flex-1 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-all shadow-lg shadow-blue-500/10 disabled:opacity-50"
               >
                 {createPayableMutation.isPending ? (
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />

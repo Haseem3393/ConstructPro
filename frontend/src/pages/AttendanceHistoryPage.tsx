@@ -139,15 +139,15 @@ const AttendanceHistoryPage: React.FC = () => {
     <SidebarLayout>
       <div className="space-y-6">
         {/* Page Header */}
-        <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b border-zinc-800 pb-5">
+        <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b border-[#1a2535] pb-5">
           <div>
-            <h1 className="text-3xl font-extrabold text-white">Attendance Audit History</h1>
-            <p className="text-zinc-400 text-sm mt-1">Review historic worker check-ins and wage logs</p>
+            <h1 className="text-2xl font-black text-white tracking-tight">Attendance Audit History</h1>
+            <p className="text-slate-500 text-xs font-medium mt-1">Review historic worker check-ins and wage logs</p>
           </div>
           <button
             onClick={handleExportCSV}
             disabled={!historyRecords || historyRecords.length === 0}
-            className="inline-flex items-center justify-center px-4 py-2 border border-zinc-850 hover:bg-[#1c1d26] text-zinc-350 hover:text-white rounded-lg text-xs font-bold uppercase tracking-wider transition-colors disabled:opacity-40"
+            className="inline-flex items-center justify-center px-4 py-2.5 border border-[#1a2535] bg-[#0b1220] hover:bg-[#111d33] text-slate-350 hover:text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors disabled:opacity-40"
           >
             <Download className="h-4 w-4 mr-2" />
             Export to CSV
@@ -155,17 +155,17 @@ const AttendanceHistoryPage: React.FC = () => {
         </div>
 
         {/* Filters Panel */}
-        <div className="bg-[#14161f] border border-zinc-800 rounded-xl p-6 shadow-xl space-y-4">
-          <h3 className="text-zinc-450 text-xs font-bold uppercase tracking-widest flex items-center">
-            <Filter className="h-4 w-4 mr-1.5 text-zinc-550" /> Filter Logs
+        <div className="bg-[#0d1526] border border-[#1a2535] rounded-2xl p-6 shadow-xl space-y-4">
+          <h3 className="text-slate-500 text-[10px] font-black uppercase tracking-[0.14em] flex items-center">
+            <Filter className="h-4 w-4 mr-1.5 text-slate-700" /> Filter Logs
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div>
-              <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Project</label>
+              <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-2">Project</label>
               <select
                 value={selectedProject}
                 onChange={(e) => setSelectedProject(e.target.value)}
-                className="w-full bg-[#1c1d26] border border-zinc-800 rounded-lg px-3 py-2 text-xs text-zinc-350 focus:outline-none focus:border-violet-600"
+                className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-3 py-2 text-xs text-slate-350 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200 cursor-pointer"
               >
                 <option value="">All Projects</option>
                 {projects?.map((p) => (
@@ -177,11 +177,11 @@ const AttendanceHistoryPage: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Worker</label>
+              <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-2">Worker</label>
               <select
                 value={selectedWorker}
                 onChange={(e) => setSelectedWorker(e.target.value)}
-                className="w-full bg-[#1c1d26] border border-zinc-800 rounded-lg px-3 py-2 text-xs text-zinc-350 focus:outline-none focus:border-violet-600"
+                className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-3 py-2 text-xs text-slate-355 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200 cursor-pointer"
               >
                 <option value="">All Workers</option>
                 {workers?.map((w) => (
@@ -193,48 +193,51 @@ const AttendanceHistoryPage: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Start Date</label>
+              <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-2">Start Date</label>
               <input
                 type="date"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
-                className="w-full bg-[#1c1d26] border border-zinc-800 rounded-lg px-3 py-2 text-xs text-zinc-300 focus:outline-none focus:border-violet-600"
+                className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-3 py-2 text-xs text-slate-300 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200 cursor-pointer"
               />
             </div>
 
             <div>
-              <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">End Date</label>
+              <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-2">End Date</label>
               <input
                 type="date"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
-                className="w-full bg-[#1c1d26] border border-zinc-800 rounded-lg px-3 py-2 text-xs text-zinc-300 focus:outline-none focus:border-violet-600"
+                className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-3 py-2 text-xs text-slate-300 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200 cursor-pointer"
               />
             </div>
           </div>
         </div>
 
         {/* History Table Card */}
-        <div className="bg-[#14161f] border border-zinc-800 rounded-xl overflow-hidden shadow-xl">
-          <div className="px-6 py-4 border-b border-zinc-800 bg-[#171924]/30 flex justify-between items-center">
-            <h3 className="font-bold text-sm text-zinc-350">Attendance Audit Ledger</h3>
-            {isFetching && <Loader2 className="h-4 w-4 text-violet-500 animate-spin" />}
+        <div className="bg-[#0d1526] border border-[#1a2535] rounded-2xl overflow-hidden shadow-xl">
+          <div className="px-6 py-4 border-b border-[#1a2535] bg-white/[0.005] flex justify-between items-center">
+            <h3 className="font-black text-sm text-slate-350">Attendance Audit Ledger</h3>
+            {isFetching && <Loader2 className="h-4 w-4 text-blue-500 animate-spin" />}
           </div>
 
           {isLoading ? (
-            <div className="flex flex-col items-center justify-center py-20 space-y-3">
-              <Loader2 className="h-10 w-10 text-violet-500 animate-spin" />
-              <p className="text-zinc-500 text-sm font-medium">Loading history records...</p>
+            <div className="flex flex-col items-center justify-center py-20 space-y-4">
+              <div className="relative">
+                <Loader2 className="h-9 w-9 text-blue-500 animate-spin" />
+                <div className="absolute inset-0 rounded-full blur-xl bg-blue-500/20 animate-pulse" />
+              </div>
+              <p className="text-slate-500 text-xs font-bold uppercase tracking-wider">Loading history records...</p>
             </div>
           ) : !historyRecords || historyRecords.length === 0 ? (
-            <div className="p-16 text-center text-zinc-500 text-sm font-medium">
+            <div className="p-16 text-center text-slate-500 text-xs font-black uppercase tracking-wider">
               No matching attendance logs found in the selected range.
             </div>
           ) : (
             <div className="overflow-x-auto w-full">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="text-[10px] text-zinc-400 font-black tracking-widest uppercase bg-[#181a24]/50 border-b border-zinc-800">
+                  <tr className="text-[10px] text-slate-655 font-black tracking-widest uppercase bg-white/[0.002] border-b border-[#1a2535]">
                     <th className="py-4 px-6">DATE</th>
                     <th className="py-4 px-4">WORKER</th>
                     <th className="py-4 px-4">PROJECT</th>
@@ -246,32 +249,32 @@ const AttendanceHistoryPage: React.FC = () => {
                     )}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-zinc-800/60 text-xs">
+                <tbody className="divide-y divide-[#1a2535] text-xs">
                   {historyRecords.map((record: any) => {
                     const editable = canUserEdit(record)
                     return (
-                      <tr key={record.id} className="hover:bg-[#1a1c27]/30 transition-colors">
+                      <tr key={record.id} className="hover:bg-white/[0.015] transition-colors">
                         <td className="py-4 px-6 font-bold text-white">
                           {new Date(record.date).toLocaleDateString()}
                         </td>
-                        <td className="py-4 px-4 font-bold text-zinc-200">
+                        <td className="py-4 px-4 font-bold text-slate-200">
                           {record.workerName}
-                          <span className="block text-[10px] text-zinc-500 font-semibold">{record.trade}</span>
+                          <span className="block text-[10px] text-slate-550 font-semibold">{record.trade}</span>
                         </td>
-                        <td className="py-4 px-4 text-zinc-400 font-semibold">{record.projectName}</td>
+                        <td className="py-4 px-4 text-slate-400 font-semibold">{record.projectName}</td>
                         <td className="py-4 px-4">
-                          <span className={`inline-flex px-2.5 py-0.5 rounded text-[9px] font-black uppercase ${
+                          <span className={`inline-flex px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase ${
                             record.present 
-                              ? 'bg-green-500/10 text-green-400 border border-green-500/20' 
-                              : 'bg-rose-500/10 text-rose-400 border border-rose-500/20'
+                              ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/22' 
+                              : 'bg-rose-500/10 text-rose-455 border border-rose-500/22'
                           }`}>
                             {record.present ? 'Present' : 'Absent'}
                           </span>
                         </td>
-                        <td className="py-4 px-4 text-center font-bold text-zinc-300">
+                        <td className="py-4 px-4 text-center font-bold text-slate-300">
                           {record.overtimeHours} hrs
                         </td>
-                        <td className="py-4 px-4 text-right font-black text-white">
+                        <td className="py-4 px-4 text-right font-black text-white tabular-nums">
                           {formatCurrency(record.totalPay)}
                         </td>
                         {(user?.role === 'ADMIN' || user?.role === 'PROJECT_MANAGER') && (
@@ -279,12 +282,12 @@ const AttendanceHistoryPage: React.FC = () => {
                             {editable ? (
                               <button
                                 onClick={() => handleOpenEdit(record)}
-                                className="p-1.5 bg-zinc-850 hover:bg-[#1a1c24] text-zinc-400 hover:text-violet-400 border border-zinc-800 rounded transition-colors"
+                                className="p-1.5 bg-[#0b1220] hover:bg-[#111d33] text-slate-400 hover:text-blue-400 border border-[#1a2535] rounded-lg transition-colors"
                               >
                                 <Edit3 className="h-3.5 w-3.5" />
                               </button>
                             ) : (
-                              <span className="text-[10px] text-zinc-600 font-bold uppercase tracking-widest">Locked</span>
+                              <span className="text-[9px] text-slate-600 font-black uppercase tracking-widest">Locked</span>
                             )}
                           </td>
                         )}
@@ -300,13 +303,14 @@ const AttendanceHistoryPage: React.FC = () => {
 
       {/* Edit Confirmation Modal */}
       {editingRecord && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-[#14161f] border border-zinc-800 rounded-xl max-w-md w-full overflow-hidden shadow-2xl animate-in zoom-in-95 duration-200">
-            <div className="px-6 py-4 border-b border-zinc-800 flex justify-between items-center">
-              <h3 className="font-extrabold text-sm text-white uppercase tracking-wider">Edit Attendance Log</h3>
+        <div className="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-[#0d1526] border border-[#1a2535] rounded-2xl max-w-md w-full overflow-hidden shadow-2xl relative animate-in zoom-in-95 duration-200">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-blue-500 via-blue-400 to-transparent" />
+            <div className="px-6 py-4 border-b border-[#1a2535] bg-white/[0.01] flex justify-between items-center">
+              <h3 className="font-black text-sm text-white uppercase tracking-wider">Edit Attendance Log</h3>
               <button
                 onClick={() => setEditingRecord(null)}
-                className="p-1 text-zinc-400 hover:text-white bg-zinc-900 border border-zinc-800 rounded"
+                className="p-1.5 rounded-lg bg-white/[0.04] text-slate-500 hover:text-white transition-colors"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -314,30 +318,30 @@ const AttendanceHistoryPage: React.FC = () => {
 
             <form onSubmit={handleSaveEdit} className="p-6 space-y-4">
               {editError && (
-                <div className="p-3 bg-rose-500/10 border border-rose-500/20 text-rose-400 rounded text-xs font-bold">
+                <div className="p-3.5 bg-rose-500/8 border border-rose-500/20 text-rose-455 rounded-xl text-xs font-semibold">
                   {editError}
                 </div>
               )}
 
-              <div className="bg-[#181a24] border border-zinc-850 p-4 rounded-lg space-y-1">
-                <span className="block text-[9px] font-black text-zinc-550 uppercase tracking-widest">Selected Log</span>
+              <div className="bg-[#0b1220] border border-[#1a2535] p-4 rounded-xl space-y-1">
+                <span className="block text-[9px] font-black text-slate-600 uppercase tracking-[0.14em]">Selected Log</span>
                 <span className="block text-white font-extrabold">{editingRecord.workerName}</span>
-                <span className="block text-zinc-400 text-xs font-semibold">
+                <span className="block text-slate-400 text-xs font-semibold">
                   {editingRecord.projectName} • {new Date(editingRecord.date).toLocaleDateString()}
                 </span>
               </div>
 
               {/* Status toggle */}
               <div>
-                <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Check-in Status</label>
+                <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-2">Check-in Status</label>
                 <div className="flex gap-2">
                   <button
                     type="button"
                     onClick={() => setEditPresent(true)}
-                    className={`flex-1 py-2 rounded-lg font-bold text-xs uppercase tracking-wider border transition-all ${
+                    className={`flex-1 py-2 rounded-xl font-black text-xs uppercase tracking-wider border transition-all ${
                       editPresent 
-                        ? 'bg-green-600/15 border-green-500/30 text-green-400' 
-                        : 'bg-[#1b1c25] border-zinc-800 text-zinc-400 hover:text-zinc-200'
+                        ? 'bg-emerald-500/10 border-emerald-500/22 text-emerald-400' 
+                        : 'bg-[#0b1220] border-[#1a2535] text-slate-550 hover:text-slate-200 hover:bg-[#111d33]'
                     }`}
                   >
                     Present
@@ -348,10 +352,10 @@ const AttendanceHistoryPage: React.FC = () => {
                       setEditPresent(false)
                       setEditOvertime('0')
                     }}
-                    className={`flex-1 py-2 rounded-lg font-bold text-xs uppercase tracking-wider border transition-all ${
+                    className={`flex-1 py-2 rounded-xl font-black text-xs uppercase tracking-wider border transition-all ${
                       !editPresent 
-                        ? 'bg-rose-600/15 border-rose-500/30 text-rose-400' 
-                        : 'bg-[#1b1c25] border-zinc-800 text-zinc-400 hover:text-zinc-200'
+                        ? 'bg-rose-500/10 border-rose-500/22 text-rose-455' 
+                        : 'bg-[#0b1220] border-[#1a2535] text-slate-550 hover:text-slate-200 hover:bg-[#111d33]'
                     }`}
                   >
                     Absent
@@ -362,7 +366,7 @@ const AttendanceHistoryPage: React.FC = () => {
               {/* Overtime Hours input */}
               {editPresent && (
                 <div>
-                  <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-1.5">Overtime Hours</label>
+                  <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">Overtime Hours</label>
                   <input
                     type="number"
                     min="0"
@@ -371,39 +375,39 @@ const AttendanceHistoryPage: React.FC = () => {
                     required
                     value={editOvertime}
                     onChange={(e) => setEditOvertime(e.target.value)}
-                    className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3 py-2 text-xs text-zinc-300 focus:outline-none focus:border-violet-600 font-semibold"
+                    className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all font-semibold"
                   />
                 </div>
               )}
 
               {/* Daily Wage input */}
               <div>
-                <label className="block text-[10px] font-black text-zinc-455 uppercase tracking-widest mb-1.5">Daily Wage (LKR)</label>
+                <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">Daily Wage (LKR)</label>
                 <input
                   type="number"
                   min="0"
                   required
                   value={editWage}
                   onChange={(e) => setEditWage(e.target.value)}
-                  className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3 py-2 text-xs text-zinc-300 focus:outline-none focus:border-violet-600 font-semibold"
+                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all font-semibold"
                 />
               </div>
 
               {/* Action Buttons */}
-              <div className="pt-2 border-t border-zinc-850 flex gap-2">
+              <div className="pt-2 border-t border-[#1a2535] flex gap-2">
                 <button
                   type="button"
                   onClick={() => setEditingRecord(null)}
-                  className="flex-1 py-2.5 bg-[#1b1c25] border border-zinc-800 text-zinc-400 rounded-lg font-bold text-xs uppercase tracking-wider hover:text-white transition-colors"
+                  className="flex-1 py-2.5 bg-[#0b1220] hover:bg-[#111d33] border border-[#1a2535] text-slate-350 rounded-xl font-bold text-xs uppercase tracking-wider hover:text-white transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={updateAttendanceMutation.isPending}
-                  className="flex-1 py-2.5 bg-violet-600 hover:bg-violet-700 text-white rounded-lg font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-colors disabled:opacity-50"
+                  className="flex-1 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-xl font-black text-xs uppercase tracking-wider flex items-center justify-center transition-all duration-200 shadow-md shadow-blue-500/10 hover:shadow-blue-500/25 disabled:opacity-50"
                 >
-                  {updateAttendanceMutation.isPending ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <Save className="h-4 w-4 mr-2" />}
+                  {updateAttendanceMutation.isPending ? <Loader2 className="h-4 w-4 mr-2 animate-spin text-blue-500" /> : <Save className="h-4 w-4 mr-2" />}
                   Save Changes
                 </button>
               </div>

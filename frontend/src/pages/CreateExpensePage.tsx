@@ -70,7 +70,7 @@ const CreateExpensePage: React.FC = () => {
         <div className="flex items-center">
           <Link
             to="/expenses"
-            className="inline-flex items-center text-xs font-bold text-zinc-400 hover:text-white uppercase tracking-wider transition-colors"
+            className="inline-flex items-center text-xs font-bold text-slate-400 hover:text-white uppercase tracking-wider transition-colors"
           >
             <ArrowLeft className="h-4 w-4 mr-1.5" />
             Back to Ledger
@@ -78,28 +78,28 @@ const CreateExpensePage: React.FC = () => {
         </div>
 
         {/* Header */}
-        <div className="border-b border-zinc-800 pb-5">
-          <h1 className="text-3xl font-extrabold text-white">Record Project Expense</h1>
-          <p className="text-zinc-400 text-sm mt-1">Manually log project expenditures, site costs, subcontractor fees, or transport charges</p>
+        <div className="border-b border-[#1a2535] pb-5">
+          <h1 className="text-3xl font-black text-white tracking-tight">Record Project Expense</h1>
+          <p className="text-slate-400 text-xs font-semibold mt-1">Manually log project expenditures, site costs, subcontractor fees, or transport charges</p>
         </div>
 
         {/* Form Card */}
-        <div className="bg-[#14161f] border border-zinc-800 rounded-xl p-6 shadow-xl">
+        <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-6 shadow-xl">
           <form onSubmit={handleSubmit} className="space-y-4">
             {formError && (
-              <div className="p-3 bg-rose-500/10 border border-rose-500/20 text-rose-400 rounded text-xs font-bold">
+              <div className="p-3 bg-rose-500/10 border border-rose-500/22 text-rose-455 rounded text-xs font-bold">
                 {formError}
               </div>
             )}
 
             {/* Project Select */}
             <div>
-              <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Project context *</label>
+              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Project context *</label>
               <select
                 value={projectId}
                 onChange={(e) => setProjectId(e.target.value)}
                 required
-                className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3 py-2.5 text-xs text-zinc-350 focus:outline-none focus:border-violet-600 font-semibold cursor-pointer"
+                className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2.5 text-xs text-slate-300 focus:outline-none focus:border-blue-500/60 transition-all font-semibold cursor-pointer"
               >
                 <option value="">Select Project</option>
                 {isProjectsLoading ? (
@@ -117,11 +117,11 @@ const CreateExpensePage: React.FC = () => {
             {/* Category and Amount */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Expense Category *</label>
+                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Expense Category *</label>
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3 py-2.5 text-xs text-zinc-350 focus:outline-none focus:border-violet-600 font-semibold cursor-pointer"
+                  className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2.5 text-xs text-slate-300 focus:outline-none focus:border-blue-500/60 transition-all font-semibold cursor-pointer"
                 >
                   <option value="LABOUR">Labour & Payroll</option>
                   <option value="MATERIAL">Materials & Stock</option>
@@ -133,7 +133,7 @@ const CreateExpensePage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-[10px] font-black text-zinc-455 uppercase tracking-widest mb-2">Amount (LKR / Rs.) *</label>
+                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Amount (LKR / Rs.) *</label>
                 <input
                   type="number"
                   required
@@ -142,7 +142,7 @@ const CreateExpensePage: React.FC = () => {
                   placeholder="e.g. 25000"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
-                  className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3.5 py-2.5 text-xs text-zinc-300 focus:outline-none focus:border-violet-600 font-semibold"
+                  className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold"
                 />
               </div>
             </div>
@@ -150,45 +150,45 @@ const CreateExpensePage: React.FC = () => {
             {/* Date and Invoice/Reference */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Expense Date *</label>
+                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Expense Date *</label>
                 <input
                   type="date"
                   required
                   value={date}
                   max={new Date().toISOString().split('T')[0]}
                   onChange={(e) => setDate(e.target.value)}
-                  className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3.5 py-2.5 text-xs text-zinc-300 focus:outline-none focus:border-violet-600 font-semibold cursor-pointer"
+                  className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold cursor-pointer"
                 />
               </div>
 
               <div>
-                <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Reference / Invoice Number</label>
+                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Reference / Invoice Number</label>
                 <input
                   type="text"
                   placeholder="e.g. INV-9908"
                   value={reference}
                   onChange={(e) => setReference(e.target.value)}
-                  className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3.5 py-2.5 text-xs text-zinc-300 focus:outline-none focus:border-violet-600 font-semibold"
+                  className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold"
                 />
               </div>
             </div>
 
             {/* Description */}
             <div>
-              <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Description / Notes</label>
+              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Description / Notes</label>
               <textarea
                 rows={3}
                 placeholder="Details of expense (e.g. sand unloading charges, machine replacement parts, etc.)"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3.5 py-2.5 text-xs text-zinc-300 focus:outline-none focus:border-violet-600 font-semibold"
+                className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold"
               />
             </div>
 
             {/* Receipt Attachment */}
             <div>
-              <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Attach Receipt (Photo/PDF)</label>
-              <div className="relative flex items-center justify-center border-2 border-dashed border-zinc-800 hover:border-zinc-700/80 bg-[#161720] rounded-xl p-6 transition-all group">
+              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Attach Receipt (Photo/PDF)</label>
+              <div className="relative flex items-center justify-center border-2 border-dashed border-[#1a2535] hover:border-blue-500/50 bg-[#0b1220] rounded-xl p-6 transition-all group">
                 <input
                   type="file"
                   onChange={handleFileChange}
@@ -196,11 +196,11 @@ const CreateExpensePage: React.FC = () => {
                   className="absolute inset-0 opacity-0 cursor-pointer"
                 />
                 <div className="text-center space-y-2">
-                  <Paperclip className="h-6 w-6 text-zinc-500 mx-auto group-hover:text-violet-400 transition-colors" />
-                  <span className="block text-xs font-bold text-zinc-300">
+                  <Paperclip className="h-6 w-6 text-slate-500 mx-auto group-hover:text-blue-400 transition-colors" />
+                  <span className="block text-xs font-bold text-slate-350">
                     {attachedFileName ? attachedFileName : 'Select or drag receipt file'}
                   </span>
-                  <span className="block text-[9px] text-zinc-550 uppercase font-black">
+                  <span className="block text-[9px] text-slate-500 uppercase font-black">
                     Max size: 5MB (PDF or Image formats)
                   </span>
                 </div>
@@ -208,17 +208,17 @@ const CreateExpensePage: React.FC = () => {
             </div>
 
             {/* Action Buttons */}
-            <div className="pt-4 border-t border-zinc-850 flex gap-2">
+            <div className="pt-4 border-t border-[#1a2535] flex gap-2">
               <Link
                 to="/expenses"
-                className="flex-1 py-3 bg-[#1b1c25] border border-zinc-800 text-zinc-455 hover:text-white rounded-lg font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-colors"
+                className="flex-1 py-3 bg-[#0b1220] border border-[#1a2535] text-slate-400 hover:text-white rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-all"
               >
                 Cancel
               </Link>
               <button
                 type="submit"
                 disabled={createExpenseMutation.isPending}
-                className="flex-1 py-3 bg-violet-600 hover:bg-violet-700 text-white rounded-lg font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-colors disabled:opacity-50"
+                className="flex-1 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-all shadow-lg shadow-blue-500/10 disabled:opacity-50"
               >
                 {createExpenseMutation.isPending ? (
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />

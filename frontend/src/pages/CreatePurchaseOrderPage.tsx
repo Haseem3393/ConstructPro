@@ -94,7 +94,7 @@ const CreatePurchaseOrderPage: React.FC = () => {
         <div className="flex items-center">
           <Link
             to="/inventory/purchases"
-            className="inline-flex items-center text-xs font-bold text-zinc-400 hover:text-white uppercase tracking-wider transition-colors"
+            className="inline-flex items-center text-xs font-bold text-slate-400 hover:text-white uppercase tracking-wider transition-colors"
           >
             <ArrowLeft className="h-4 w-4 mr-1.5" />
             Back to PO Registry
@@ -102,15 +102,15 @@ const CreatePurchaseOrderPage: React.FC = () => {
         </div>
 
         {/* Header */}
-        <div className="border-b border-zinc-800 pb-5">
-          <h1 className="text-3xl font-extrabold text-white">Create Purchase Order</h1>
-          <p className="text-zinc-400 text-sm mt-1">Draft or order formal material requests to suppliers</p>
+        <div className="border-b border-[#1a2535] pb-5">
+          <h1 className="text-3xl font-black text-white tracking-tight">Create Purchase Order</h1>
+          <p className="text-slate-400 text-xs font-semibold mt-1">Draft or order formal material requests to suppliers</p>
         </div>
 
         {/* Form Card */}
-        <div className="bg-[#14161f] border border-zinc-800 rounded-xl p-6 shadow-xl space-y-6">
+        <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-6 shadow-xl space-y-6">
           {formError && (
-            <div className="p-3 bg-rose-500/10 border border-rose-500/20 text-rose-455 rounded text-xs font-bold">
+            <div className="p-3 bg-rose-500/10 border border-rose-500/22 text-rose-455 rounded text-xs font-bold">
               {formError}
             </div>
           )}
@@ -118,7 +118,7 @@ const CreatePurchaseOrderPage: React.FC = () => {
           {/* Primary Selectors */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Project Site *</label>
+              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Project Site *</label>
               <select
                 value={projectId}
                 onChange={(e) => {
@@ -127,7 +127,7 @@ const CreatePurchaseOrderPage: React.FC = () => {
                   setLineItems([{ materialId: '', quantity: 1, unitPrice: 0 }])
                 }}
                 required
-                className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3 py-2.5 text-xs text-zinc-350 focus:outline-none focus:border-violet-600 font-semibold cursor-pointer"
+                className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2.5 text-xs text-slate-350 focus:outline-none focus:border-blue-500/60 transition-all font-semibold cursor-pointer"
               >
                 <option value="">Select Project</option>
                 {projects?.map((p) => (
@@ -139,12 +139,12 @@ const CreatePurchaseOrderPage: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Supplier Vendor *</label>
+              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Supplier Vendor *</label>
               <select
                 value={supplierId}
                 onChange={(e) => setSupplierId(e.target.value)}
                 required
-                className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3 py-2.5 text-xs text-zinc-350 focus:outline-none focus:border-violet-600 font-semibold cursor-pointer"
+                className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2.5 text-xs text-slate-350 focus:outline-none focus:border-blue-500/60 transition-all font-semibold cursor-pointer"
               >
                 <option value="">Select Supplier</option>
                 {suppliers?.map((s) => (
@@ -156,25 +156,25 @@ const CreatePurchaseOrderPage: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-[10px] font-black text-zinc-455 uppercase tracking-widest mb-2">Delivery Date Expected</label>
+              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Delivery Date Expected</label>
               <input
                 type="date"
                 value={deliveryDateExpected}
                 onChange={(e) => setDeliveryDateExpected(e.target.value)}
-                className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3.5 py-2.5 text-xs text-zinc-200 focus:outline-none focus:border-violet-600 font-semibold"
+                className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold"
               />
             </div>
           </div>
 
           {/* Line Items Matrix */}
           <div className="space-y-3">
-            <div className="flex justify-between items-center pb-2 border-b border-zinc-850">
-              <span className="text-xs font-black text-zinc-400 uppercase tracking-wider">Purchase Items Schedule</span>
+            <div className="flex justify-between items-center pb-2 border-b border-[#1a2535]">
+              <span className="text-xs font-black text-slate-400 uppercase tracking-wider">Purchase Items Schedule</span>
               <button
                 type="button"
                 onClick={handleAddItemRow}
                 disabled={!projectId}
-                className="inline-flex items-center px-2.5 py-1 bg-violet-600/10 hover:bg-violet-600/20 text-violet-400 border border-violet-500/20 rounded text-[10px] font-black uppercase tracking-wider transition-colors disabled:opacity-40"
+                className="inline-flex items-center px-2.5 py-1 bg-blue-500/10 hover:bg-blue-500/20 text-blue-405 border border-blue-500/22 rounded-xl text-[10px] font-black uppercase tracking-wider transition-colors disabled:opacity-40"
               >
                 <Plus className="h-3.5 w-3.5 mr-1" />
                 Add Item Row
@@ -182,20 +182,20 @@ const CreatePurchaseOrderPage: React.FC = () => {
             </div>
 
             {!projectId ? (
-              <div className="py-8 text-center text-xs text-zinc-650 font-bold bg-zinc-900/10 border border-dashed border-zinc-850 rounded-lg">
+              <div className="py-8 text-center text-xs text-slate-500 font-bold bg-[#0b1220]/40 border border-dashed border-[#1a2535] rounded-xl">
                 Please select a project site to load materials registers.
               </div>
             ) : (
               <div className="space-y-3.5">
                 {lineItems.map((item, index) => (
-                  <div key={index} className="flex flex-col sm:flex-row items-end gap-3 bg-[#181a24]/30 border border-zinc-850 p-4 rounded-xl">
+                  <div key={index} className="flex flex-col sm:flex-row items-end gap-3 bg-[#0b1220]/40 border border-[#1a2535] p-4 rounded-xl">
                     <div className="flex-1 w-full">
-                      <label className="block text-[9px] font-bold text-zinc-500 uppercase tracking-widest mb-1.5">Material *</label>
+                      <label className="block text-[9px] font-bold text-slate-500 uppercase tracking-widest mb-1.5">Material *</label>
                       <select
                         value={item.materialId}
                         onChange={(e) => handleLineChange(index, 'materialId', e.target.value)}
                         required
-                        className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3 py-2 text-xs text-zinc-300 focus:outline-none focus:border-violet-600 font-semibold cursor-pointer"
+                        className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold cursor-pointer"
                       >
                         <option value="">Select Material</option>
                         {materials?.map((m) => (
@@ -207,7 +207,7 @@ const CreatePurchaseOrderPage: React.FC = () => {
                     </div>
 
                     <div className="w-full sm:w-28">
-                      <label className="block text-[9px] font-bold text-zinc-500 uppercase tracking-widest mb-1.5">Quantity *</label>
+                      <label className="block text-[9px] font-bold text-slate-500 uppercase tracking-widest mb-1.5">Quantity *</label>
                       <input
                         type="number"
                         min="0.1"
@@ -215,25 +215,25 @@ const CreatePurchaseOrderPage: React.FC = () => {
                         required
                         value={item.quantity}
                         onChange={(e) => handleLineChange(index, 'quantity', e.target.value)}
-                        className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3 py-2 text-xs text-zinc-300 focus:outline-none focus:border-violet-600 font-semibold"
+                        className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold"
                       />
                     </div>
 
                     <div className="w-full sm:w-36">
-                      <label className="block text-[9px] font-bold text-zinc-500 uppercase tracking-widest mb-1.5">Unit Price (LKR) *</label>
+                      <label className="block text-[9px] font-bold text-slate-500 uppercase tracking-widest mb-1.5">Unit Price (LKR) *</label>
                       <input
                         type="number"
                         min="0"
                         required
                         value={item.unitPrice}
                         onChange={(e) => handleLineChange(index, 'unitPrice', e.target.value)}
-                        className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3 py-2 text-xs text-zinc-300 focus:outline-none focus:border-violet-600 font-semibold"
+                        className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold"
                       />
                     </div>
 
                     <div className="w-full sm:w-36 text-right pb-2 shrink-0">
-                      <span className="block text-[9px] text-zinc-550 font-bold uppercase tracking-wider mb-2.5">Line Total</span>
-                      <span className="text-zinc-200 font-black text-sm pr-1">
+                      <span className="block text-[9px] text-slate-500 font-bold uppercase tracking-wider mb-2.5">Line Total</span>
+                      <span className="text-slate-200 font-black text-sm pr-1">
                         Rs.{(item.quantity * item.unitPrice).toLocaleString()}
                       </span>
                     </div>
@@ -243,7 +243,7 @@ const CreatePurchaseOrderPage: React.FC = () => {
                         type="button"
                         onClick={() => handleRemoveItemRow(index)}
                         disabled={lineItems.length === 1}
-                        className="p-1.5 bg-rose-500/10 hover:bg-rose-500/20 text-rose-455 border border-rose-500/25 rounded disabled:opacity-35"
+                        className="p-1.5 bg-rose-500/10 hover:bg-rose-500/20 text-rose-455 border border-rose-500/22 rounded-lg disabled:opacity-35"
                       >
                         <Trash2 className="h-4 w-4" />
                       </button>
@@ -256,29 +256,29 @@ const CreatePurchaseOrderPage: React.FC = () => {
 
           {/* Notes */}
           <div>
-            <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Remarks / Purchase Instructions</label>
+            <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Remarks / Purchase Instructions</label>
             <textarea
               placeholder="e.g. Terms 30 days credit. Delivery required on site by 8:00 AM."
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               rows={3}
-              className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3.5 py-2.5 text-xs text-zinc-300 focus:outline-none focus:border-violet-600 font-semibold"
+              className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold"
             />
           </div>
 
           {/* Total Display */}
-          <div className="flex justify-between items-center p-4 bg-zinc-900/30 border border-zinc-850 rounded-xl">
-            <span className="text-xs font-black text-zinc-400 uppercase tracking-wider">Estimated PO Total</span>
-            <span className="text-xl font-black text-green-400">
+          <div className="flex justify-between items-center p-4 bg-[#0b1220] border border-[#1a2535] rounded-xl">
+            <span className="text-xs font-black text-slate-400 uppercase tracking-wider">Estimated PO Total</span>
+            <span className="text-xl font-black text-emerald-405">
               Rs.{totalAmount.toLocaleString()}
             </span>
           </div>
 
           {/* Save Buttons */}
-          <div className="pt-4 border-t border-zinc-850 flex flex-col sm:flex-row gap-3">
+          <div className="pt-4 border-t border-[#1a2535] flex flex-col sm:flex-row gap-3">
             <Link
               to="/inventory/purchases"
-              className="flex-1 py-3 bg-[#1b1c25] border border-zinc-800 text-zinc-450 hover:text-white rounded-lg font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-colors order-last sm:order-first"
+              className="flex-1 py-3 bg-[#0b1220] border border-[#1a2535] text-slate-400 hover:text-white rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-all order-last sm:order-first"
             >
               Cancel
             </Link>
@@ -286,7 +286,7 @@ const CreatePurchaseOrderPage: React.FC = () => {
               type="button"
               onClick={() => handleSubmit('DRAFT')}
               disabled={createPOMutation.isPending}
-              className="flex-1 py-3 bg-[#181a24] hover:bg-[#1f212f] text-zinc-300 border border-zinc-800 rounded-lg font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-colors disabled:opacity-50"
+              className="flex-1 py-3 bg-[#0b1220] hover:bg-white/[0.02] text-slate-300 border border-[#1a2535] rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-all disabled:opacity-50"
             >
               Save as Draft
             </button>
@@ -294,7 +294,7 @@ const CreatePurchaseOrderPage: React.FC = () => {
               type="button"
               onClick={() => handleSubmit('ORDERED')}
               disabled={createPOMutation.isPending}
-              className="flex-1 py-3 bg-violet-600 hover:bg-violet-700 text-white rounded-lg font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-colors shadow-lg shadow-violet-600/10 disabled:opacity-50"
+              className="flex-1 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-all shadow-lg shadow-blue-500/10 disabled:opacity-50"
             >
               {createPOMutation.isPending ? (
                 <Loader2 className="h-4 w-4 mr-2 animate-spin" />

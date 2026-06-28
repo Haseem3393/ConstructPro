@@ -13,7 +13,8 @@ import {
   X,
   Building,
   Archive,
-  Save
+  Save,
+  Info
 } from 'lucide-react'
 
 const OpeningStockPage: React.FC = () => {
@@ -88,31 +89,31 @@ const OpeningStockPage: React.FC = () => {
     <SidebarLayout>
       <div className="space-y-6">
         {/* Page Header */}
-        <div className="border-b border-zinc-800 pb-5 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+        <div className="border-b border-[#1a2535] pb-5 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
           <div>
-            <h1 className="text-3xl font-extrabold text-white">Opening Stock</h1>
-            <p className="text-zinc-400 text-sm mt-1">One-time initial stock registry for materials at project startup</p>
+            <h1 className="text-3xl font-black text-white tracking-tight">Opening Stock</h1>
+            <p className="text-slate-400 text-xs font-semibold mt-1">One-time initial stock registry for materials at project startup</p>
           </div>
 
           <button
             onClick={handleOpenModal}
-            className="inline-flex items-center justify-center px-4 py-2.5 bg-violet-600 hover:bg-violet-700 text-white rounded-lg transition-colors font-bold text-xs uppercase tracking-wider shadow-lg shadow-violet-600/10 shrink-0"
+            className="inline-flex items-center justify-center px-4 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-xl transition-all font-bold text-xs uppercase tracking-wider shadow-lg shadow-blue-500/10 shrink-0"
           >
             <Plus className="h-4 w-4 mr-2" /> Initial Stock
           </button>
         </div>
 
         {/* Filters Panel */}
-        <div className="bg-[#14161f] border border-zinc-800 rounded-xl p-6 shadow-xl space-y-4">
-          <h3 className="text-zinc-450 text-xs font-bold uppercase tracking-widest flex items-center">
-            <Filter className="h-4 w-4 mr-1.5 text-zinc-550" /> Filter Stocks
+        <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-6 shadow-xl space-y-4">
+          <h3 className="text-slate-400 text-xs font-bold uppercase tracking-widest flex items-center">
+            <Filter className="h-4 w-4 mr-1.5 text-slate-500" /> Filter Stocks
           </h3>
           <div>
-            <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Project</label>
+            <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2">Project</label>
             <select
               value={selectedProjectId}
               onChange={(e) => setSelectedProjectId(e.target.value)}
-              className="w-full max-w-md bg-[#1c1d26] border border-zinc-800 rounded-lg px-3 py-2 text-xs text-zinc-350 focus:outline-none focus:border-violet-600 cursor-pointer"
+              className="w-full max-w-md bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2 text-xs text-slate-300 focus:outline-none focus:border-blue-500/60 transition-all cursor-pointer"
             >
               <option value="">All Projects</option>
               {projects?.map((p) => (
@@ -125,26 +126,26 @@ const OpeningStockPage: React.FC = () => {
         </div>
 
         {/* Data Registry Table */}
-        <div className="bg-[#14161f] border border-zinc-800 rounded-xl overflow-hidden shadow-xl">
-          <div className="px-6 py-4 border-b border-zinc-800 bg-[#171924]/30 flex justify-between items-center">
-            <h3 className="font-bold text-sm text-zinc-350">Opening Stock ledger</h3>
-            {isFetching && <Loader2 className="h-4 w-4 text-violet-500 animate-spin" />}
+        <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl overflow-hidden shadow-xl">
+          <div className="px-6 py-4 border-b border-[#1a2535] bg-white/[0.01] flex justify-between items-center">
+            <h3 className="font-bold text-sm text-slate-300">Opening Stock ledger</h3>
+            {isFetching && <Loader2 className="h-4 w-4 text-blue-505 animate-spin" />}
           </div>
 
           {isLoading ? (
             <div className="flex flex-col items-center justify-center py-20 space-y-3">
-              <Loader2 className="h-8 w-8 text-violet-500 animate-spin" />
-              <p className="text-xs text-zinc-400 font-medium">Loading ledger logs...</p>
+              <Loader2 className="h-8 w-8 text-blue-505 animate-spin" />
+              <p className="text-xs text-slate-500 font-semibold">Loading ledger logs...</p>
             </div>
           ) : !openingStocks || openingStocks.length === 0 ? (
-            <div className="p-16 text-center text-zinc-550 text-xs font-semibold">
+            <div className="p-16 text-center text-slate-500 text-xs font-semibold">
               No opening stock transactions recorded for the selected project.
             </div>
           ) : (
             <div className="overflow-x-auto w-full">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="text-[10px] text-zinc-400 font-black tracking-widest uppercase bg-[#181a24]/50 border-b border-zinc-800">
+                  <tr className="text-[10px] text-slate-500 font-bold tracking-wider uppercase bg-white/[0.005] border-b border-[#1a2535]">
                     <th className="py-4 px-6">PROJECT / SITE</th>
                     <th className="py-4 px-4">ITEM DESCRIPTION</th>
                     <th className="py-4 px-4 text-center">INITIAL QTY</th>
@@ -153,31 +154,31 @@ const OpeningStockPage: React.FC = () => {
                     <th className="py-4 px-6">REGISTRATION DATE</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-zinc-800/60 text-xs">
+                <tbody className="divide-y divide-[#1a2535] text-xs">
                   {openingStocks.map((stock) => (
-                    <tr key={stock.id} className="hover:bg-[#1a1c27]/20 transition-colors">
+                    <tr key={stock.id} className="hover:bg-white/[0.02] transition-colors">
                       <td className="py-4 px-6">
                         <div className="flex items-center space-x-2">
-                          <Building className="h-4 w-4 text-violet-400 shrink-0" />
+                          <Building className="h-4 w-4 text-blue-405 shrink-0" />
                           <span className="font-bold text-white">{stock.projectName}</span>
                         </div>
                       </td>
-                      <td className="py-4 px-4 font-bold text-zinc-200">
+                      <td className="py-4 px-4 font-bold text-slate-200">
                         {stock.materialName}
-                        <span className="block text-[10px] text-zinc-550 font-normal uppercase mt-0.5">Unit: {stock.unit}</span>
+                        <span className="block text-[10px] text-slate-500 font-normal uppercase mt-0.5">Unit: {stock.unit}</span>
                       </td>
-                      <td className="py-4 px-4 text-center font-bold text-zinc-350">
+                      <td className="py-4 px-4 text-center font-bold text-slate-300">
                         {stock.quantity.toLocaleString()} {stock.unit}
                       </td>
-                      <td className="py-4 px-4 text-right text-zinc-400">
+                      <td className="py-4 px-4 text-right text-slate-400 font-medium">
                         {formatCurrency(stock.unitPrice)}
                       </td>
-                      <td className="py-4 px-4 text-right font-black text-green-400">
+                      <td className="py-4 px-4 text-right font-bold text-emerald-405">
                         {formatCurrency(stock.total)}
                       </td>
-                      <td className="py-4 px-6 text-zinc-450 font-medium">
+                      <td className="py-4 px-6 text-slate-400 font-medium">
                         <div className="flex items-center space-x-1.5">
-                          <Calendar className="h-3.5 w-3.5 text-zinc-550" />
+                          <Calendar className="h-3.5 w-3.5 text-slate-500" />
                           <span>{formatDate(stock.date)}</span>
                         </div>
                       </td>
@@ -193,12 +194,13 @@ const OpeningStockPage: React.FC = () => {
       {/* New Opening Stock Modal */}
       {isOpen && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-[#14161f] border border-zinc-800 rounded-xl max-w-md w-full overflow-hidden shadow-2xl animate-in zoom-in-95 duration-200">
-            <div className="px-6 py-4 border-b border-zinc-800 flex justify-between items-center">
+          <div className="bg-[#0d1526] border border-[#1a2535] rounded-2xl max-w-md w-full overflow-hidden shadow-2xl relative animate-in zoom-in-95 duration-200">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-blue-500 via-blue-400 to-transparent" />
+            <div className="px-6 py-4 border-b border-[#1a2535] flex justify-between items-center">
               <h3 className="font-extrabold text-sm text-white uppercase tracking-wider">New Opening Stock</h3>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 text-zinc-400 hover:text-white bg-zinc-900 border border-zinc-800 rounded"
+                className="p-1 text-slate-400 hover:text-white bg-[#0b1220] border border-[#1a2535] rounded transition-colors"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -206,13 +208,13 @@ const OpeningStockPage: React.FC = () => {
 
             <form onSubmit={handleCreate} className="p-6 space-y-4">
               {modalError && (
-                <div className="p-3 bg-rose-500/10 border border-rose-500/20 text-rose-455 rounded text-xs font-bold">
+                <div className="p-3 bg-rose-500/10 border border-rose-500/22 text-rose-455 rounded text-xs font-bold">
                   {modalError}
                 </div>
               )}
 
               <div>
-                <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Select Project *</label>
+                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Select Project *</label>
                 <select
                   value={newProjectId}
                   onChange={(e) => {
@@ -220,7 +222,7 @@ const OpeningStockPage: React.FC = () => {
                     setNewMaterialId('')
                   }}
                   required
-                  className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3 py-2.5 text-xs text-zinc-350 focus:outline-none focus:border-violet-600 font-semibold cursor-pointer"
+                  className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2.5 text-xs text-slate-300 focus:outline-none focus:border-blue-500/60 transition-all font-semibold cursor-pointer"
                 >
                   <option value="">Select Project</option>
                   {projects?.map((p) => (
@@ -232,13 +234,13 @@ const OpeningStockPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Select Material *</label>
+                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Select Material *</label>
                 <select
                   value={newMaterialId}
                   onChange={(e) => setNewMaterialId(e.target.value)}
                   required
                   disabled={!newProjectId}
-                  className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3 py-2.5 text-xs text-zinc-350 focus:outline-none focus:border-violet-600 font-semibold cursor-pointer disabled:opacity-40"
+                  className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2.5 text-xs text-slate-300 focus:outline-none focus:border-blue-500/60 transition-all font-semibold cursor-pointer disabled:opacity-40"
                 >
                   <option value="">Select Material</option>
                   {materials?.map((m) => (
@@ -251,7 +253,7 @@ const OpeningStockPage: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-1">Quantity *</label>
+                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Quantity *</label>
                   <input
                     type="number"
                     required
@@ -260,12 +262,12 @@ const OpeningStockPage: React.FC = () => {
                     placeholder="e.g. 50"
                     value={quantity}
                     onChange={(e) => setQuantity(e.target.value)}
-                    className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3.5 py-2.5 text-xs text-zinc-300 focus:outline-none focus:border-violet-600 font-semibold"
+                    className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-1">Unit Price (LKR) *</label>
+                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Unit Price (LKR) *</label>
                   <input
                     type="number"
                     required
@@ -273,31 +275,31 @@ const OpeningStockPage: React.FC = () => {
                     placeholder="e.g. 2500"
                     value={unitPrice}
                     onChange={(e) => setUnitPrice(e.target.value)}
-                    className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3.5 py-2.5 text-xs text-zinc-300 focus:outline-none focus:border-violet-600 font-semibold"
+                    className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold"
                   />
                 </div>
               </div>
 
-              <div className="p-3 bg-violet-600/5 border border-violet-500/15 rounded-lg flex items-start space-x-2">
-                <Info className="h-4 w-4 text-violet-400 shrink-0 mt-0.5" />
-                <p className="text-[10px] text-violet-400 font-semibold leading-relaxed">
+              <div className="p-3 bg-blue-500/10 border border-blue-500/22 rounded-xl flex items-start space-x-2">
+                <Info className="h-4 w-4 text-blue-400 shrink-0 mt-0.5" />
+                <p className="text-[10px] text-blue-405 font-semibold leading-relaxed">
                   Opening stock is a one-time operation per material in a project. This sets the initial inventory level without creating expense entries in the system.
                 </p>
               </div>
 
               {/* Action Buttons */}
-              <div className="pt-2 border-t border-zinc-850 flex gap-2">
+              <div className="pt-2 border-t border-[#1a2535] flex gap-2">
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
-                  className="flex-1 py-2.5 bg-[#1b1c25] border border-zinc-800 text-zinc-400 rounded-lg font-bold text-xs uppercase tracking-wider hover:text-white transition-colors"
+                  className="flex-1 py-2.5 bg-[#0b1220] border border-[#1a2535] text-slate-400 rounded-xl font-bold text-xs uppercase tracking-wider hover:text-white transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={createOpeningStockMutation.isPending}
-                  className="flex-1 py-2.5 bg-violet-600 hover:bg-violet-700 text-white rounded-lg font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-colors disabled:opacity-50"
+                  className="flex-1 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-all disabled:opacity-50"
                 >
                   {createOpeningStockMutation.isPending ? (
                     <Loader2 className="h-4 w-4 mr-2 animate-spin" />

@@ -43,6 +43,13 @@ import SuppliersListPage from './pages/SuppliersListPage'
 import CreateSupplierPage from './pages/CreateSupplierPage'
 import SupplierDetailsPage from './pages/SupplierDetailsPage'
 import ReportsPage from './pages/ReportsPage'
+import ProjectReportPage from './pages/ProjectReportPage'
+import ExpenseReportPage from './pages/ExpenseReportPage'
+import PayrollReportPage from './pages/PayrollReportPage'
+import AttendanceReportPage from './pages/AttendanceReportPage'
+import MaterialReportPage from './pages/MaterialReportPage'
+import BudgetReportPage from './pages/BudgetReportPage'
+import MachineryReportPage from './pages/MachineryReportPage'
 import MachineryListPage from './pages/MachineryListPage'
 import CreateMachineryPage from './pages/CreateMachineryPage'
 import MachineryDetailsPage from './pages/MachineryDetailsPage'
@@ -56,8 +63,25 @@ import PayablesPage from './pages/PayablesPage'
 import CreatePayablePage from './pages/CreatePayablePage'
 import ChequesPage from './pages/ChequesPage'
 import CreateChequePage from './pages/CreateChequePage'
-
-
+import ContractsListPage from './pages/ContractsListPage'
+import CreateContractPage from './pages/CreateContractPage'
+import ContractDetailsPage from './pages/ContractDetailsPage'
+import PaymentsListPage from './pages/PaymentsListPage'
+import PaymentDetailsPage from './pages/PaymentDetailsPage'
+import ChangeOrdersPage from './pages/ChangeOrdersPage'
+import CreateChangeOrderPage from './pages/CreateChangeOrderPage'
+import PortalProgressPage from './pages/PortalProgressPage'
+import PortalPaymentsPage from './pages/PortalPaymentsPage'
+import PortalDocumentsPage from './pages/PortalDocumentsPage'
+import SettingsPage from './pages/SettingsPage'
+import CompanySettingsPage from './pages/CompanySettingsPage'
+import CategoriesSettingsPage from './pages/CategoriesSettingsPage'
+import RolesSettingsPage from './pages/RolesSettingsPage'
+import AuditLogsPage from './pages/AuditLogsPage'
+import NotificationsPage from './pages/NotificationsPage'
+import NotFoundPage from './pages/NotFoundPage'
+import ServerErrorPage from './pages/ServerErrorPage'
+import { ToastContainer } from './components/ToastContainer'
 
 // Protected Route Component
 const ProtectedRoute: React.FC<{ children: React.ReactNode; allowedRoles?: string[] }> = ({
@@ -81,6 +105,7 @@ function App() {
   return (
     <QueryProvider>
       <Router>
+        <ToastContainer />
         <Routes>
           {/* Public Recovery Routes */}
           <Route path="/login" element={<LoginPage />} />
@@ -351,6 +376,62 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/reports/project"
+            element={
+              <ProtectedRoute allowedRoles={['ADMIN', 'PROJECT_MANAGER']}>
+                <ProjectReportPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/reports/expense"
+            element={
+              <ProtectedRoute allowedRoles={['ADMIN', 'PROJECT_MANAGER']}>
+                <ExpenseReportPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/reports/payroll"
+            element={
+              <ProtectedRoute allowedRoles={['ADMIN', 'PROJECT_MANAGER']}>
+                <PayrollReportPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/reports/attendance"
+            element={
+              <ProtectedRoute allowedRoles={['ADMIN', 'PROJECT_MANAGER']}>
+                <AttendanceReportPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/reports/material"
+            element={
+              <ProtectedRoute allowedRoles={['ADMIN', 'PROJECT_MANAGER']}>
+                <MaterialReportPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/reports/budget"
+            element={
+              <ProtectedRoute allowedRoles={['ADMIN', 'PROJECT_MANAGER']}>
+                <BudgetReportPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/reports/machinery"
+            element={
+              <ProtectedRoute allowedRoles={['ADMIN', 'PROJECT_MANAGER']}>
+                <MachineryReportPage />
+              </ProtectedRoute>
+            }
+          />
 
           {/* Machinery & Equipment Module Routes */}
           <Route
@@ -460,6 +541,64 @@ function App() {
             }
           />
 
+          {/* Contracts & Payments Routes */}
+          <Route
+            path="/contracts"
+            element={
+              <ProtectedRoute allowedRoles={['ADMIN', 'PROJECT_MANAGER', 'SUPERVISOR', 'CLIENT']}>
+                <ContractsListPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/contracts/new"
+            element={
+              <ProtectedRoute allowedRoles={['ADMIN', 'PROJECT_MANAGER']}>
+                <CreateContractPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/contracts/:id"
+            element={
+              <ProtectedRoute allowedRoles={['ADMIN', 'PROJECT_MANAGER', 'SUPERVISOR', 'CLIENT']}>
+                <ContractDetailsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/payments"
+            element={
+              <ProtectedRoute allowedRoles={['ADMIN', 'PROJECT_MANAGER', 'SUPERVISOR', 'CLIENT']}>
+                <PaymentsListPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/payments/:id"
+            element={
+              <ProtectedRoute allowedRoles={['ADMIN', 'PROJECT_MANAGER', 'SUPERVISOR', 'CLIENT']}>
+                <PaymentDetailsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/change-orders"
+            element={
+              <ProtectedRoute allowedRoles={['ADMIN', 'PROJECT_MANAGER', 'SUPERVISOR', 'CLIENT']}>
+                <ChangeOrdersPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/change-orders/new"
+            element={
+              <ProtectedRoute allowedRoles={['ADMIN', 'PROJECT_MANAGER']}>
+                <CreateChangeOrderPage />
+              </ProtectedRoute>
+            }
+          />
+
           {/* Attendance & Timesheet Routes */}
           <Route
             path="/attendance"
@@ -511,10 +650,90 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/portal/progress"
+            element={
+              <ProtectedRoute allowedRoles={['CLIENT']}>
+                <PortalProgressPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/portal/payments"
+            element={
+              <ProtectedRoute allowedRoles={['CLIENT']}>
+                <PortalPaymentsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/portal/documents"
+            element={
+              <ProtectedRoute allowedRoles={['CLIENT']}>
+                <PortalDocumentsPage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Admin Settings & System Audit Routes */}
+          <Route
+            path="/settings"
+            element={
+              <ProtectedRoute allowedRoles={['ADMIN']}>
+                <SettingsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/settings/company"
+            element={
+              <ProtectedRoute allowedRoles={['ADMIN']}>
+                <CompanySettingsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/settings/categories"
+            element={
+              <ProtectedRoute allowedRoles={['ADMIN']}>
+                <CategoriesSettingsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/settings/roles"
+            element={
+              <ProtectedRoute allowedRoles={['ADMIN']}>
+                <RolesSettingsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/audit-logs"
+            element={
+              <ProtectedRoute allowedRoles={['ADMIN']}>
+                <AuditLogsPage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Notifications Routes */}
+          <Route
+            path="/notifications"
+            element={
+              <ProtectedRoute allowedRoles={['ADMIN', 'PROJECT_MANAGER', 'SUPERVISOR', 'CLIENT']}>
+                <NotificationsPage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Fallbacks */}
+          <Route path="/500" element={<ServerErrorPage />} />
+          <Route path="/404" element={<NotFoundPage />} />
 
           {/* Default redirect */}
           <Route path="/" element={<Navigate to="/login" replace />} />
-          <Route path="*" element={<Navigate to="/login" replace />} />
+          <Route path="*" element={<Navigate to="/404" replace />} />
         </Routes>
       </Router>
     </QueryProvider>

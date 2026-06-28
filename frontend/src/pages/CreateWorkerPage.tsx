@@ -60,31 +60,31 @@ const CreateWorkerPage: React.FC = () => {
     <SidebarLayout>
       <div className="space-y-6 max-w-2xl mx-auto">
         {/* Header */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 border-b border-[#1a2535] pb-5">
           <Link
             to="/workers"
-            className="p-2 bg-[#14161f] border border-zinc-800 rounded-lg text-zinc-400 hover:text-white transition-colors"
+            className="p-2.5 bg-[#0d1526] border border-[#1a2535] rounded-xl text-slate-400 hover:text-white transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
           </Link>
           <div>
-            <h1 className="text-3xl font-extrabold text-white">Register Worker</h1>
-            <p className="text-zinc-400 text-sm mt-1">Add new skilled labor resources, contact details, and base wage rates</p>
+            <h1 className="text-2xl font-black text-white tracking-tight">Register Worker</h1>
+            <p className="text-slate-500 text-xs font-medium mt-1">Add new skilled labor resources, contact details, and base wage rates</p>
           </div>
         </div>
 
         {/* Form Card */}
-        <div className="bg-[#14161f] border border-zinc-800 rounded-xl overflow-hidden shadow-xl p-6">
+        <div className="bg-[#0d1526] border border-[#1a2535] rounded-2xl overflow-hidden shadow-xl p-6">
           <form onSubmit={handleSave} className="space-y-5">
             {formError && (
-              <div className="p-3 bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs rounded font-semibold">
+              <div className="p-3.5 bg-rose-500/8 border border-rose-500/20 text-rose-455 text-xs rounded-xl flex items-center gap-2 font-semibold">
                 {formError}
               </div>
             )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1.5">
+                <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">
                   Tradesman Name *
                 </label>
                 <input
@@ -92,19 +92,19 @@ const CreateWorkerPage: React.FC = () => {
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-4 py-2.5 text-sm text-zinc-300 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
                   placeholder="e.g. A.C. Kumar"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1.5">
+                <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">
                   Trade Skill Category *
                 </label>
                 <select
                   value={trade}
                   onChange={(e) => setTrade(e.target.value)}
-                  className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-4 py-2.5 text-sm text-zinc-300 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-350 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
                 >
                   {trades.map((t) => (
                     <option key={t} value={t}>{t}</option>
@@ -113,7 +113,7 @@ const CreateWorkerPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1.5">
+                <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">
                   Base Daily Wage (Rs.) *
                 </label>
                 <input
@@ -123,47 +123,47 @@ const CreateWorkerPage: React.FC = () => {
                   step="50"
                   value={dailyWage}
                   onChange={(e) => setDailyWage(e.target.value)}
-                  className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-4 py-2.5 text-sm text-zinc-300 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
                   placeholder="e.g. 2500"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1.5">
+                <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">
                   Contact Phone Number
                 </label>
                 <input
                   type="text"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-4 py-2.5 text-sm text-zinc-300 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
                   placeholder="e.g. +94771234567"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1.5">
+              <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">
                 Home Address
               </label>
               <textarea
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 rows={3}
-                className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-4 py-2.5 text-sm text-zinc-300 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
                 placeholder="e.g. 123 Main Street, Colombo 03"
               />
             </div>
 
-            <div className="flex justify-end pt-4 border-t border-zinc-800/80">
+            <div className="flex justify-end pt-4 border-t border-[#1a2535]">
               <button
                 type="submit"
                 disabled={createWorkerMutation.isPending}
-                className="flex items-center px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold text-xs uppercase tracking-wider shadow-lg shadow-blue-600/10 transition-all disabled:opacity-50"
+                className="flex items-center px-5 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-xl font-black text-xs uppercase tracking-wider transition-all duration-200 shadow-md shadow-blue-500/10 hover:shadow-blue-500/25 disabled:opacity-50"
               >
                 {createWorkerMutation.isPending ? (
                   <>
-                    <Loader2 className="h-4 w-4 mr-2 animate-spin" /> Saving...
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin text-blue-500" /> Saving...
                   </>
                 ) : (
                   <>

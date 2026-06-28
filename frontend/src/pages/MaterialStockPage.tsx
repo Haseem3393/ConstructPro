@@ -91,8 +91,8 @@ const MaterialStockPage: React.FC = () => {
     return (
       <SidebarLayout>
         <div className="flex flex-col items-center justify-center py-40 space-y-3">
-          <Loader2 className="h-10 w-10 text-violet-500 animate-spin" />
-          <p className="text-zinc-500 text-sm font-medium">Loading material details...</p>
+          <Loader2 className="h-10 w-10 text-blue-505 animate-spin" />
+          <p className="text-slate-500 text-sm font-semibold">Loading material details...</p>
         </div>
       </SidebarLayout>
     )
@@ -101,10 +101,10 @@ const MaterialStockPage: React.FC = () => {
   if (!material) {
     return (
       <SidebarLayout>
-        <div className="p-8 text-center text-rose-455 bg-rose-500/10 border border-rose-500/25 rounded-xl space-y-4 max-w-md mx-auto">
-          <Info className="h-12 w-12 mx-auto text-rose-400" />
+        <div className="p-8 text-center text-rose-455 bg-rose-500/10 border border-rose-500/22 rounded-xl space-y-4 max-w-md mx-auto">
+          <Info className="h-12 w-12 mx-auto text-rose-455" />
           <p className="font-extrabold text-sm uppercase tracking-wider">Material Not Found</p>
-          <Link to="/materials" className="inline-flex text-xs font-bold text-violet-400 hover:text-violet-300">
+          <Link to="/materials" className="inline-flex text-xs font-bold text-blue-405 hover:text-blue-300">
             Back to Registry
           </Link>
         </div>
@@ -119,7 +119,7 @@ const MaterialStockPage: React.FC = () => {
         <div className="flex items-center">
           <Link
             to={`/materials/${material.id}`}
-            className="inline-flex items-center text-xs font-bold text-zinc-400 hover:text-white uppercase tracking-wider transition-colors"
+            className="inline-flex items-center text-xs font-bold text-slate-400 hover:text-white uppercase tracking-wider transition-colors"
           >
             <ArrowLeft className="h-4 w-4 mr-1.5" />
             Back to Details
@@ -127,13 +127,13 @@ const MaterialStockPage: React.FC = () => {
         </div>
 
         {/* Header */}
-        <div className="border-b border-zinc-800 pb-5">
-          <h1 className="text-3xl font-extrabold text-white">Stock Adjustment</h1>
-          <p className="text-zinc-400 text-sm mt-1">Record delivery stock-ins or daily consumption stock-outs</p>
+        <div className="border-b border-[#1a2535] pb-5">
+          <h1 className="text-3xl font-black text-white tracking-tight">Stock Adjustment</h1>
+          <p className="text-slate-400 text-xs font-semibold mt-1">Record delivery stock-ins or daily consumption stock-outs</p>
         </div>
 
         {/* Tab Controls */}
-        <div className="flex border-b border-zinc-800">
+        <div className="flex border-b border-[#1a2535]">
           <button
             onClick={() => {
               setMode('in')
@@ -143,11 +143,11 @@ const MaterialStockPage: React.FC = () => {
             }}
             className={`flex-1 py-3 text-xs font-black uppercase tracking-wider border-b-2 transition-all flex items-center justify-center gap-1.5 ${
               mode === 'in'
-                ? 'border-violet-600 text-white bg-violet-600/5'
-                : 'border-transparent text-zinc-500 hover:text-zinc-350'
+                ? 'border-blue-500 text-white bg-blue-500/5'
+                : 'border-transparent text-slate-500 hover:text-slate-300'
             }`}
           >
-            <ArrowDownLeft className="h-4 w-4 text-green-400" />
+            <ArrowDownLeft className="h-4 w-4 text-emerald-400" />
             Stock In (Delivery)
           </button>
           <button
@@ -159,32 +159,32 @@ const MaterialStockPage: React.FC = () => {
             }}
             className={`flex-1 py-3 text-xs font-black uppercase tracking-wider border-b-2 transition-all flex items-center justify-center gap-1.5 ${
               mode === 'out'
-                ? 'border-violet-600 text-white bg-violet-600/5'
-                : 'border-transparent text-zinc-500 hover:text-zinc-350'
+                ? 'border-blue-500 text-white bg-blue-500/5'
+                : 'border-transparent text-slate-500 hover:text-slate-300'
             }`}
           >
-            <ArrowUpRight className="h-4 w-4 text-rose-400" />
+            <ArrowUpRight className="h-4 w-4 text-rose-450" />
             Stock Out (Consumption)
           </button>
         </div>
 
         {/* Form Card */}
-        <div className="bg-[#14161f] border border-zinc-800 rounded-xl p-6 shadow-xl space-y-4">
-          <div className="bg-zinc-900/40 p-3 rounded-lg border border-zinc-850 flex justify-between text-xs text-zinc-400">
+        <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-6 shadow-xl space-y-4">
+          <div className="bg-[#0b1220] p-3 rounded-lg border border-[#1a2535] flex justify-between text-xs text-slate-400">
             <span>Selected Material: <strong className="text-white">{material.name}</strong></span>
             <span>Current Stock: <strong className="text-white">{material.currentStock} {material.unit}</strong></span>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
-              <div className="p-3 bg-rose-500/10 border border-rose-500/20 text-rose-455 rounded text-xs font-bold">
+              <div className="p-3 bg-rose-500/10 border border-rose-500/22 text-rose-455 rounded text-xs font-bold">
                 {error}
               </div>
             )}
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Quantity *</label>
+                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Quantity *</label>
                 <input
                   type="number"
                   required
@@ -193,31 +193,31 @@ const MaterialStockPage: React.FC = () => {
                   placeholder="e.g. 100"
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
-                  className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3.5 py-2.5 text-xs text-zinc-300 focus:outline-none focus:border-violet-600 font-semibold"
+                  className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold"
                 />
               </div>
 
               {mode === 'in' ? (
                 <div>
-                  <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Total Invoice Cost (LKR)</label>
+                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Total Invoice Cost (LKR)</label>
                   <input
                     type="number"
                     min="0"
                     placeholder="e.g. 55000"
                     value={cost}
                     onChange={(e) => setCost(e.target.value)}
-                    className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3.5 py-2.5 text-xs text-zinc-300 focus:outline-none focus:border-violet-600 font-semibold"
+                    className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold"
                   />
                 </div>
               ) : (
                 <div>
-                  <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Usage Date</label>
+                  <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Usage Date</label>
                   <input
                     type="date"
                     required
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
-                    className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3.5 py-2.5 text-xs text-zinc-200 focus:outline-none focus:border-violet-600 font-semibold"
+                    className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold"
                   />
                 </div>
               )}
@@ -227,11 +227,11 @@ const MaterialStockPage: React.FC = () => {
               <>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Supplier</label>
+                    <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Supplier</label>
                     <select
                       value={supplierId}
                       onChange={(e) => setSupplierId(e.target.value)}
-                      className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3 py-2.5 text-xs text-zinc-350 focus:outline-none focus:border-violet-600 font-semibold cursor-pointer"
+                      className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2.5 text-xs text-slate-300 focus:outline-none focus:border-blue-500/60 transition-all font-semibold cursor-pointer"
                     >
                       <option value="">Select Supplier</option>
                       {suppliersQuery.data?.map((s) => (
@@ -243,36 +243,36 @@ const MaterialStockPage: React.FC = () => {
                   </div>
 
                   <div>
-                    <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Invoice Number</label>
+                    <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Invoice Number</label>
                     <input
                       type="text"
                       placeholder="e.g. INV-2026-904"
                       value={invoiceNumber}
                       onChange={(e) => setInvoiceNumber(e.target.value)}
-                      className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3.5 py-2.5 text-xs text-zinc-300 focus:outline-none focus:border-violet-600 font-semibold"
+                      className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Delivery Date</label>
+                    <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Delivery Date</label>
                     <input
                       type="date"
                       required
                       value={date}
                       onChange={(e) => setDate(e.target.value)}
-                      className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3.5 py-2.5 text-xs text-zinc-200 focus:outline-none focus:border-violet-600 font-semibold"
+                      className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold"
                     />
                   </div>
 
                   <div className="flex flex-col justify-end">
-                    <label className="flex items-center space-x-2 text-xs font-bold text-zinc-400 uppercase tracking-widest mb-2 cursor-pointer">
+                    <label className="flex items-center space-x-2 text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 cursor-pointer">
                       <input
                         type="checkbox"
                         checked={autoExpense}
                         onChange={(e) => setAutoExpense(e.target.checked)}
-                        className="accent-violet-600 rounded"
+                        className="accent-blue-500 rounded"
                       />
                       <span>Auto log as project expense</span>
                     </label>
@@ -282,7 +282,7 @@ const MaterialStockPage: React.FC = () => {
             )}
 
             <div>
-              <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">
+              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">
                 {mode === 'in' ? 'Delivery Description' : 'Usage Description *'}
               </label>
               <textarea
@@ -291,23 +291,23 @@ const MaterialStockPage: React.FC = () => {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 rows={3}
-                className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3.5 py-2.5 text-xs text-zinc-300 focus:outline-none focus:border-violet-600 font-semibold"
+                className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold"
               />
             </div>
 
             {/* Submit buttons */}
-            <div className="pt-4 border-t border-zinc-850 flex gap-2">
+            <div className="pt-4 border-t border-[#1a2535] flex gap-2">
               <Link
                 to={`/materials/${material.id}`}
-                className="flex-1 py-3 bg-[#1b1c25] border border-zinc-800 text-zinc-450 hover:text-white rounded-lg font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-colors"
+                className="flex-1 py-3 bg-[#0b1220] border border-[#1a2535] text-slate-400 hover:text-white rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-colors"
               >
                 Cancel
               </Link>
               <button
                 type="submit"
                 disabled={recordStockInMutation.isPending || recordStockOutMutation.isPending}
-                className={`flex-1 py-3 text-white rounded-lg font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-colors disabled:opacity-50 ${
-                  mode === 'in' ? 'bg-green-600 hover:bg-green-700' : 'bg-rose-600 hover:bg-rose-700'
+                className={`flex-1 py-3 text-white rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-colors disabled:opacity-50 ${
+                  mode === 'in' ? 'bg-emerald-600 hover:bg-emerald-500' : 'bg-rose-600 hover:bg-rose-500'
                 }`}
               >
                 {recordStockInMutation.isPending || recordStockOutMutation.isPending ? (

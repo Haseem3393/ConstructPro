@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import prisma from '../config/database'
+import { logAudit } from '../utils/audit'
 
 export const getProjects = async (req: Request, res: Response) => {
   try {
@@ -129,6 +130,8 @@ export const createProject = async (req: Request, res: Response) => {
       },
     })
 
+    await logAudit(req.user?.id, req.user?.name || 'System', 'CREATE', 'Project', `Created project: ${project.name}`)
+
     res.status(201).json(project)
   } catch (error) {
     console.error('Error creating project:', error)
@@ -157,6 +160,8 @@ export const updateProject = async (req: Request, res: Response) => {
       },
     })
 
+    await logAudit(req.user?.id, req.user?.name || 'System', 'UPDATE', 'Project', `Updated project: ${project.name}`)
+
     res.json(project)
   } catch (error) {
     console.error('Error updating project:', error)
@@ -171,6 +176,8 @@ export const deleteProject = async (req: Request, res: Response) => {
     await prisma.project.delete({
       where: { id },
     })
+
+    await logAudit(req.user?.id, req.user?.name || 'System', 'DELETE', 'Project', `Deleted project with ID: ${id}`)
 
     res.json({ message: 'Project deleted successfully' })
   } catch (error) {
@@ -194,6 +201,7 @@ export const createMilestone = async (req: Request, res: Response) => {
         projectId: id,
       },
     })
+    await logAudit(req.user?.id, req.user?.name || 'System', 'CREATE', 'Milestone', `Created milestone: ${milestone.name} for project ID: ${id}`)
     res.status(201).json(milestone)
   } catch (error) {
     console.error('Error creating milestone:', error)
@@ -215,6 +223,7 @@ export const createMember = async (req: Request, res: Response) => {
         role,
       },
     })
+    await logAudit(req.user?.id, req.user?.name || 'System', 'CREATE', 'ProjectMember', `Added member: ${member.userId} to project ID: ${id}`)
     res.status(201).json(member)
   } catch (error) {
     console.error('Error adding project member:', error)
@@ -240,6 +249,7 @@ export const createExpense = async (req: Request, res: Response) => {
         createdById: userId || null,
       },
     })
+    await logAudit(req.user?.id, req.user?.name || 'System', 'CREATE', 'Expense', `Created expense: ${expense.amount} under ${expense.category} for project ID: ${id}`)
     res.status(201).json(expense)
   } catch (error) {
     console.error('Error creating project expense:', error)
@@ -294,6 +304,8 @@ export const updatePaymentStatus = async (req: Request, res: Response) => {
         paidDate,
       },
     })
+
+    await logAudit(req.user?.id, req.user?.name || 'System', 'UPDATE', 'Payment', `Updated payment ${paymentId} status to ${status} for project ID: ${id}`)
 
     res.json(updatedPayment)
   } catch (error) {

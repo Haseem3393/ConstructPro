@@ -142,21 +142,21 @@ const AttendancePage: React.FC = () => {
     <SidebarLayout>
       <div className="space-y-6">
         {/* Page Header */}
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center border-b border-[#1a2535] pb-5">
           <div>
-            <h1 className="text-3xl font-extrabold text-white">Daily Timesheets</h1>
-            <p className="text-zinc-400 text-sm mt-1">Manage and audit labor wages and overtime allocations</p>
+            <h1 className="text-2xl font-black text-white tracking-tight">Daily Timesheets</h1>
+            <p className="text-slate-500 text-xs font-medium mt-1">Manage and audit labor wages and overtime allocations</p>
           </div>
         </div>
 
         {/* Filters Panel */}
-        <div className="bg-[#14161f] border border-zinc-800 rounded-xl p-6 shadow-xl">
-          <h3 className="text-zinc-400 text-xs font-bold uppercase tracking-widest mb-4">Select Period & Site</h3>
+        <div className="bg-[#0d1526] border border-[#1a2535] rounded-2xl p-6 shadow-xl">
+          <h3 className="text-slate-500 text-[10px] font-black uppercase tracking-[0.14em] mb-4">Select Period & Site</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-xs font-bold text-zinc-500 uppercase tracking-wider mb-2">Calendar Date</label>
+              <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-2">Calendar Date</label>
               <div className="relative">
-                <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-zinc-500" />
+                <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-700" />
                 <input
                   type="date"
                   value={selectedDate}
@@ -165,17 +165,17 @@ const AttendancePage: React.FC = () => {
                     setSelectedDate(e.target.value)
                     setStatusMessage(null)
                   }}
-                  className="pl-10 w-full bg-[#1c1d26] border border-zinc-800 rounded-lg px-4 py-2.5 text-sm text-zinc-300 focus:outline-none focus:border-violet-600"
+                  className="pl-10 w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-zinc-500 uppercase tracking-wider mb-2">Construction Project</label>
+              <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-2">Construction Project</label>
               {isProjectsLoading ? (
                 <div className="flex items-center h-11">
-                  <Loader2 className="h-5 w-5 text-violet-500 animate-spin mr-2" />
-                  <span className="text-xs text-zinc-500">Loading projects...</span>
+                  <Loader2 className="h-5 w-5 text-blue-500 animate-spin mr-2" />
+                  <span className="text-xs text-slate-500">Loading projects...</span>
                 </div>
               ) : (
                 <select
@@ -184,7 +184,7 @@ const AttendancePage: React.FC = () => {
                     setSelectedProject(e.target.value)
                     setStatusMessage(null)
                   }}
-                  className="w-full bg-[#1c1d26] border border-zinc-800 rounded-lg px-4 py-2.5 text-sm text-zinc-350 focus:outline-none focus:border-violet-600 bg-none"
+                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-3 py-2.5 text-sm text-slate-355 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200 cursor-pointer"
                 >
                   {projects?.map((project) => (
                     <option key={project.id} value={project.id}>
@@ -201,41 +201,44 @@ const AttendancePage: React.FC = () => {
         {/* Feedback Message */}
         {statusMessage && (
           <div
-            className={`p-4 rounded-xl border ${
+            className={`p-3.5 rounded-xl border ${
               statusMessage.type === 'success'
-                ? 'bg-emerald-500/10 border-emerald-500/25 text-emerald-400'
-                : 'bg-rose-500/10 border-rose-500/25 text-rose-400'
-            } text-xs font-bold tracking-wide`}
+                ? 'bg-emerald-500/10 border-emerald-500/22 text-emerald-400'
+                : 'bg-rose-500/8 border-rose-500/20 text-rose-450'
+            } text-xs font-semibold`}
           >
             {statusMessage.text}
           </div>
         )}
 
         {/* Timesheet List Table */}
-        <div className="bg-[#14161f] border border-zinc-800 rounded-xl overflow-hidden shadow-xl">
-          <div className="px-6 py-4 border-b border-zinc-800 bg-[#171924]/30 flex justify-between items-center">
+        <div className="bg-[#0d1526] border border-[#1a2535] rounded-2xl overflow-hidden shadow-xl">
+          <div className="px-6 py-4 border-b border-[#1a2535] bg-white/[0.005] flex justify-between items-center">
             <div className="flex items-center space-x-3">
-              <Users className="h-5 w-5 text-zinc-400" />
-              <h3 className="font-bold text-sm text-zinc-350">Worker Registry & Payroll</h3>
+              <Users className="h-5 w-5 text-slate-500" />
+              <h3 className="font-black text-sm text-slate-350">Worker Registry & Payroll</h3>
             </div>
             {isFetching && (
-              <span className="flex items-center text-[10px] text-violet-400 font-bold uppercase tracking-wider animate-pulse">
-                <Loader2 className="h-3 w-3 mr-1 animate-spin" /> Syncing...
+              <span className="flex items-center text-[10px] text-blue-400 font-bold uppercase tracking-wider animate-pulse">
+                <Loader2 className="h-3 w-3 mr-1 animate-spin text-blue-500" /> Syncing...
               </span>
             )}
           </div>
 
           {isAttendanceLoading ? (
-            <div className="flex flex-col items-center justify-center py-20 space-y-3">
-              <Loader2 className="h-10 w-10 text-violet-500 animate-spin" />
-              <p className="text-zinc-500 text-sm font-medium">Reading attendance logs...</p>
+            <div className="flex flex-col items-center justify-center py-20 space-y-4">
+              <div className="relative">
+                <Loader2 className="h-9 w-9 text-blue-500 animate-spin" />
+                <div className="absolute inset-0 rounded-full blur-xl bg-blue-500/20 animate-pulse" />
+              </div>
+              <p className="text-slate-500 text-xs font-bold uppercase tracking-wider">Reading attendance logs...</p>
             </div>
           ) : !selectedProject ? (
-            <div className="p-10 text-center text-zinc-500 text-sm font-medium">
+            <div className="p-10 text-center text-slate-500 text-xs font-black uppercase tracking-wider">
               Create a construction site in Projects Module to log timesheets.
             </div>
           ) : attendanceList.length === 0 ? (
-            <div className="p-10 text-center text-zinc-500 text-sm font-medium">
+            <div className="p-10 text-center text-slate-500 text-xs font-black uppercase tracking-wider">
               No workers registered in database. Run database seeds or add workers.
             </div>
           ) : (
@@ -243,7 +246,7 @@ const AttendancePage: React.FC = () => {
               <table className="w-full text-left border-collapse min-w-[800px]">
                 <thead>
                   {/* Columns Labels */}
-                  <tr className="text-[10px] text-zinc-400 font-black tracking-widest uppercase bg-[#181a24]/50 border-b border-zinc-800">
+                  <tr className="text-[10px] text-slate-655 font-black tracking-widest uppercase bg-white/[0.002] border-b border-[#1a2535]">
                     <th className="py-4 px-6 w-12 text-center">ID</th>
                     <th className="py-4 px-6">WORKER NAME</th>
                     <th className="py-4 px-4">TRADE</th>
@@ -253,15 +256,15 @@ const AttendancePage: React.FC = () => {
                     <th className="py-4 px-6 text-center w-40">ACTIONS</th>
                   </tr>
                   {/* Inline search fields */}
-                  <tr className="bg-[#161822]/40 border-b border-zinc-805">
-                    <td className="py-2.5 px-4 text-center text-zinc-650 font-bold">-</td>
+                  <tr className="bg-white/[0.005] border-b border-[#1a2535]">
+                    <td className="py-2.5 px-4 text-center text-slate-700 font-bold">-</td>
                     <td className="py-2.5 px-6">
                       <input
                         type="text"
                         placeholder="Search name..."
                         value={searchName}
                         onChange={(e) => setSearchName(e.target.value)}
-                        className="w-full bg-[#1b1c25] border border-zinc-800/80 rounded px-2.5 py-1 text-[11px] text-zinc-300 placeholder-zinc-600 focus:outline-none focus:border-violet-600"
+                        className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-2.5 py-1.5 text-xs text-slate-200 placeholder-slate-800 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all"
                       />
                     </td>
                     <td className="py-2.5 px-4">
@@ -270,32 +273,32 @@ const AttendancePage: React.FC = () => {
                         placeholder="Search trade..."
                         value={searchTrade}
                         onChange={(e) => setSearchTrade(e.target.value)}
-                        className="w-full bg-[#1b1c25] border border-zinc-800/80 rounded px-2.5 py-1 text-[11px] text-zinc-300 placeholder-zinc-600 focus:outline-none focus:border-violet-600"
+                        className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-2.5 py-1.5 text-xs text-slate-200 placeholder-slate-800 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all"
                       />
                     </td>
                     <td colSpan={4}></td>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-zinc-800/60 text-xs">
+                <tbody className="divide-y divide-[#1a2535] text-xs">
                   {filteredAttendance.map((worker, index) => (
                     <tr 
                       key={worker.workerId} 
                       className={`transition-colors ${
                         worker.present 
-                          ? 'bg-emerald-500/5 hover:bg-emerald-500/10' 
-                          : 'hover:bg-[#1a1c27]/30'
+                          ? 'bg-emerald-500/[0.02] hover:bg-emerald-500/[0.05]' 
+                          : 'hover:bg-white/[0.015]'
                       }`}
                     >
-                      <td className="py-4 px-6 text-center font-bold text-zinc-500">{index + 1}</td>
+                      <td className="py-4 px-6 text-center font-bold text-slate-500">{index + 1}</td>
                       <td className="py-4 px-6">
                         <span className="block font-bold text-white text-sm">{worker.name}</span>
                       </td>
                       <td className="py-4 px-4">
-                        <span className="px-2 py-0.5 text-[10px] font-bold text-zinc-300 bg-zinc-800 rounded uppercase tracking-wide">
+                        <span className="px-2 py-0.5 text-[10px] font-bold text-slate-300 bg-[#0b1220] border border-[#1a2535] rounded-lg uppercase tracking-wide">
                           {worker.trade}
                         </span>
                       </td>
-                      <td className="py-4 px-4 text-right font-semibold text-zinc-300">
+                      <td className="py-4 px-4 text-right font-semibold text-slate-300 tabular-nums">
                         {worker.dailyWage.toLocaleString()} LKR
                       </td>
                       <td className="py-4 px-4 text-center">
@@ -308,19 +311,19 @@ const AttendancePage: React.FC = () => {
                           value={worker.present ? worker.overtimeHours : ''}
                           onChange={(e) => handleOvertimeChange(worker.workerId, e.target.value)}
                           placeholder="0.0"
-                          className="w-16 px-2 py-1 bg-[#1b1c25] border border-zinc-800 rounded focus:ring-1 focus:ring-violet-600 focus:outline-none disabled:opacity-40 disabled:bg-zinc-900 text-center text-zinc-300 font-semibold"
+                          className="w-16 px-2 py-1 bg-[#0b1220] border border-[#1a2535] rounded-xl focus:ring-1 focus:ring-blue-500 focus:outline-none disabled:opacity-40 disabled:bg-[#060b14] text-center text-slate-200 font-bold"
                         />
                       </td>
-                      <td className="py-4 px-4 text-right font-extrabold text-violet-400">
+                      <td className="py-4 px-4 text-right font-black text-blue-400 tabular-nums">
                         {calculateTotalPay(worker).toLocaleString()} LKR
                       </td>
                       <td className="py-4 px-6 text-center">
                         <button
                           onClick={() => toggleAttendance(worker.workerId)}
-                          className={`px-3 py-1.5 rounded-lg border font-bold text-[10px] uppercase tracking-wider transition-all inline-flex items-center space-x-1.5 ${
+                          className={`px-3 py-1.5 rounded-xl border font-black text-[9px] uppercase tracking-wider transition-all inline-flex items-center space-x-1.5 ${
                             worker.present
-                              ? 'bg-emerald-600/15 border-emerald-500/30 text-emerald-400 hover:bg-emerald-600 hover:text-white'
-                              : 'bg-rose-600/15 border-rose-500/30 text-rose-400 hover:bg-rose-600 hover:text-white'
+                              ? 'bg-emerald-500/10 border-emerald-500/22 text-emerald-400 hover:bg-emerald-600 hover:text-white'
+                              : 'bg-rose-500/10 border-rose-500/22 text-rose-455 hover:bg-rose-600 hover:text-white'
                           }`}
                         >
                           {worker.present ? (
@@ -340,7 +343,7 @@ const AttendancePage: React.FC = () => {
                   ))}
                   {filteredAttendance.length === 0 && (
                     <tr>
-                      <td colSpan={7} className="py-12 text-center text-zinc-500">No Timesheet records matching search parameters</td>
+                      <td colSpan={7} className="py-12 text-center text-slate-500 text-xs font-black uppercase tracking-wider">No Timesheet records matching search parameters</td>
                     </tr>
                   )}
                 </tbody>
@@ -349,22 +352,22 @@ const AttendancePage: React.FC = () => {
           )}
 
           {/* Footer Save Row */}
-          <div className="px-6 py-4 bg-[#171924]/20 border-t border-zinc-800 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
-            <div className="font-bold text-zinc-400 uppercase tracking-widest text-[10px]">
+          <div className="px-6 py-4 bg-white/[0.005] border-t border-[#1a2535] flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
+            <div className="font-bold text-slate-500 uppercase tracking-widest text-[9px]">
               Present Summary: <span className="text-emerald-400 font-extrabold">{presentCount}</span> / {attendanceList.length} Workers Logged
             </div>
             {isClean ? (
-              <span className="flex items-center text-[10px] text-emerald-400 font-extrabold uppercase tracking-widest bg-emerald-500/10 border border-emerald-500/20 px-4 py-2 rounded-lg">
+              <span className="flex items-center text-[9px] text-emerald-400 font-extrabold uppercase tracking-widest bg-emerald-500/10 border border-emerald-500/22 px-4 py-2 rounded-xl">
                 <CheckCircle2 className="h-4 w-4 mr-1.5" /> Synced with Server
               </span>
             ) : (
               <button
                 onClick={handleSave}
                 disabled={saveMutation.isPending}
-                className="w-full sm:w-auto flex items-center justify-center px-6 py-2.5 bg-violet-600 hover:bg-violet-700 text-white rounded-lg font-bold text-xs uppercase tracking-wider shadow-lg shadow-violet-600/10 transition-colors disabled:opacity-50"
+                className="w-full sm:w-auto flex items-center justify-center px-6 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-xl font-black text-xs uppercase tracking-wider transition-all duration-200 shadow-md shadow-blue-500/10 hover:shadow-blue-500/25 disabled:opacity-50"
               >
                 {saveMutation.isPending ? (
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin text-blue-500" />
                 ) : (
                   <Save className="h-4 w-4 mr-2" />
                 )}

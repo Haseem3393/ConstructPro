@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import prisma from '../config/database'
 import { ContractStatus, ContractType, PaymentPercentage } from '@prisma/client'
+import { logAudit } from '../utils/audit'
 
 export const getContracts = async (req: Request, res: Response) => {
   try {
@@ -160,6 +161,8 @@ export const createContract = async (req: Request, res: Response) => {
 
       return contract
     })
+
+    await logAudit(req.user?.id, req.user?.name || 'System', 'CREATE', 'Contract', `Created contract of value ${valNum} for client/subcontractor ${clientName}`)
 
     res.status(201).json(result)
   } catch (error) {

@@ -33,6 +33,13 @@ export interface Project {
     name: string
     email: string
   }
+  managerId?: string
+  client?: {
+    name: string
+    email: string
+  }
+  clientId?: string
+  members?: any[]
   createdAt: string
   updatedAt: string
 }
@@ -80,12 +87,18 @@ export interface Material {
   id: string
   name: string
   unit: string
+  category?: string
+  itemType?: string
   stockIn: number
   stockOut: number
   currentStock: number
   minimumLevel: number
   supplier?: string
+  supplierId?: string
+  supplierRef?: any
   projectId: string
+  project?: Project
+  transactions?: any[]
   createdAt: string
   updatedAt: string
 }

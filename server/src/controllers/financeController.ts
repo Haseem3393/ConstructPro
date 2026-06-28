@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import prisma from '../config/database'
 import { ExpenseCategory, PayableStatus, ChequeStatus } from '@prisma/client'
+import { logAudit } from '../utils/audit'
 
 export const getExpenses = async (req: Request, res: Response) => {
   try {
@@ -76,6 +77,8 @@ export const createExpense = async (req: Request, res: Response) => {
         isAuto: false, // Manually entered
       },
     })
+
+    await logAudit(user?.id, user?.name || 'System', 'CREATE', 'Expense', `Created expense: ${expense.amount} under category ${expense.category} in project ID: ${projectId}`)
 
     res.status(201).json(expense)
   } catch (error) {
@@ -280,6 +283,8 @@ export const createPayable = async (req: Request, res: Response) => {
       },
     })
 
+    await logAudit(req.user?.id, req.user?.name || 'System', 'CREATE', 'Payable', `Created payable of ${payable.amount} with due date ${dueDate} in project ID: ${projectId}`)
+
     res.status(201).json(payable)
   } catch (error) {
     console.error('Error creating payable:', error)
@@ -373,6 +378,8 @@ export const createCheque = async (req: Request, res: Response) => {
       return cheque
     })
 
+    await logAudit(req.user?.id, req.user?.name || 'System', 'CREATE', 'Cheque', `Created cheque ${chequeNo} for bank ${bank} of amount ${amountNum}`)
+
     res.status(201).json(result)
   } catch (error) {
     console.error('Error creating cheque:', error)
@@ -414,6 +421,8 @@ export const updateChequeStatus = async (req: Request, res: Response) => {
 
       return updatedCheque
     })
+
+    await logAudit(req.user?.id, req.user?.name || 'System', 'UPDATE', 'Cheque', `Updated cheque status of ID ${id} to ${status}`)
 
     res.json(result)
   } catch (error) {

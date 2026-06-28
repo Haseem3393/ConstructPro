@@ -77,17 +77,17 @@ const ExpensesPage: React.FC = () => {
     <SidebarLayout>
       <div className="space-y-6">
         {/* Header */}
-        <div className="border-b border-zinc-800 pb-5 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+        <div className="border-b border-[#1a2535] pb-5 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
           <div>
-            <h1 className="text-3xl font-extrabold text-white">Expenses Ledger</h1>
-            <p className="text-zinc-400 text-sm mt-1">Audit construction expenditures, labour payroll allocations, and equipment usages</p>
+            <h1 className="text-3xl font-black text-white tracking-tight">Expenses Ledger</h1>
+            <p className="text-slate-400 text-xs font-semibold mt-1">Audit construction expenditures, labour payroll allocations, and equipment usages</p>
           </div>
 
           <div className="flex gap-2 shrink-0">
             <button
               onClick={exportToCSV}
               disabled={!data?.expenses || data.expenses.length === 0}
-              className="inline-flex items-center justify-center px-4 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white border border-zinc-700/50 rounded-lg transition-colors font-bold text-xs uppercase tracking-wider disabled:opacity-40"
+              className="inline-flex items-center justify-center px-4 py-2.5 bg-[#0b1220] hover:bg-white/[0.04] text-slate-300 hover:text-white border border-[#1a2535] rounded-xl transition-all font-bold text-xs uppercase tracking-wider disabled:opacity-40"
             >
               <Download className="h-4 w-4 mr-2" /> Export CSV
             </button>
@@ -95,7 +95,7 @@ const ExpensesPage: React.FC = () => {
             {isEditable && (
               <Link
                 to="/expenses/new"
-                className="inline-flex items-center justify-center px-4 py-2.5 bg-violet-600 hover:bg-violet-700 text-white rounded-lg transition-colors font-bold text-xs uppercase tracking-wider shadow-lg shadow-violet-600/10"
+                className="inline-flex items-center justify-center px-4 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-xl transition-all font-bold text-xs uppercase tracking-wider shadow-lg shadow-blue-500/10"
               >
                 <Plus className="h-4 w-4 mr-2" /> Add Expense
               </Link>
@@ -104,32 +104,32 @@ const ExpensesPage: React.FC = () => {
         </div>
 
         {/* Total Sum Display */}
-        <div className="bg-[#14161f] border border-zinc-800 rounded-xl p-5 shadow-xl flex items-center justify-between">
+        <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-5 shadow-xl flex items-center justify-between">
           <div className="space-y-1">
-            <span className="block text-[9px] font-black text-zinc-550 uppercase tracking-widest">Aggregate Cumulative Expense</span>
-            <span className="block text-3xl font-black text-violet-400">
+            <span className="block text-[9px] font-black text-slate-500 uppercase tracking-widest">Aggregate Cumulative Expense</span>
+            <span className="block text-3xl font-black text-blue-505">
               {isLoading ? (
-                <Loader2 className="h-6 w-6 animate-spin text-violet-500 inline-block" />
+                <Loader2 className="h-6 w-6 animate-spin text-blue-505 inline-block" />
               ) : (
                 formatCurrency(data?.totalAmount || 0)
               )}
             </span>
           </div>
-          <div className="p-3 rounded-lg bg-violet-600/10 text-violet-400 border border-violet-500/15">
+          <div className="p-3 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/22">
             <TrendingUp className="h-6 w-6" />
           </div>
         </div>
 
         {/* Filter Toolbar */}
-        <div className="bg-[#14161f] border border-zinc-800 rounded-xl p-4 shadow-xl">
+        <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-4 shadow-xl">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Project Filter */}
             <div>
-              <label className="block text-[9px] font-black text-zinc-500 uppercase tracking-widest mb-1.5">Project Site</label>
+              <label className="block text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1.5">Project Site</label>
               <select
                 value={projectId}
                 onChange={(e) => setProjectId(e.target.value)}
-                className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3 py-2 text-xs font-semibold text-zinc-350 focus:outline-none focus:border-violet-600 cursor-pointer"
+                className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2 text-xs font-semibold text-slate-350 focus:outline-none focus:border-blue-500/60 transition-all cursor-pointer"
               >
                 <option value="">All Projects</option>
                 {projects?.map((p) => (
@@ -140,11 +140,11 @@ const ExpensesPage: React.FC = () => {
 
             {/* Category Filter */}
             <div>
-              <label className="block text-[9px] font-black text-zinc-500 uppercase tracking-widest mb-1.5">Expense Category</label>
+              <label className="block text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1.5">Expense Category</label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3 py-2 text-xs font-semibold text-zinc-350 focus:outline-none focus:border-violet-600 cursor-pointer"
+                className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2 text-xs font-semibold text-slate-350 focus:outline-none focus:border-blue-500/60 transition-all cursor-pointer"
               >
                 <option value="">All Categories</option>
                 <option value="LABOUR">Labour & Payroll</option>
@@ -158,23 +158,23 @@ const ExpensesPage: React.FC = () => {
 
             {/* Date Range Start */}
             <div>
-              <label className="block text-[9px] font-black text-zinc-500 uppercase tracking-widest mb-1.5">From Date</label>
+              <label className="block text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1.5">From Date</label>
               <input
                 type="date"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
-                className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3 py-1.5 text-xs font-semibold text-zinc-350 focus:outline-none focus:border-violet-600 cursor-pointer"
+                className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-1.5 text-xs font-semibold text-slate-355 focus:outline-none focus:border-blue-500/60 transition-all cursor-pointer"
               />
             </div>
 
             {/* Date Range End */}
             <div>
-              <label className="block text-[9px] font-black text-zinc-500 uppercase tracking-widest mb-1.5">To Date</label>
+              <label className="block text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1.5">To Date</label>
               <input
                 type="date"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
-                className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3 py-1.5 text-xs font-semibold text-zinc-350 focus:outline-none focus:border-violet-600 cursor-pointer"
+                className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-1.5 text-xs font-semibold text-slate-355 focus:outline-none focus:border-blue-500/60 transition-all cursor-pointer"
               />
             </div>
           </div>
@@ -182,24 +182,24 @@ const ExpensesPage: React.FC = () => {
 
         {/* Expenses List Table */}
         {isLoading ? (
-          <div className="flex flex-col items-center justify-center py-20 space-y-3 bg-[#14161f] border border-zinc-800 rounded-xl shadow-xl">
-            <Loader2 className="h-8 w-8 text-violet-500 animate-spin" />
-            <p className="text-xs text-zinc-400 font-medium">Synchronizing accounts ledger...</p>
+          <div className="flex flex-col items-center justify-center py-20 space-y-3 bg-[#0d1526] border border-[#1a2535] rounded-xl shadow-xl">
+            <Loader2 className="h-8 w-8 text-blue-505 animate-spin" />
+            <p className="text-xs text-slate-500 font-semibold">Synchronizing accounts ledger...</p>
           </div>
         ) : isError ? (
-          <div className="p-16 text-center text-rose-455 bg-[#14161f] border border-rose-500/20 rounded-xl shadow-xl">
+          <div className="p-16 text-center text-rose-455 bg-[#0d1526] border border-rose-500/22 rounded-xl shadow-xl">
             Failed to load project expenses records.
           </div>
         ) : !data?.expenses || data.expenses.length === 0 ? (
-          <div className="p-16 text-center text-zinc-550 text-xs font-semibold bg-[#14161f] border border-zinc-800 rounded-xl shadow-xl">
+          <div className="p-16 text-center text-slate-500 text-xs font-semibold bg-[#0d1526] border border-[#1a2535] rounded-xl shadow-xl">
             No expenses found matching the selected filters.
           </div>
         ) : (
-          <div className="bg-[#14161f] border border-zinc-800 rounded-xl overflow-hidden shadow-xl">
+          <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl overflow-hidden shadow-xl">
             <div className="overflow-x-auto w-full">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="text-[10px] text-zinc-500 font-bold tracking-wider uppercase bg-[#181a24]/30 border-b border-zinc-800">
+                  <tr className="text-[10px] text-slate-550 font-bold tracking-wider uppercase bg-white/[0.005] border-b border-[#1a2535]">
                     <th className="py-3 px-6">DATE</th>
                     <th className="py-3 px-4">PROJECT</th>
                     <th className="py-3 px-4">CATEGORY</th>
@@ -209,32 +209,32 @@ const ExpensesPage: React.FC = () => {
                     <th className="py-3 px-6 text-center">TYPE</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-zinc-800/60 text-xs">
+                <tbody className="divide-y divide-[#1a2535] text-xs">
                   {data.expenses.map((e) => (
-                    <tr key={e.id} className="hover:bg-[#1a1c27]/20 transition-colors">
+                    <tr key={e.id} className="hover:bg-white/[0.02] transition-colors">
                       {/* Date */}
-                      <td className="py-3.5 px-6 font-semibold text-zinc-300">{formatDate(e.date)}</td>
+                      <td className="py-3.5 px-6 font-semibold text-slate-300">{formatDate(e.date)}</td>
                       
                       {/* Project */}
-                      <td className="py-3.5 px-4 text-zinc-300 font-semibold">{e.project?.name}</td>
+                      <td className="py-3.5 px-4 text-slate-300 font-semibold">{e.project?.name}</td>
                       
                       {/* Category */}
                       <td className="py-3.5 px-4">
-                        <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-zinc-800 text-zinc-400 border border-zinc-750">
+                        <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-[#0b1220] text-slate-400 border border-[#1a2535] rounded-lg">
                           {e.category}
                         </span>
                       </td>
 
                       {/* Description / Reference */}
-                      <td className="py-3.5 px-4 text-zinc-400 max-w-[240px] truncate leading-normal" title={e.description || ''}>
-                        <span className="block text-zinc-300 truncate font-medium">{e.description || 'No description provided'}</span>
+                      <td className="py-3.5 px-4 text-slate-400 max-w-[240px] truncate leading-normal" title={e.description || ''}>
+                        <span className="block text-slate-300 truncate font-medium">{e.description || 'No description provided'}</span>
                         {e.reference && (
-                          <span className="inline-block mt-0.5 text-[10px] text-violet-400 font-black uppercase tracking-wide bg-violet-500/5 border border-violet-500/10 px-1.5 py-0.2 rounded">
+                          <span className="inline-block mt-0.5 text-[10px] text-blue-405 font-black uppercase tracking-wide bg-blue-500/10 border border-blue-500/22 px-1.5 py-0.2 rounded-lg">
                             Invoice: {e.reference}
                           </span>
                         )}
                         {e.receiptUrl && (
-                          <span className="block mt-0.5 text-[9px] text-zinc-550 font-bold">
+                          <span className="block mt-0.5 text-[9px] text-slate-500 font-bold">
                             📎 {e.receiptUrl}
                           </span>
                         )}
@@ -246,18 +246,18 @@ const ExpensesPage: React.FC = () => {
                       </td>
 
                       {/* Added By */}
-                      <td className="py-3.5 px-4 text-zinc-450 font-medium">
+                      <td className="py-3.5 px-4 text-slate-450 font-medium">
                         {e.createdBy?.name || 'System / Batch'}
                       </td>
 
                       {/* Type (AUTO vs MANUAL) */}
                       <td className="py-3.5 px-6 text-center">
                         {e.isAuto ? (
-                          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black tracking-wider uppercase bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black tracking-wider uppercase bg-blue-500/10 text-blue-405 border border-blue-500/22 rounded-lg">
                             Auto
                           </span>
                         ) : (
-                          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black tracking-wider uppercase bg-zinc-800 text-zinc-500 border border-zinc-750">
+                          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black tracking-wider uppercase bg-[#0b1220] text-slate-500 border border-[#1a2535] rounded-lg">
                             Manual
                           </span>
                         )}
