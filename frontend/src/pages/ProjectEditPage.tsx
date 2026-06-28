@@ -81,10 +81,10 @@ const ProjectEditPage: React.FC = () => {
       <SidebarLayout>
         <div className="flex flex-col items-center justify-center py-40 space-y-4">
           <div className="relative">
-            <Loader2 className="h-10 w-10 text-blue-500 animate-spin" />
-            <div className="absolute inset-0 rounded-full blur-xl bg-blue-500/20 animate-pulse" />
+            <Loader2 className="h-10 w-10 text-[#7c3aed] animate-spin" />
+            <div className="absolute inset-0 rounded-full blur-xl bg-[#7c3aed]/20 animate-pulse" />
           </div>
-          <p className="text-slate-400 font-medium text-sm">Fetching contract configurations...</p>
+          <p className="text-slate-400 font-semibold text-sm">Fetching contract configurations...</p>
         </div>
       </SidebarLayout>
     )
@@ -116,7 +116,7 @@ const ProjectEditPage: React.FC = () => {
         <div className="flex items-center space-x-4">
           <button
             onClick={() => navigate(-1)}
-            className="p-2.5 bg-[#0d1526] border border-[#1a2535] rounded-xl text-slate-400 hover:text-white transition-colors"
+            className="p-2.5 bg-[#0d1322]/70 border border-white/10 rounded-xl text-slate-400 hover:text-white transition-colors cursor-pointer"
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
@@ -127,7 +127,8 @@ const ProjectEditPage: React.FC = () => {
         </div>
 
         {/* Edit Form */}
-        <div className="bg-[#0d1526] border border-[#1a2535] rounded-2xl overflow-hidden shadow-xl p-6">
+        <div className="bg-[#0d1322]/70 border border-white/10 rounded-2xl overflow-hidden shadow-xl p-6 backdrop-blur-xl relative">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
           <form onSubmit={handleSubmit} className="space-y-5">
             {formError && (
               <div className="p-3.5 bg-rose-500/8 border border-rose-500/20 text-rose-450 text-xs rounded-xl flex items-center gap-2 font-semibold">
@@ -137,7 +138,7 @@ const ProjectEditPage: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">
                   Project Name *
                 </label>
                 <input
@@ -145,12 +146,12 @@ const ProjectEditPage: React.FC = () => {
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:outline-none transition-all duration-200 font-semibold"
                 />
               </div>
 
               <div>
-                <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">
                   Location *
                 </label>
                 <input
@@ -158,20 +159,20 @@ const ProjectEditPage: React.FC = () => {
                   required
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:outline-none transition-all duration-200 font-semibold"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">
                   Project Status *
                 </label>
                 <select
                   value={status}
                   onChange={(e) => setStatus(e.target.value as any)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-3 py-2.5 text-sm text-slate-350 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-3 py-2.5 text-xs text-slate-350 focus:outline-none transition-all duration-200 font-semibold"
                 >
                   <option value="PLANNING">Planning</option>
                   <option value="ONGOING">Ongoing</option>
@@ -181,7 +182,7 @@ const ProjectEditPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">
                   Budget (LKR) *
                 </label>
                 <input
@@ -189,14 +190,14 @@ const ProjectEditPage: React.FC = () => {
                   required
                   value={budget}
                   onChange={(e) => setBudget(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:outline-none transition-all duration-200 font-semibold"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">
                   Start Date *
                 </label>
                 <input
@@ -204,12 +205,12 @@ const ProjectEditPage: React.FC = () => {
                   required
                   value={startDate}
                   onChange={(e) => setStartDate(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:outline-none transition-all duration-200 font-semibold"
                 />
               </div>
 
               <div>
-                <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">
                   End Date *
                 </label>
                 <input
@@ -217,20 +218,20 @@ const ProjectEditPage: React.FC = () => {
                   required
                   value={endDate}
                   onChange={(e) => setEndDate(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:outline-none transition-all duration-200 font-semibold"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">
                   Project Manager
                 </label>
                 <select
                   value={managerId}
                   onChange={(e) => setManagerId(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-3 py-2.5 text-sm text-slate-355 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-3 py-2.5 text-xs text-slate-350 focus:outline-none transition-all duration-200 font-semibold"
                 >
                   <option value="">Unassigned</option>
                   {managers?.map((mgr: any) => (
@@ -242,13 +243,13 @@ const ProjectEditPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">
                   Client / Owner
                 </label>
                 <select
                   value={clientId}
                   onChange={(e) => setClientId(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-3 py-2.5 text-sm text-slate-355 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-3 py-2.5 text-xs text-slate-355 focus:outline-none transition-all duration-200 font-semibold"
                 >
                   <option value="">Unassigned</option>
                   {clients?.map((cl: any) => (
@@ -263,10 +264,10 @@ const ProjectEditPage: React.FC = () => {
             {/* Progress Slider */}
             <div>
               <div className="flex justify-between items-center mb-1.5">
-                <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em]">
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest">
                   Manual Site Progress (%)
                 </label>
-                <span className="text-sm font-black text-blue-400">{progress}%</span>
+                <span className="text-sm font-black text-[#00d2ff]">{progress}%</span>
               </div>
               <input
                 type="range"
@@ -274,36 +275,36 @@ const ProjectEditPage: React.FC = () => {
                 max="100"
                 value={progress}
                 onChange={(e) => setProgress(parseInt(e.target.value))}
-                className="w-full h-2 bg-[#0b1220] border border-[#1a2535] rounded-xl appearance-none cursor-pointer accent-blue-500"
+                className="w-full h-2 bg-[#0a0f1d]/60 border border-white/10 rounded-xl appearance-none cursor-pointer accent-[#7c3aed]"
               />
             </div>
 
             <div>
-              <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">
+              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">
                 Description
               </label>
               <textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 rows={3}
-                className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
+                className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:outline-none transition-all duration-200 resize-none font-semibold"
                 placeholder="Contract scopes, notes, materials etc."
               />
             </div>
 
             {/* Action buttons */}
-            <div className="flex justify-end space-x-3 border-t border-[#1a2535] pt-5 mt-6">
+            <div className="flex justify-end space-x-3 border-t border-white/10 pt-5 mt-6">
               <button
                 type="button"
                 onClick={() => navigate(-1)}
-                className="px-4 py-2.5 border border-[#1a2535] hover:bg-[#111d33] text-slate-350 hover:text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors"
+                className="px-4 py-2.5 border border-white/10 hover:bg-[#7c3aed]/10 text-slate-400 hover:text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={updateProjectMutation.isPending}
-                className="flex items-center px-5 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-200 shadow-md shadow-blue-500/10 hover:shadow-blue-500/25 disabled:opacity-50"
+                className="flex items-center px-5 py-2.5 bg-gradient-to-r from-[#7c3aed] via-[#6366f1] to-[#00d2ff] hover:from-[#8b5cf6] hover:via-[#4f46e5] hover:to-[#00f0ff] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-200 shadow-md shadow-purple-500/20 disabled:opacity-50 cursor-pointer"
               >
                 {updateProjectMutation.isPending ? (
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />

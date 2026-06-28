@@ -41,10 +41,10 @@ const DashboardPage: React.FC = () => {
       <SidebarLayout>
         <div className="flex flex-col items-center justify-center py-40 space-y-4">
           <div className="relative">
-            <Loader2 className="h-10 w-10 text-blue-500 animate-spin" />
-            <div className="absolute inset-0 rounded-full blur-xl bg-blue-500/20 animate-pulse" />
+            <Loader2 className="h-10 w-10 text-[#7c3aed] animate-spin" />
+            <div className="absolute inset-0 rounded-full blur-xl bg-[#7c3aed]/20 animate-pulse" />
           </div>
-          <p className="text-slate-400 font-medium text-sm">Gathering real-time stats...</p>
+          <p className="text-slate-400 font-semibold text-sm">Gathering real-time stats...</p>
         </div>
       </SidebarLayout>
     )
@@ -75,20 +75,20 @@ const DashboardPage: React.FC = () => {
       value: stats.totalProjects,
       desc: 'Overall portfolio size',
       icon: Building2,
-      iconColor: 'text-blue-400',
-      iconBg: 'bg-blue-500/10',
-      topLine: 'bg-gradient-to-r from-blue-500 via-blue-400 to-transparent',
-      glow: 'hover:shadow-blue-500/5',
+      iconColor: 'text-[#a78bfa]',
+      iconBg: 'bg-[#7c3aed]/10',
+      topLine: 'bg-gradient-to-r from-[#7c3aed] via-[#6366f1] to-transparent',
+      glow: 'hover:shadow-[#7c3aed]/5',
     },
     {
       label: 'Active Projects',
       value: stats.activeProjects,
       desc: 'Ongoing developments',
       icon: TrendingUp,
-      iconColor: 'text-sky-400',
-      iconBg: 'bg-sky-500/10',
-      topLine: 'bg-gradient-to-r from-sky-400 via-blue-400 to-transparent',
-      glow: 'hover:shadow-sky-500/5',
+      iconColor: 'text-[#00d2ff]',
+      iconBg: 'bg-[#00d2ff]/10',
+      topLine: 'bg-gradient-to-r from-[#00d2ff] via-[#6366f1] to-transparent',
+      glow: 'hover:shadow-[#00d2ff]/5',
     },
     {
       label: 'Completed',
@@ -116,10 +116,10 @@ const DashboardPage: React.FC = () => {
       value: formatBudget(stats.totalBudget),
       desc: 'Combined project values',
       icon: DollarSign,
-      iconColor: 'text-cyan-400',
-      iconBg: 'bg-cyan-500/10',
-      topLine: 'bg-gradient-to-r from-cyan-500 via-cyan-400 to-transparent',
-      glow: 'hover:shadow-cyan-500/5',
+      iconColor: 'text-amber-400',
+      iconBg: 'bg-amber-500/10',
+      topLine: 'bg-gradient-to-r from-amber-500 via-amber-400 to-transparent',
+      glow: 'hover:shadow-amber-500/5',
     },
     {
       label: 'Portfolio Expenses',
@@ -160,11 +160,11 @@ const DashboardPage: React.FC = () => {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h1 className="text-2xl font-black text-white tracking-tight">Admin Dashboard</h1>
-            <p className="text-slate-500 text-xs font-medium mt-1">
+            <p className="text-slate-400 text-xs font-semibold mt-1">
               Real-time financials, project statuses, and activity feed
             </p>
           </div>
-          <div className="flex items-center gap-2 bg-[#0d1526] border border-[#1a2535] rounded-xl px-4 py-2 w-fit">
+          <div className="flex items-center gap-2 bg-[#0d1322]/70 border border-white/10 rounded-xl px-4 py-2 w-fit backdrop-blur-xl">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
@@ -174,7 +174,7 @@ const DashboardPage: React.FC = () => {
         </div>
 
         {/* ── Sub-navigation Tabs ── */}
-        <div className="flex flex-wrap gap-2 border-b border-[#1a2535] pb-4">
+        <div className="flex flex-wrap gap-2 border-b border-white/10 pb-4">
           {[
             { label: 'Overview', to: '/dashboard', active: true },
             { label: 'Portfolio', to: '/dashboard/portfolio', active: false },
@@ -186,8 +186,8 @@ const DashboardPage: React.FC = () => {
               to={tab.to}
               className={`px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
                 tab.active
-                  ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/20'
-                  : 'bg-white/[0.03] border border-[#1a2535] text-slate-500 hover:text-slate-200 hover:bg-white/[0.06]'
+                  ? 'bg-gradient-to-r from-[#7c3aed] via-[#6366f1] to-[#00d2ff] text-white shadow-lg shadow-purple-500/25'
+                  : 'bg-white/[0.03] border border-white/10 text-slate-400 hover:text-slate-200 hover:bg-white/[0.06]'
               }`}
             >
               {tab.label}
@@ -202,8 +202,8 @@ const DashboardPage: React.FC = () => {
             return (
               <div
                 key={idx}
-                className={`relative bg-[#0d1526] border rounded-2xl p-6 overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-xl group ${
-                  card.alert ? 'border-rose-500/30' : 'border-[#1a2535]'
+                className={`relative bg-[#0d1322]/70 border rounded-2xl p-6 overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-xl group backdrop-blur-xl ${
+                  card.alert ? 'border-rose-500/30' : 'border-white/10'
                 } ${card.glow}`}
               >
                 {/* Gradient top accent */}
@@ -226,7 +226,7 @@ const DashboardPage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="mt-5 pt-4 border-t border-[#1a2535] flex items-center justify-between">
+                <div className="mt-5 pt-4 border-t border-white/10 flex items-center justify-between">
                   <span className="text-xs text-slate-500 font-bold">{card.desc}</span>
                   <ChevronRight className="h-3.5 w-3.5 text-slate-700 group-hover:text-slate-400 transition-colors" />
                 </div>
@@ -239,11 +239,11 @@ const DashboardPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
           {/* Projects Overview Table */}
-          <div className="lg:col-span-2 bg-[#0d1526] border border-[#1a2535] rounded-2xl overflow-hidden flex flex-col shadow-lg">
+          <div className="lg:col-span-2 bg-[#0d1322]/70 border border-white/10 rounded-2xl overflow-hidden flex flex-col shadow-lg backdrop-blur-xl">
             {/* Table Header */}
-            <div className="px-6 py-4 border-b border-[#1a2535] flex items-center justify-between bg-white/[0.01]">
+            <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between bg-white/[0.01]">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-blue-500/10 rounded-xl text-blue-400">
+                <div className="p-2 bg-[#7c3aed]/10 rounded-xl text-[#a78bfa]">
                   <Layers className="h-4 w-4" />
                 </div>
                 <div>
@@ -253,7 +253,7 @@ const DashboardPage: React.FC = () => {
               </div>
               <Link
                 to="/projects"
-                className="flex items-center gap-1 text-xs text-blue-450 hover:text-blue-400 font-bold transition-colors uppercase tracking-wider"
+                className="flex items-center gap-1 text-xs text-[#a78bfa] hover:text-[#c4b5fd] font-bold transition-colors uppercase tracking-wider"
               >
                 View All <ChevronRight className="h-3.5 w-3.5" />
               </Link>
@@ -263,7 +263,7 @@ const DashboardPage: React.FC = () => {
             <div className="overflow-x-auto flex-1">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-[#1a2535] text-[10px] text-slate-600 font-black tracking-[0.13em] uppercase bg-white/[0.005]">
+                  <tr className="border-b border-white/10 text-[10px] text-slate-600 font-black tracking-[0.13em] uppercase bg-white/[0.005]">
                     <th className="py-4 px-6">Project</th>
                     <th className="py-4 px-4">Location</th>
                     <th className="py-4 px-4 text-center">Progress</th>
@@ -271,7 +271,7 @@ const DashboardPage: React.FC = () => {
                     <th className="py-4 px-6 text-center">Status</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#1a2535] text-xs">
+                <tbody className="divide-y divide-white/10 text-xs">
                   {projectsOverview.slice(0, 5).map((project) => {
                     const status = statusConfig[project.status] || {
                       label: project.status,
@@ -286,7 +286,7 @@ const DashboardPage: React.FC = () => {
                           <span className="block font-bold text-white text-sm leading-tight">
                             {project.name}
                           </span>
-                          <span className="block text-[10px] text-slate-650 mt-1 font-bold uppercase tracking-wider">
+                          <span className="block text-[10px] text-slate-400 mt-1 font-bold uppercase tracking-wider">
                             {project.manager?.name ? `Mgr: ${project.manager.name}` : 'Unassigned'}
                           </span>
                         </td>
@@ -296,9 +296,9 @@ const DashboardPage: React.FC = () => {
                             <span className="font-black text-slate-350 w-8 text-right tabular-nums">
                               {project.progress}%
                             </span>
-                            <div className="w-16 bg-white/[0.08] rounded-full h-1.5 overflow-hidden shrink-0">
+                            <div className="w-16 bg-white/[0.05] rounded-full h-1.5 overflow-hidden shrink-0">
                               <div
-                                className="h-1.5 rounded-full bg-gradient-to-r from-blue-500 to-sky-400 transition-all"
+                                className="h-1.5 rounded-full bg-gradient-to-r from-[#7c3aed] to-[#00d2ff] transition-all"
                                 style={{ width: `${project.progress}%` }}
                               />
                             </div>
@@ -330,10 +330,10 @@ const DashboardPage: React.FC = () => {
           </div>
 
           {/* Activity Feed */}
-          <div className="bg-[#0d1526] border border-[#1a2535] rounded-2xl flex flex-col overflow-hidden shadow-lg">
+          <div className="bg-[#0d1322]/70 border border-white/10 rounded-2xl flex flex-col overflow-hidden shadow-lg backdrop-blur-xl">
             {/* Feed Header */}
-            <div className="px-5 py-4 border-b border-[#1a2535] bg-white/[0.01] flex items-center gap-3">
-              <div className="p-2 bg-blue-500/10 rounded-xl text-blue-400">
+            <div className="px-5 py-4 border-b border-white/10 bg-white/[0.01] flex items-center gap-3">
+              <div className="p-2 bg-[#7c3aed]/10 rounded-xl text-[#a78bfa]">
                 <Activity className="h-4 w-4" />
               </div>
               <div>
@@ -351,21 +351,21 @@ const DashboardPage: React.FC = () => {
                 >
                   {/* Timeline dot */}
                   <div className="flex flex-col items-center shrink-0">
-                    <div className="w-2 h-2 rounded-full bg-blue-500 mt-1 shadow-[0_0_6px_rgba(59,130,246,0.6)]" />
-                    <div className="w-px flex-1 bg-[#1a2535] mt-1.5" />
+                    <div className="w-2 h-2 rounded-full bg-[#7c3aed] mt-1 shadow-[0_0_6px_rgba(124,58,237,0.6)]" />
+                    <div className="w-px flex-1 bg-white/10 mt-1.5" />
                   </div>
 
-                  <div className="flex-1 pb-4 border-b border-[#1a2535] last:border-0 last:pb-0 space-y-1.5">
+                  <div className="flex-1 pb-4 border-b border-white/10 last:border-0 last:pb-0 space-y-1.5">
                     <p className="text-slate-200 font-semibold leading-relaxed">
                       {activity.description}
                     </p>
                     <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider">
-                      <span className="text-blue-400 bg-blue-500/10 px-1.5 py-0.5 rounded border border-blue-500/20">
+                      <span className="text-[#a78bfa] bg-[#7c3aed]/10 px-1.5 py-0.5 rounded border border-[#7c3aed]/20">
                         {activity.category}
                       </span>
-                      <span className="text-slate-750">·</span>
-                      <span className="text-slate-600">By {activity.user}</span>
-                      <span className="text-slate-750">·</span>
+                      <span className="text-slate-500">·</span>
+                      <span className="text-slate-400">By {activity.user}</span>
+                      <span className="text-slate-500">·</span>
                       <span className="text-slate-600 ml-auto font-medium">
                         {formatRelativeTime(activity.date)}
                       </span>

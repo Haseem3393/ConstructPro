@@ -117,7 +117,7 @@ const ProjectsPage: React.FC = () => {
           {(user?.role === 'ADMIN' || user?.role === 'PROJECT_MANAGER') && (
             <button
               onClick={() => setIsModalOpen(true)}
-              className="flex items-center px-4 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-xl transition-all font-black text-xs uppercase tracking-wider shadow-lg shadow-blue-500/20 hover:shadow-blue-500/35 hover:-translate-y-px"
+              className="flex items-center px-4 py-2.5 bg-gradient-to-r from-[#7c3aed] via-[#6366f1] to-[#00d2ff] hover:from-[#8b5cf6] hover:via-[#4f46e5] hover:to-[#00f0ff] text-white rounded-xl transition-all font-black text-xs uppercase tracking-wider shadow-lg shadow-purple-500/20 hover:-translate-y-px cursor-pointer"
             >
               <Plus className="h-4 w-4 mr-2" /> Add Project
             </button>
@@ -125,10 +125,10 @@ const ProjectsPage: React.FC = () => {
         </div>
 
         {/* Data Table */}
-        <div className="bg-[#0d1526] border border-[#1a2535] rounded-2xl overflow-hidden shadow-xl">
-          <div className="px-6 py-4 border-b border-[#1a2535] bg-white/[0.005] flex justify-between items-center">
+        <div className="bg-[#0d1322]/70 border border-white/10 rounded-2xl overflow-hidden shadow-xl backdrop-blur-xl">
+          <div className="px-6 py-4 border-b border-white/10 bg-white/[0.005] flex justify-between items-center">
             <h3 className="font-black text-sm text-slate-350">Contract Records</h3>
-            <span className="text-[9px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2.5 py-0.5 rounded-full font-black uppercase tracking-wider">
+            <span className="text-[9px] bg-[#7c3aed]/10 text-[#a78bfa] border border-[#7c3aed]/20 px-2.5 py-0.5 rounded-full font-black uppercase tracking-wider">
               {filteredProjects.length} records found
             </span>
           </div>
@@ -136,8 +136,8 @@ const ProjectsPage: React.FC = () => {
           {isLoading ? (
             <div className="flex flex-col items-center justify-center py-20 space-y-4">
               <div className="relative">
-                <Loader2 className="h-9 w-9 text-blue-500 animate-spin" />
-                <div className="absolute inset-0 rounded-full blur-xl bg-blue-500/20 animate-pulse" />
+                <Loader2 className="h-9 w-9 text-[#7c3aed] animate-spin" />
+                <div className="absolute inset-0 rounded-full blur-xl bg-[#7c3aed]/20 animate-pulse" />
               </div>
               <p className="text-slate-500 text-xs font-bold uppercase tracking-wider">Syncing project ledger...</p>
             </div>
@@ -151,7 +151,7 @@ const ProjectsPage: React.FC = () => {
               <table className="w-full text-left border-collapse min-w-[900px]">
                 <thead>
                   {/* Columns Labels */}
-                  <tr className="text-[10px] text-slate-600 font-black tracking-widest uppercase bg-white/[0.002] border-b border-[#1a2535]">
+                  <tr className="text-[10px] text-slate-605 font-black tracking-widest uppercase bg-white/[0.002] border-b border-white/10">
                     <th className="py-4 px-6 w-12 text-center">ID</th>
                     <th className="py-4 px-6">PROJECT NAME</th>
                     <th className="py-4 px-4">LOCATION</th>
@@ -161,7 +161,7 @@ const ProjectsPage: React.FC = () => {
                     <th className="py-4 px-6 text-center w-32">ACTIONS</th>
                   </tr>
                   {/* Inline Search Fields */}
-                  <tr className="bg-white/[0.005] border-b border-[#1a2535]">
+                  <tr className="bg-white/[0.005] border-b border-white/10">
                     <td className="py-2.5 px-4 text-center text-slate-700 font-bold">-</td>
                     <td className="py-2.5 px-6">
                       <input
@@ -169,7 +169,7 @@ const ProjectsPage: React.FC = () => {
                         placeholder="Search name..."
                         value={searchName}
                         onChange={(e) => setSearchName(e.target.value)}
-                        className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-3 py-1.5 text-xs text-slate-200 placeholder-slate-800 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all"
+                        className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-3 py-1.5 text-xs text-slate-200 placeholder-slate-655 focus:outline-none transition-all"
                       />
                     </td>
                     <td className="py-2.5 px-4">
@@ -178,7 +178,7 @@ const ProjectsPage: React.FC = () => {
                         placeholder="Search location..."
                         value={searchLocation}
                         onChange={(e) => setSearchLocation(e.target.value)}
-                        className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-3 py-1.5 text-xs text-slate-200 placeholder-slate-800 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all"
+                        className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-3 py-1.5 text-xs text-slate-200 placeholder-slate-655 focus:outline-none transition-all"
                       />
                     </td>
                     <td className="py-2.5 px-4">
@@ -187,7 +187,7 @@ const ProjectsPage: React.FC = () => {
                         placeholder="Search budget..."
                         value={searchBudget}
                         onChange={(e) => setSearchBudget(e.target.value)}
-                        className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-3 py-1.5 text-xs text-slate-200 placeholder-slate-800 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all"
+                        className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-3 py-1.5 text-xs text-slate-200 placeholder-slate-655 focus:outline-none transition-all"
                       />
                     </td>
                     <td className="py-2.5 px-4 text-center text-slate-700 font-bold">-</td>
@@ -195,7 +195,7 @@ const ProjectsPage: React.FC = () => {
                       <select
                         value={searchStatus}
                         onChange={(e) => setSearchStatus(e.target.value)}
-                        className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-2 py-1.5 text-xs text-slate-350 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all"
+                        className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-2 py-1.5 text-xs text-slate-350 focus:outline-none transition-all font-semibold"
                       >
                         <option value="">All Statuses</option>
                         <option value="PLANNING">Planning</option>
@@ -207,14 +207,14 @@ const ProjectsPage: React.FC = () => {
                     <td className="py-2.5 px-6 text-center text-slate-700 font-bold">-</td>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#1a2535] text-xs">
+                <tbody className="divide-y divide-white/10 text-xs">
                   {filteredProjects.slice(0, rowsPerPage).map((project, index) => (
                     <tr key={project.id} className="hover:bg-white/[0.015] transition-colors">
                       <td className="py-4 px-6 text-center font-bold text-slate-650">{index + 1}</td>
                       <td className="py-4 px-6">
                         <Link 
                           to={`/projects/${project.id}`} 
-                          className="block font-bold text-white text-sm hover:text-blue-400 transition-colors"
+                          className="block font-bold text-white text-sm hover:text-[#a78bfa] transition-colors"
                         >
                           {project.name}
                         </Link>
@@ -222,25 +222,25 @@ const ProjectsPage: React.FC = () => {
                           <span className="block text-[10px] text-slate-550 mt-1 line-clamp-1">{project.description}</span>
                         )}
                       </td>
-                      <td className="py-4 px-4 font-semibold text-slate-350">{project.location}</td>
+                      <td className="py-4 px-4 font-semibold text-slate-355">{project.location}</td>
                       <td className="py-4 px-4 font-extrabold text-slate-200 tabular-nums">{project.budget.toLocaleString()}</td>
                       <td className="py-4 px-4">
                         <div className="flex items-center justify-center space-x-2.5">
                           <span className="font-black text-slate-300 w-8 text-right tabular-nums">{project.progress}%</span>
-                          <div className="w-16 bg-[#0b1220] rounded-full h-1.5 overflow-hidden border border-white/[0.02] shrink-0">
-                             <div className="bg-gradient-to-r from-blue-500 to-sky-400 h-1.5 rounded-full" style={{ width: `${project.progress}%` }} />
+                          <div className="w-16 bg-[#0a0f1d]/60 rounded-full h-1.5 overflow-hidden border border-white/[0.02] shrink-0">
+                             <div className="bg-gradient-to-r from-[#7c3aed] to-[#00d2ff] h-1.5 rounded-full" style={{ width: `${project.progress}%` }} />
                            </div>
                          </div>
                       </td>
                       <td className="py-4 px-4 text-center">
                         <span className={`inline-block px-2.5 py-0.5 text-[9px] font-black rounded-full uppercase ${
                           project.status === 'ONGOING'
-                            ? 'bg-blue-500/10 text-blue-400 border border-blue-500/22'
+                            ? 'bg-[#7c3aed]/10 text-[#a78bfa] border border-[#7c3aed]/22'
                             : project.status === 'COMPLETED'
                             ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/22'
                             : project.status === 'OVERDUE'
-                            ? 'bg-rose-500/10 text-rose-450 border border-rose-500/22'
-                            : 'bg-amber-500/10 text-amber-450 border border-amber-500/22'
+                            ? 'bg-rose-500/10 text-rose-455 border border-rose-500/22'
+                            : 'bg-amber-500/10 text-amber-455 border border-amber-500/22'
                         }`}>
                           {project.status}
                         </span>
@@ -250,7 +250,7 @@ const ProjectsPage: React.FC = () => {
                           {/* Edit / Pencil button */}
                            <button 
                              onClick={() => navigate(`/projects/${project.id}/edit`)}
-                             className="p-1.5 bg-blue-500/10 text-blue-400 hover:bg-blue-500 hover:text-white rounded-lg border border-blue-500/20 transition-all duration-150"
+                             className="p-1.5 bg-[#7c3aed]/10 text-[#a78bfa] hover:bg-[#7c3aed] hover:text-white rounded-lg border border-[#7c3aed]/20 transition-all duration-150 cursor-pointer"
                              title="Edit"
                            >
                             <Edit2 className="h-3.5 w-3.5" />
@@ -259,7 +259,7 @@ const ProjectsPage: React.FC = () => {
                           {user?.role === 'ADMIN' && (
                             <button 
                               onClick={() => handleDelete(project.id)}
-                              className="p-1.5 bg-rose-500/10 text-rose-450 hover:bg-rose-600 hover:text-white rounded-lg border border-rose-500/20 transition-all duration-150"
+                              className="p-1.5 bg-rose-500/10 text-rose-455 hover:bg-rose-650 hover:text-white rounded-lg border border-rose-500/20 transition-all duration-150 cursor-pointer"
                               title="Delete"
                             >
                               <Trash2 className="h-3.5 w-3.5" />
@@ -280,7 +280,7 @@ const ProjectsPage: React.FC = () => {
           )}
 
           {/* Footer Controls */}
-          <div className="px-6 py-4 bg-white/[0.005] border-t border-[#1a2535] flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+          <div className="px-6 py-4 bg-white/[0.005] border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500">
             <div className="font-semibold">
               Showing {Math.min(filteredProjects.length, rowsPerPage)} of {filteredProjects.length} entries
             </div>
@@ -289,7 +289,7 @@ const ProjectsPage: React.FC = () => {
               <select
                 value={rowsPerPage}
                 onChange={(e) => setRowsPerPage(parseInt(e.target.value))}
-                className="bg-[#0b1220] border border-[#1a2535] rounded-xl px-2.5 py-1 text-slate-350 focus:outline-none focus:border-blue-500/50"
+                className="bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-2.5 py-1 text-slate-350 focus:outline-none font-semibold"
               >
                 <option value={5}>5</option>
                 <option value={10}>10</option>
@@ -303,11 +303,11 @@ const ProjectsPage: React.FC = () => {
       {/* Add Project Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-          <div className="bg-[#0d1526] border border-[#1a2535] rounded-2xl shadow-2xl shadow-black/80 max-w-lg w-full overflow-hidden modal-enter relative">
-            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-blue-500 via-blue-400 to-transparent" />
-            <div className="flex justify-between items-center px-6 py-4 border-b border-[#1a2535] bg-white/[0.01]">
+          <div className="bg-[#0d1322]/85 border border-white/10 rounded-2xl shadow-2xl shadow-black/80 max-w-lg w-full overflow-hidden modal-enter relative backdrop-blur-xl">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
+            <div className="flex justify-between items-center px-6 py-4 border-b border-white/10 bg-white/[0.01]">
               <h3 className="text-base font-black text-white">Create Project</h3>
-              <button onClick={() => setIsModalOpen(false)} className="p-1.5 rounded-lg bg-white/[0.04] text-slate-500 hover:text-white transition-colors">
+              <button onClick={() => setIsModalOpen(false)} className="p-1.5 rounded-lg bg-white/[0.04] text-slate-500 hover:text-white transition-colors cursor-pointer">
                 <X className="h-4 w-4" />
               </button>
             </div>
@@ -321,73 +321,73 @@ const ProjectsPage: React.FC = () => {
               )}
 
               <div>
-                <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">Project Name *</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Project Name *</label>
                 <input
                   type="text"
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-200 placeholder-slate-800 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-4 py-2.5 text-xs text-slate-200 placeholder-slate-655 focus:outline-none transition-all duration-200 font-semibold"
                   placeholder="e.g. Colombo Residential Complex"
                 />
               </div>
 
               <div>
-                <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">Location *</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Location *</label>
                 <input
                   type="text"
                   required
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-200 placeholder-slate-800 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-4 py-2.5 text-xs text-slate-200 placeholder-slate-655 focus:outline-none transition-all duration-200 font-semibold"
                   placeholder="e.g. Colombo 03"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">Budget (LKR) *</label>
+                  <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Budget (LKR) *</label>
                   <input
                     type="number"
                     required
                     value={budget}
                     onChange={(e) => setBudget(e.target.value)}
-                    className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-200 placeholder-slate-800 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
+                    className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-4 py-2.5 text-xs text-slate-200 placeholder-slate-655 focus:outline-none transition-all duration-200 font-semibold"
                     placeholder="e.g. 5000000"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">Start Date *</label>
+                  <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Start Date *</label>
                   <input
                     type="date"
                     required
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
-                    className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
+                    className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:outline-none transition-all duration-200 font-semibold"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">End Date *</label>
+                  <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">End Date *</label>
                   <input
                     type="date"
                     required
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
-                    className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
+                    className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:outline-none transition-all duration-200 font-semibold"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">Project Manager</label>
+                  <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Project Manager</label>
                   <select
                     value={managerId}
                     onChange={(e) => setManagerId(e.target.value)}
-                    className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-3 py-2.5 text-sm text-slate-350 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
+                    className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-3 py-2.5 text-xs text-slate-350 focus:outline-none transition-all duration-200 font-semibold"
                   >
                     <option value="">Unassigned</option>
                     {managers?.map((mgr: any) => (
@@ -396,11 +396,11 @@ const ProjectsPage: React.FC = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">Client / Owner</label>
+                  <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Client / Owner</label>
                   <select
                     value={clientId}
                     onChange={(e) => setClientId(e.target.value)}
-                    className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-3 py-2.5 text-sm text-slate-350 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
+                    className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-3 py-2.5 text-xs text-slate-350 focus:outline-none transition-all duration-200 font-semibold"
                   >
                     <option value="">Unassigned</option>
                     {clients?.map((cl: any) => (
@@ -411,28 +411,28 @@ const ProjectsPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">Description</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Description</label>
                 <textarea
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   rows={3}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-4 py-2.5 text-xs text-slate-200 placeholder-slate-655 focus:outline-none transition-all duration-200 font-semibold resize-none"
                   placeholder="Additional descriptions..."
                 />
               </div>
 
-              <div className="flex justify-end space-x-3 border-t border-[#1a2535] pt-4 mt-6">
+              <div className="flex justify-end space-x-3 border-t border-white/10 pt-4 mt-6">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2.5 border border-[#1a2535] hover:bg-[#111d33] text-slate-350 hover:text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors"
+                  className="px-4 py-2.5 border border-white/10 hover:bg-[#7c3aed]/10 text-slate-400 hover:text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={createProjectMutation.isPending}
-                  className="flex items-center px-5 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-200 shadow-md shadow-blue-500/10 hover:shadow-blue-500/25 disabled:opacity-50"
+                  className="flex items-center px-5 py-2.5 bg-gradient-to-r from-[#7c3aed] via-[#6366f1] to-[#00d2ff] hover:from-[#8b5cf6] hover:via-[#4f46e5] hover:to-[#00f0ff] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-200 shadow-md shadow-purple-500/20 disabled:opacity-50 cursor-pointer"
                 >
                   {createProjectMutation.isPending && (
                     <Loader2 className="h-4 w-4 mr-2 animate-spin" />

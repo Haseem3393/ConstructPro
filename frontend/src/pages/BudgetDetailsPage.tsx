@@ -14,11 +14,11 @@ import {
 } from 'lucide-react'
 
 const CATEGORY_COLORS = [
-  '#3b82f6', // LABOUR - Blue
-  '#34d399', // MATERIAL - Green
-  '#60a5fa', // EQUIPMENT - Sky Blue
-  '#fbbf24', // SUBCONTRACTOR - Amber
-  '#f87171', // TRANSPORT - Red
+  '#7c3aed', // LABOUR - Violet
+  '#10b981', // MATERIAL - Emerald
+  '#00d2ff', // EQUIPMENT - Cyan
+  '#6366f1', // SUBCONTRACTOR - Indigo
+  '#f43f5e', // TRANSPORT - Rose
   '#94a3b8', // OTHER - Slate
 ]
 
@@ -79,9 +79,12 @@ const BudgetDetailsPage: React.FC = () => {
   if (isLoading) {
     return (
       <SidebarLayout>
-        <div className="flex flex-col items-center justify-center py-40 space-y-3">
-          <Loader2 className="h-10 w-10 text-blue-550 animate-spin" />
-          <p className="text-slate-500 text-sm font-semibold">Analyzing budget sheets...</p>
+        <div className="flex flex-col items-center justify-center py-40 space-y-4">
+          <div className="relative">
+            <Loader2 className="h-10 w-10 text-[#7c3aed] animate-spin" />
+            <div className="absolute inset-0 rounded-full blur-xl bg-[#7c3aed]/20 animate-pulse" />
+          </div>
+          <p className="text-slate-400 font-semibold text-sm">Analyzing budget sheets...</p>
         </div>
       </SidebarLayout>
     )
@@ -126,7 +129,7 @@ const BudgetDetailsPage: React.FC = () => {
         <div className="flex items-center">
           <Link
             to="/budget"
-            className="inline-flex items-center text-xs font-bold text-slate-400 hover:text-white uppercase tracking-wider transition-colors"
+            className="inline-flex items-center text-xs font-bold text-slate-400 hover:text-[#a78bfa] uppercase tracking-wider transition-colors"
           >
             <ArrowLeft className="h-4 w-4 mr-1.5" />
             Back to Budgets
@@ -134,8 +137,8 @@ const BudgetDetailsPage: React.FC = () => {
         </div>
 
         {/* Banner Headers */}
-        <div className="border-b border-[#1a2535] pb-5">
-          <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest bg-blue-500/10 px-2.5 py-0.5 rounded border border-blue-500/22">
+        <div className="border-b border-white/10 pb-5">
+          <span className="text-[10px] font-black text-[#a78bfa] uppercase tracking-widest bg-[#7c3aed]/10 px-2.5 py-0.5 rounded border border-[#7c3aed]/20">
             Site Code: PRJ-{data.project.id.slice(-4).toUpperCase()}
           </span>
           <h1 className="text-3xl font-black text-white mt-2.5 tracking-tight">{data.project.name}</h1>
@@ -179,62 +182,63 @@ const BudgetDetailsPage: React.FC = () => {
           </div>
         )}
 
-        {/* Large Metrics widgets */}
+         {/* Large Metrics widgets */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Budget */}
-          <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-5 shadow-xl flex items-center justify-between">
+          <div className="bg-[#0d1322]/70 border border-white/10 rounded-xl p-5 shadow-xl flex items-center justify-between backdrop-blur-xl">
             <div className="space-y-1">
               <span className="block text-[9px] font-black text-slate-500 uppercase tracking-widest">Target Capital Budget</span>
               <span className="block text-xl font-black text-white">{formatCurrency(data.project.budget)}</span>
             </div>
-            <div className="p-3 rounded-xl bg-[#0b1220] text-slate-400 border border-[#1a2535]">
+            <div className="p-3 rounded-xl bg-[#0a0f1d]/60 text-slate-400 border border-white/10">
               <DollarSign className="h-5 w-5" />
             </div>
           </div>
 
           {/* Spent */}
-          <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-5 shadow-xl flex items-center justify-between">
+          <div className="bg-[#0d1322]/70 border border-white/10 rounded-xl p-5 shadow-xl flex items-center justify-between backdrop-blur-xl">
             <div className="space-y-1">
               <span className="block text-[9px] font-black text-slate-500 uppercase tracking-widest">Total Spent to Date</span>
-              <span className="block text-xl font-black text-blue-505">{formatCurrency(data.spent)}</span>
+              <span className="block text-xl font-black text-[#a78bfa]">{formatCurrency(data.spent)}</span>
             </div>
-            <div className="p-3 rounded-xl bg-blue-500/10 text-blue-450 border border-blue-500/22">
+            <div className="p-3 rounded-xl bg-[#7c3aed]/10 text-[#a78bfa] border border-[#7c3aed]/20">
               <TrendingUp className="h-5 w-5" />
             </div>
           </div>
 
           {/* Remaining */}
-          <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-5 shadow-xl flex items-center justify-between">
+          <div className="bg-[#0d1322]/70 border border-white/10 rounded-xl p-5 shadow-xl flex items-center justify-between backdrop-blur-xl">
             <div className="space-y-1">
               <span className="block text-[9px] font-black text-slate-500 uppercase tracking-widest">Remaining Reserve Cap</span>
               <span className={`block text-xl font-black ${data.remaining < 0 ? 'text-rose-455 animate-pulse' : 'text-emerald-400'}`}>
                 {data.remaining < 0 ? `-${formatCurrency(Math.abs(data.remaining))}` : formatCurrency(data.remaining)}
               </span>
             </div>
-            <div className={`p-3 rounded-xl border ${data.remaining < 0 ? 'bg-rose-500/10 text-rose-400 border-rose-500/22' : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/22'}`}>
+            <div className={`p-3 rounded-xl border ${data.remaining < 0 ? 'bg-rose-500/10 text-rose-455 border-rose-500/22' : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/22'}`}>
               <TrendingDown className="h-5 w-5" />
             </div>
           </div>
         </div>
 
         {/* Global Progress Bar */}
-        <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-5 shadow-xl space-y-3">
+        <div className="bg-[#0d1322]/70 border border-white/10 rounded-xl p-5 shadow-xl space-y-3 backdrop-blur-xl">
           <div className="flex justify-between items-center text-xs font-bold uppercase tracking-wider text-slate-400">
             <span>Overall Budget Consumption</span>
             <span className={utilizationPercent > 80 ? 'text-rose-455 font-extrabold' : 'text-slate-300'}>
               {utilizationPercent.toFixed(2)}% Used
             </span>
           </div>
-          <div className="w-full bg-[#0b1220] h-3 rounded-full overflow-hidden border border-[#1a2535]">
+          <div className="w-full bg-[#0a0f1d]/60 h-3 rounded-full overflow-hidden border border-white/10">
             <div 
-              className={`h-full ${progressColor} rounded-full transition-all duration-500`}
+              className={`h-full ${utilizationPercent > 100 ? 'bg-rose-500' : 'bg-gradient-to-r from-[#7c3aed] via-[#6366f1] to-[#00d2ff]'} rounded-full transition-all duration-500`}
               style={{ width: `${Math.min(utilizationPercent, 100)}%` }}
             ></div>
           </div>
         </div>          {/* Visual Charts Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Pie/Donut Chart visual */}
-          <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-6 shadow-xl flex flex-col justify-between">
+          <div className="bg-[#0d1322]/70 border border-white/10 rounded-xl p-6 shadow-xl flex flex-col justify-between backdrop-blur-xl relative">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
             <span className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-4">Cost Category Allocation</span>
             
             {data.spent === 0 ? (
@@ -265,13 +269,13 @@ const BudgetDetailsPage: React.FC = () => {
                     ))}
                   </svg>
                   <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                    <span className="block text-[9px] font-black text-slate-550 uppercase tracking-widest">Wastage</span>
+                    <span className="block text-[9px] font-black text-slate-550 uppercase tracking-widest">Spent</span>
                     <span className="block text-sm font-black text-white">{utilizationPercent.toFixed(0)}%</span>
                   </div>
                 </div>
 
                 {/* Donut Legend */}
-                <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-[10px] w-full pt-2 border-t border-[#1a2535]">
+                <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-[10px] w-full pt-2 border-t border-white/10">
                   {donutSegments.map((seg, idx) => (
                     <div key={idx} className="flex items-center space-x-1.5 font-bold">
                       <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: seg.color }}></span>
@@ -285,7 +289,8 @@ const BudgetDetailsPage: React.FC = () => {
           </div>
 
           {/* Monthly Spending Trend Chart */}
-          <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-6 shadow-xl lg:col-span-2 flex flex-col justify-between">
+          <div className="bg-[#0d1322]/70 border border-white/10 rounded-xl p-6 shadow-xl lg:col-span-2 flex flex-col justify-between backdrop-blur-xl relative">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
             <span className="block text-[10px] font-black text-slate-500 uppercase tracking-widest">Monthly Capital Outflow Trend</span>
             
             {trendPoints.length < 2 ? (
@@ -296,18 +301,18 @@ const BudgetDetailsPage: React.FC = () => {
               <div className="mt-6">
                 <svg viewBox="0 0 500 150" className="w-full overflow-visible">
                   {/* Grid Lines */}
-                  <line x1="15" y1="15" x2="485" y2="15" stroke="#1a2535" strokeWidth="1" strokeDasharray="3" />
-                  <line x1="15" y1="135" x2="485" y2="135" stroke="#1a2535" strokeWidth="1" />
+                  <line x1="15" y1="15" x2="485" y2="15" stroke="rgba(255,255,255,0.04)" strokeWidth="1" strokeDasharray="3" />
+                  <line x1="15" y1="135" x2="485" y2="135" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
                   
                   {/* SVG Line Graph */}
                   <path
                     d={svgPath}
                     fill="none"
-                    stroke="#3b82f6"
+                    stroke="#7c3aed"
                     strokeWidth="3.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="drop-shadow-[0_4px_12px_rgba(59,130,246,0.25)]"
+                    className="drop-shadow-[0_4px_12px_rgba(124,58,237,0.25)]"
                   />
 
                   {/* Chart Dots */}
@@ -323,10 +328,10 @@ const BudgetDetailsPage: React.FC = () => {
                           cx={x}
                           cy={y}
                           r="4.5"
-                          fill="#0d1526"
-                          stroke="#60a5fa"
+                          fill="#0d1322"
+                          stroke="#00d2ff"
                           strokeWidth="2.5"
-                          className="hover:r-6 hover:fill-blue-400 transition-all"
+                          className="hover:r-6 hover:fill-purple-400 transition-all"
                         />
                         <title>{`${p.month}: ${formatCurrency(p.amount)}`}</title>
                       </g>
@@ -343,8 +348,8 @@ const BudgetDetailsPage: React.FC = () => {
         </div>
 
         {/* Category Breakdown Table */}
-        <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl overflow-hidden shadow-xl">
-          <div className="px-6 py-4 border-b border-[#1a2535] bg-white/[0.01]">
+        <div className="bg-[#0d1322]/70 border border-white/10 rounded-xl overflow-hidden shadow-xl backdrop-blur-xl">
+          <div className="px-6 py-4 border-b border-white/10 bg-white/[0.01]">
             <h3 className="font-extrabold text-xs text-white uppercase tracking-wider">
               Category Capital Allocations
             </h3>
@@ -352,23 +357,23 @@ const BudgetDetailsPage: React.FC = () => {
           <div className="overflow-x-auto w-full">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="text-[10px] text-slate-550 font-bold tracking-wider uppercase bg-white/[0.005] border-b border-[#1a2535]">
+                <tr className="text-[10px] text-slate-550 font-bold tracking-wider uppercase bg-white/[0.005] border-b border-white/10">
                   <th className="py-3 px-6">CATEGORY</th>
                   <th className="py-3 px-4 text-right">SPENT (LKR)</th>
                   <th className="py-3 px-6">PERCENT OF TOTAL SPENT</th>
                   <th className="py-3 px-6">UTILIZATION RATIO VISUAL</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#1a2535] text-xs">
+              <tbody className="divide-y divide-white/10 text-xs">
                 {data.categoryBreakdown.map((cat, idx) => (
                   <tr key={cat.category} className="hover:bg-white/[0.02] transition-colors">
                     <td className="py-3.5 px-6 font-extrabold text-slate-300 capitalize">{cat.category.toLowerCase()}</td>
                     <td className="py-3.5 px-4 text-right text-white font-black text-sm">{formatCurrency(cat.amount)}</td>
-                    <td className="py-3.5 px-6 font-bold text-blue-455">{cat.percent.toFixed(1)}%</td>
+                    <td className="py-3.5 px-6 font-bold text-[#a78bfa]">{cat.percent.toFixed(1)}%</td>
                     <td className="py-3.5 px-6 min-w-[150px]">
-                      <div className="w-32 bg-[#0b1220] h-2 rounded-full overflow-hidden border border-[#1a2535]">
+                      <div className="w-32 bg-[#0a0f1d]/60 h-2 rounded-full overflow-hidden border border-white/10">
                         <div 
-                          className="h-full bg-blue-500 rounded-full"
+                          className="h-full bg-[#7c3aed] rounded-full"
                           style={{ width: `${cat.percent}%` }}
                         ></div>
                       </div>

@@ -84,10 +84,10 @@ const WorkerEditPage: React.FC = () => {
       <SidebarLayout>
         <div className="flex flex-col items-center justify-center py-40 space-y-4">
           <div className="relative">
-            <Loader2 className="h-10 w-10 text-blue-500 animate-spin" />
-            <div className="absolute inset-0 rounded-full blur-xl bg-blue-500/20 animate-pulse" />
+            <Loader2 className="h-10 w-10 text-[#7c3aed] animate-spin" />
+            <div className="absolute inset-0 rounded-full blur-xl bg-[#7c3aed]/20 animate-pulse" />
           </div>
-          <p className="text-slate-400 font-medium text-sm">Fetching worker profile state...</p>
+          <p className="text-slate-400 font-semibold text-sm">Fetching worker profile state...</p>
         </div>
       </SidebarLayout>
     )
@@ -116,10 +116,10 @@ const WorkerEditPage: React.FC = () => {
     <SidebarLayout>
       <div className="space-y-6 max-w-2xl mx-auto">
         {/* Header */}
-        <div className="flex items-center space-x-4 border-b border-[#1a2535] pb-5">
+        <div className="flex items-center space-x-4 border-b border-white/10 pb-5">
           <button
             onClick={() => navigate(-1)}
-            className="p-2.5 bg-[#0d1526] border border-[#1a2535] rounded-xl text-slate-400 hover:text-white transition-colors"
+            className="p-2.5 bg-[#0d1322]/70 border border-white/10 rounded-xl text-slate-400 hover:text-white transition-colors cursor-pointer"
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
@@ -130,7 +130,8 @@ const WorkerEditPage: React.FC = () => {
         </div>
 
         {/* Edit Form */}
-        <div className="bg-[#0d1526] border border-[#1a2535] rounded-2xl overflow-hidden shadow-xl p-6">
+        <div className="bg-[#0d1322]/70 border border-white/10 rounded-2xl overflow-hidden shadow-xl p-6 backdrop-blur-xl relative">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
           <form onSubmit={handleSubmit} className="space-y-5">
             {formError && (
               <div className="p-3.5 bg-rose-500/8 border border-rose-500/20 text-rose-455 text-xs rounded-xl flex items-center gap-2 font-semibold">
@@ -140,7 +141,7 @@ const WorkerEditPage: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">
                   Tradesman Name *
                 </label>
                 <input
@@ -148,18 +149,18 @@ const WorkerEditPage: React.FC = () => {
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:outline-none transition-all duration-200 font-semibold"
                 />
               </div>
 
               <div>
-                <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">
                   Trade Skill Category *
                 </label>
                 <select
                   value={trade}
                   onChange={(e) => setTrade(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-350 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-4 py-2.5 text-xs text-slate-350 focus:outline-none transition-all duration-200 font-semibold cursor-pointer"
                 >
                   {trades.map((t) => (
                     <option key={t} value={t}>{t}</option>
@@ -168,7 +169,7 @@ const WorkerEditPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">
                   Base Daily Wage (Rs.) *
                 </label>
                 <input
@@ -178,32 +179,32 @@ const WorkerEditPage: React.FC = () => {
                   step="50"
                   value={dailyWage}
                   onChange={(e) => setDailyWage(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:outline-none transition-all duration-200 font-semibold"
                 />
               </div>
 
               <div>
-                <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">
                   Contact Phone Number
                 </label>
                 <input
                   type="text"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:outline-none transition-all duration-200 font-semibold"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-1.5">
+              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">
                 Home Address
               </label>
               <textarea
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 rows={3}
-                className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
+                className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:outline-none transition-all duration-200 resize-none font-semibold"
               />
             </div>
 
@@ -213,26 +214,26 @@ const WorkerEditPage: React.FC = () => {
                 id="active"
                 checked={active}
                 onChange={(e) => setActive(e.target.checked)}
-                className="h-4 w-4 bg-[#0b1220] border-[#1a2535] text-blue-500 focus:ring-blue-500 focus:ring-opacity-25 rounded cursor-pointer"
+                className="h-4 w-4 bg-[#0a0f1d]/60 border-white/10 text-[#7c3aed] focus:ring-[#7c3aed] focus:ring-opacity-25 rounded cursor-pointer accent-[#7c3aed]"
               />
-              <label htmlFor="active" className="text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] cursor-pointer select-none">
+              <label htmlFor="active" className="text-[10px] font-black text-slate-400 uppercase tracking-widest cursor-pointer select-none">
                 Active status in active trade registry
               </label>
             </div>
 
             {/* Action buttons */}
-            <div className="flex justify-end space-x-3 border-t border-[#1a2535] pt-5 mt-6">
+            <div className="flex justify-end space-x-3 border-t border-white/10 pt-5 mt-6">
               <button
                 type="button"
                 onClick={() => navigate(-1)}
-                className="px-4 py-2.5 border border-[#1a2535] text-slate-350 hover:bg-[#111d33] rounded-xl text-xs font-bold uppercase tracking-wider transition-colors"
+                className="px-4 py-2.5 border border-white/10 text-slate-400 hover:bg-[#7c3aed]/10 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={updateWorkerMutation.isPending}
-                className="flex items-center px-5 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-200 shadow-md shadow-blue-500/10 hover:shadow-blue-500/25 disabled:opacity-50"
+                className="flex items-center px-5 py-2.5 bg-gradient-to-r from-[#7c3aed] via-[#6366f1] to-[#00d2ff] hover:from-[#8b5cf6] hover:via-[#4f46e5] hover:to-[#00f0ff] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-200 shadow-md shadow-purple-500/20 disabled:opacity-50 cursor-pointer"
               >
                 {updateWorkerMutation.isPending ? (
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />

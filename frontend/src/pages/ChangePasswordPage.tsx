@@ -57,19 +57,19 @@ const ChangePasswordPage: React.FC = () => {
         <div className="flex items-center space-x-4">
           <Link
             to="/profile"
-            className="p-2 bg-[#0d1526] border border-[#1a2535] rounded-xl text-slate-400 hover:text-white transition-colors"
+            className="p-2 bg-[#0b1220] border border-white/10 rounded-xl text-slate-400 hover:text-[#a78bfa] transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
           </Link>
           <div>
             <h1 className="text-2xl font-black text-white tracking-tight">Security Settings</h1>
-            <p className="text-slate-500 text-xs font-medium mt-1">Configure and update your account password</p>
+            <p className="text-slate-400 text-xs font-semibold mt-1">Configure and update your account password</p>
           </div>
         </div>
 
         {/* Form Card */}
-        <div className="bg-[#0d1526] border border-[#1a2535] rounded-2xl overflow-hidden shadow-xl p-6 relative">
-          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-blue-500 via-blue-400 to-transparent" />
+        <div className="bg-[#0d1322]/70 border border-white/10 rounded-2xl overflow-hidden shadow-xl p-6 relative">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
 
           <form onSubmit={handleSave} className="space-y-5">
             {successMsg && (
@@ -99,7 +99,7 @@ const ChangePasswordPage: React.FC = () => {
                   if (errorMsg) setErrorMsg('')
                 }}
                 disabled={changePasswordMutation.isPending}
-                className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200 disabled:opacity-50"
+                className="w-full bg-white/[0.02] border border-white/10 hover:border-white/20 rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 transition-all duration-200 disabled:opacity-50"
               />
             </div>
 
@@ -118,7 +118,7 @@ const ChangePasswordPage: React.FC = () => {
                      if (errorMsg) setErrorMsg('')
                   }}
                   disabled={changePasswordMutation.isPending}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl pl-4 pr-11 py-3 text-sm text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200 disabled:opacity-50"
+                  className="w-full bg-white/[0.02] border border-white/10 hover:border-white/20 rounded-xl pl-4 pr-11 py-3 text-sm text-slate-200 focus:outline-none focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 transition-all duration-200 disabled:opacity-50"
                 />
                 <button
                   type="button"
@@ -145,22 +145,22 @@ const ChangePasswordPage: React.FC = () => {
                   if (errorMsg) setErrorMsg('')
                 }}
                 disabled={changePasswordMutation.isPending}
-                className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200 disabled:opacity-50"
+                className="w-full bg-white/[0.02] border border-white/10 hover:border-white/20 rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 transition-all duration-200 disabled:opacity-50"
               />
             </div>
 
             {/* Action buttons */}
-            <div className="flex justify-end space-x-3 border-t border-[#1a2535] pt-5 mt-6">
+            <div className="flex justify-end space-x-3 border-t border-white/10 pt-5 mt-6">
               <Link
                 to="/profile"
-                className="px-4 py-2.5 border border-[#1a2535] text-slate-350 hover:bg-[#111d33] hover:text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors"
+                className="px-4 py-2.5 border border-white/10 text-slate-350 hover:bg-[#7c3aed]/10 hover:text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors"
               >
                 Cancel
               </Link>
               <button
                 type="submit"
                 disabled={changePasswordMutation.isPending}
-                className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-200 shadow-md shadow-blue-500/10 hover:shadow-blue-500/25 disabled:opacity-50"
+                className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#7c3aed] via-[#6366f1] to-[#00d2ff] hover:from-[#8b5cf6] hover:via-[#4f46e5] hover:to-[#00f0ff] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-200 shadow-md shadow-purple-500/20 disabled:opacity-50"
               >
                 {changePasswordMutation.isPending ? (
                   <Loader2 className="h-4 w-4 animate-spin" />

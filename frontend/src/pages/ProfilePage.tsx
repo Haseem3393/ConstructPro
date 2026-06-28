@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../store/authStore'
 import { useUpdateProfile, useChangePassword } from '../hooks/useUsers'
 import SidebarLayout from '../components/SidebarLayout'
@@ -15,8 +15,11 @@ import {
   AlertTriangle,
   Eye,
   EyeOff,
-  UserCheck,
-  Calendar
+  Calendar,
+  Building2,
+  MapPin,
+  Globe,
+  ArrowLeft
 } from 'lucide-react'
 
 const ProfilePage: React.FC = () => {
@@ -27,9 +30,17 @@ const ProfilePage: React.FC = () => {
   const updateProfileMutation = useUpdateProfile()
   const changePasswordMutation = useChangePassword()
 
-  // Form States - Update Info
-  const [name, setName] = useState('')
+  // Form States - Info
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [username, setUsername] = useState('')
   const [phone, setPhone] = useState('')
+  const [company, setCompany] = useState('Munaf & Sons Contractors')
+  const [location, setLocation] = useState('Colombo, Sri Lanka')
+  const [bio, setBio] = useState('Passionate about construction management and high-quality modern engineering.')
+  const [birthday, setBirthday] = useState('1993-10-26')
+  const [website, setWebsite] = useState('constructpro.lk')
+  
   const [infoSuccess, setInfoSuccess] = useState('')
   const [infoError, setInfoError] = useState('')
 
@@ -47,9 +58,25 @@ const ProfilePage: React.FC = () => {
   // Sync profile details when user store is loaded
   useEffect(() => {
     if (user) {
-      setName(user.name)
-      const permissions = (user as any).permissions || {}
-      setPhone(permissions.phone || '')
+      const stored = localStorage.getItem('auth-storage')
+      let savedPermissions: any = {}
+      if (stored) {
+        try {
+          const parsed = JSON.parse(stored)
+          savedPermissions = parsed?.state?.user?.permissions || {}
+        } catch (e) {}
+      }
+
+      const nameParts = user.name.split(' ')
+      setFirstName(nameParts[0] || '')
+      setLastName(nameParts.slice(1).join(' ') || '')
+      setUsername(savedPermissions.username || user.email.split('@')[0])
+      setPhone(savedPermissions.phone || '')
+      setCompany(savedPermissions.company || 'Munaf & Sons Contractors')
+      setLocation(savedPermissions.location || 'Colombo, Sri Lanka')
+      setBio(savedPermissions.bio || 'Passionate about construction management and high-quality modern engineering.')
+      setBirthday(savedPermissions.birthday || '1993-10-26')
+      setWebsite(savedPermissions.website || 'constructpro.lk')
     }
   }, [user])
 
@@ -59,14 +86,15 @@ const ProfilePage: React.FC = () => {
     setInfoSuccess('')
     setInfoError('')
 
-    if (!name.trim()) {
+    const fullName = `${firstName} ${lastName}`.trim()
+    if (!fullName) {
       setInfoError('Name is required.')
       return
     }
 
     try {
       await updateProfileMutation.mutateAsync({
-        name: name.trim(),
+        name: fullName,
         phone: phone.trim(),
       })
       
@@ -75,10 +103,16 @@ const ProfilePage: React.FC = () => {
       if (stored) {
         const parsed = JSON.parse(stored)
         if (parsed.state && parsed.state.user) {
-          parsed.state.user.name = name.trim()
+          parsed.state.user.name = fullName
           parsed.state.user.permissions = {
             ...(parsed.state.user.permissions || {}),
             phone: phone.trim(),
+            company: company.trim(),
+            location: location.trim(),
+            bio: bio.trim(),
+            birthday,
+            website: website.trim(),
+            username: username.trim(),
           }
           localStorage.setItem('auth-storage', JSON.stringify(parsed))
         }
@@ -132,305 +166,432 @@ const ProfilePage: React.FC = () => {
 
   return (
     <SidebarLayout>
-      <div className="space-y-8 max-w-5xl mx-auto">
-        {/* Profile Header (No banner) */}
-        <div className="flex flex-col md:flex-row items-center md:items-start gap-6 border-b border-zinc-800/80 pb-8 pt-4">
-          {/* Avatar Circle */}
-          <div className="relative group shrink-0">
-            <div className="w-28 h-28 rounded-full bg-gradient-to-tr from-violet-600 to-indigo-650 p-1 shadow-2xl ring-4 ring-zinc-800/80 flex items-center justify-center">
-              <div className="w-full h-full rounded-full bg-[#14161f] flex items-center justify-center font-black text-white text-4xl tracking-wider shadow-inner">
-                {user?.name.charAt(0).toUpperCase()}
-              </div>
-            </div>
-            {/* Status dot */}
-            <span className="absolute bottom-1 right-1 w-6 h-6 bg-[#0d0e12] rounded-full p-1 flex items-center justify-center ring-2 ring-[#14161f]">
-              <span className="w-full h-full bg-emerald-500 rounded-full animate-pulse" />
-            </span>
+      <div className="space-y-6 max-w-5xl mx-auto fade-up">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 select-none">
+          <div>
+            <h1 className="text-2xl font-black text-white tracking-tight">Account Settings</h1>
+            <p className="text-slate-400 text-xs font-semibold mt-1">
+              Manage your personal information, profile particulars, and security credentials
+            </p>
           </div>
-
-          {/* Details */}
-          <div className="text-center md:text-left space-y-3">
-            <div>
-              <h1 className="text-3xl font-black text-white tracking-tight flex flex-col md:flex-row items-center gap-3">
-                {user?.name}
-                <div className="flex gap-2 mt-2 md:mt-0">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-bold rounded-full uppercase tracking-wider">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    Active Account
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-violet-500/10 text-violet-400 border border-violet-500/20 text-[10px] font-bold rounded-full uppercase tracking-wider">
-                    {user?.role}
-                  </span>
-                </div>
-              </h1>
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3 sm:gap-6 text-zinc-400 text-sm">
-              <span className="flex items-center gap-2">
-                <Mail className="h-4 w-4 text-zinc-550" />
-                {user?.email}
-              </span>
-              <span className="hidden sm:inline text-zinc-700">•</span>
-              <span className="flex items-center gap-2">
-                <Shield className="h-4 w-4 text-zinc-550" />
-                <span>Access Level: <strong className="text-zinc-200">{user?.role}</strong></span>
-              </span>
-            </div>
-          </div>
+          <button
+            onClick={() => navigate('/dashboard')}
+            className="flex items-center gap-2 px-4 py-2 bg-[#0d1322]/70 border border-white/10 hover:border-white/20 hover:text-[#a78bfa] rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer backdrop-blur-xl"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to Dashboard
+          </button>
         </div>
 
-        {/* Inner Grid layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-2">
-          {/* Left Column: About user particulars */}
-          <div className="space-y-6">
-            <div className="bg-[#14161f] border border-zinc-800/80 rounded-2xl p-6 shadow-xl relative overflow-hidden group">
-              <div className="absolute top-0 left-0 h-[2px] w-full bg-gradient-to-r from-transparent via-violet-500 to-transparent opacity-50" />
-              <div className="border-b border-zinc-800/80 pb-4 mb-4">
-                <h3 className="text-xs font-extrabold text-zinc-450 uppercase tracking-widest flex items-center gap-2">
-                  <UserIcon className="h-4 w-4 text-violet-400" />
-                  Personal Particulars
-                </h3>
+        {/* ════ MAIN FLOATING GLASSMORPHIC CARD CONTAINER ════ */}
+        <div className="bg-[#0d1322]/70 border border-white/10 rounded-3xl p-6 md:p-8 shadow-[0_25px_60px_rgba(0,0,0,0.55)] backdrop-blur-2xl relative overflow-hidden">
+          {/* Top gradient accent line */}
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
+          
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* ════ LEFT COLUMN: User Profile & Particulars ════ */}
+            <div className="col-span-1 flex flex-col items-center text-center space-y-6 border-b lg:border-b-0 lg:border-r border-white/10 pb-8 lg:pb-0 lg:pr-8">
+              {/* Profile Avatar with Glowing Ring */}
+              <div className="relative group shrink-0 mt-2">
+                <div className="w-28 h-28 rounded-full bg-gradient-to-tr from-[#7c3aed] to-[#00d2ff] p-1 shadow-[0_0_25px_rgba(124,58,237,0.25)] ring-4 ring-white/10 flex items-center justify-center relative">
+                  {/* Small Profile Avatar Overlap */}
+                  <div className="absolute -top-1 -right-1 w-9 h-9 rounded-full bg-[#060b14] p-0.5 border border-white/10 z-10">
+                    <div className="w-full h-full rounded-full bg-[#7c3aed] flex items-center justify-center text-[10px] font-black text-white">
+                      {user?.name.substring(0, 2).toUpperCase()}
+                    </div>
+                  </div>
+                  <div className="w-full h-full rounded-full bg-[#0a0f1d] flex items-center justify-center font-black text-white text-4xl tracking-wider shadow-inner select-none">
+                    {user?.name.substring(0, 2).toUpperCase()}
+                  </div>
+                </div>
+                {/* Active badge */}
+                <div className="mt-3.5 inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-bold rounded-full uppercase tracking-wider">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  Active
+                </div>
               </div>
 
-              <div className="space-y-5 text-sm">
-                <div className="flex items-start space-x-4 p-2.5 rounded-lg hover:bg-zinc-800/20 transition-colors">
-                  <UserIcon className="h-5 w-5 text-zinc-500 shrink-0 mt-0.5" />
-                  <div>
-                    <span className="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Full Name</span>
-                    <span className="text-zinc-200 font-bold">{user?.name}</span>
+              {/* Name & Role */}
+              <div className="space-y-1">
+                <h2 className="text-2xl font-black text-white tracking-tight">{user?.name}</h2>
+                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{user?.role}</p>
+              </div>
+
+              {/* Email Address details */}
+              <div className="w-full space-y-1.5 text-left">
+                <span className="block text-[9.5px] font-black text-slate-500 uppercase tracking-wider">Email Address Details</span>
+                <div className="flex items-center justify-between p-3 bg-white/[0.02] border border-white/10 rounded-xl hover:bg-white/[0.04] transition-all">
+                  <div className="flex items-center gap-2.5 overflow-hidden">
+                    <CheckCircle className="h-4.5 w-4.5 text-emerald-400 shrink-0" />
+                    <span className="text-xs text-slate-200 font-semibold truncate">{user?.email}</span>
                   </div>
                 </div>
+              </div>
 
-                <div className="flex items-start space-x-4 p-2.5 rounded-lg hover:bg-zinc-800/20 transition-colors">
-                  <Mail className="h-5 w-5 text-zinc-500 shrink-0 mt-0.5" />
-                  <div className="overflow-hidden font-medium">
-                    <span className="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Email Address</span>
-                    <span className="text-zinc-200 break-all">{user?.email}</span>
+              {/* Personal Particulars */}
+              <div className="w-full space-y-2 text-left">
+                <span className="block text-[9.5px] font-black text-slate-500 uppercase tracking-wider">Personal Particulars</span>
+                <div className="w-full bg-white/[0.02] border border-white/10 rounded-xl p-3 space-y-4">
+                  <div className="flex items-start space-x-3.5">
+                    <div className="p-1.5 bg-white/[0.03] rounded-lg text-slate-400 mt-0.5">
+                      <UserIcon className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <span className="block text-[9px] font-bold text-slate-500 uppercase tracking-wider">Full Name</span>
+                      <span className="text-xs text-slate-200 font-bold">{user?.name}</span>
+                    </div>
                   </div>
-                </div>
-
-                <div className="flex items-start space-x-4 p-2.5 rounded-lg hover:bg-zinc-800/20 transition-colors">
-                  <Phone className="h-5 w-5 text-zinc-500 shrink-0 mt-0.5" />
-                  <div>
-                    <span className="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Contact Phone</span>
-                    <span className="text-zinc-200 font-medium">{phone || <span className="text-zinc-500 italic">Not Logged</span>}</span>
+                  <div className="flex items-start space-x-3.5">
+                    <div className="p-1.5 bg-white/[0.03] rounded-lg text-slate-400 mt-0.5">
+                      <Building2 className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <span className="block text-[9px] font-bold text-slate-500 uppercase tracking-wider">Company</span>
+                      <span className="text-xs text-slate-200 font-medium">{company}</span>
+                    </div>
                   </div>
-                </div>
-
-                <div className="flex items-start space-x-4 p-2.5 rounded-lg hover:bg-zinc-800/20 transition-colors">
-                  <Shield className="h-5 w-5 text-zinc-500 shrink-0 mt-0.5" />
-                  <div>
-                    <span className="block text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Security Access Level</span>
-                    <span className="inline-flex px-2.5 py-0.5 rounded-md text-[9px] font-black uppercase tracking-wider bg-violet-500/10 text-violet-400 border border-violet-500/20 mt-1">
-                      {user?.role}
-                    </span>
+                  <div className="flex items-start space-x-3.5">
+                    <div className="p-1.5 bg-white/[0.03] rounded-lg text-slate-400 mt-0.5">
+                      <MapPin className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <span className="block text-[9px] font-bold text-slate-500 uppercase tracking-wider">Location</span>
+                      <span className="text-xs text-slate-200 font-medium">{location}</span>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-3.5">
+                    <div className="p-1.5 bg-white/[0.03] rounded-lg text-slate-400 mt-0.5">
+                      <Phone className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <span className="block text-[9px] font-bold text-slate-500 uppercase tracking-wider">Phone</span>
+                      <span className="text-xs text-slate-200 font-medium">{phone || 'Not Logged'}</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Right Column: Settings Tabs card */}
-          <div className="lg:col-span-2 space-y-6">
-            <div className="bg-[#14161f] border border-zinc-800/80 rounded-2xl overflow-hidden shadow-xl relative">
-              <div className="absolute top-0 left-0 h-[2px] w-full bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-50" />
-              {/* Tab headers */}
-              <div className="flex bg-[#181a24]/40 border-b border-zinc-800/80 p-2 gap-2 shrink-0">
+            {/* ════ RIGHT COLUMN: Tab Content Form ════ */}
+            <div className="col-span-1 lg:col-span-2 space-y-6">
+              {/* Pill Tab selector */}
+              <div className="flex bg-[#0a0f1d]/40 border border-white/10 rounded-2xl p-1.5 gap-2 w-fit select-none">
                 <button
+                  type="button"
                   onClick={() => setActiveTab('info')}
-                  className={`flex items-center space-x-2 px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                  className={`px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                     activeTab === 'info'
-                      ? 'bg-violet-600 text-white shadow-lg shadow-violet-600/20'
-                      : 'text-zinc-400 hover:text-white hover:bg-zinc-800/30'
+                      ? 'bg-gradient-to-r from-[#7c3aed] to-[#6366f1] text-white shadow-lg shadow-purple-500/25'
+                      : 'text-slate-400 hover:text-white hover:bg-white/[0.04]'
                   }`}
                 >
-                  <UserIcon className="h-4 w-4" />
-                  <span>Update Profile Info</span>
+                  Profile Information
                 </button>
-
                 <button
+                  type="button"
                   onClick={() => setActiveTab('security')}
-                  className={`flex items-center space-x-2 px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                  className={`px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                     activeTab === 'security'
-                      ? 'bg-violet-600 text-white shadow-lg shadow-violet-600/20'
-                      : 'text-zinc-400 hover:text-white hover:bg-zinc-800/30'
+                      ? 'bg-gradient-to-r from-[#7c3aed] to-[#6366f1] text-white shadow-lg shadow-purple-500/25'
+                      : 'text-slate-400 hover:text-white hover:bg-white/[0.04]'
                   }`}
                 >
-                  <Key className="h-4 w-4" />
-                  <span>Security & Password</span>
+                  Security & Password
                 </button>
               </div>
 
-              {/* Tab Body */}
-              <div className="p-6 md:p-8">
-                {/* 1. Update Info Tab */}
-                {activeTab === 'info' && (
-                  <form onSubmit={handleSaveInfo} className="space-y-5">
-                    {infoSuccess && (
-                      <div className="p-3.5 bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs rounded-xl font-bold tracking-wide flex items-center">
-                        <CheckCircle className="h-4 w-4 mr-2" />
-                        <span>{infoSuccess}</span>
-                      </div>
-                    )}
-                    {infoError && (
-                      <div className="p-3.5 bg-rose-500/10 border border-rose-500/25 text-rose-400 text-xs rounded-xl font-bold flex items-center">
-                        <AlertTriangle className="h-4 w-4 mr-2" />
-                        <span>{infoError}</span>
-                      </div>
-                    )}
+              {/* 1. Update Info Tab */}
+              {activeTab === 'info' && (
+                <form onSubmit={handleSaveInfo} className="space-y-5">
+                  <div className="border-b border-white/5 pb-3">
+                    <h3 className="text-lg font-black text-white tracking-tight">Update Profile</h3>
+                  </div>
 
-                    <div className="space-y-2">
-                      <label className="block text-xs font-bold text-zinc-450 uppercase tracking-widest">
-                        Full Name *
+                  {infoSuccess && (
+                    <div className="p-3.5 bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs rounded-xl font-bold tracking-wide flex items-center">
+                      <CheckCircle className="h-4 w-4 mr-2" />
+                      <span>{infoSuccess}</span>
+                    </div>
+                  )}
+                  {infoError && (
+                    <div className="p-3.5 bg-rose-500/10 border border-rose-500/25 text-rose-400 text-xs rounded-xl font-bold flex items-center">
+                      <AlertTriangle className="h-4 w-4 mr-2" />
+                      <span>{infoError}</span>
+                    </div>
+                  )}
+
+                  {/* First Name & Last Name (Side by Side) */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-1.5">
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                        First Name
                       </label>
                       <div className="relative">
-                        <UserIcon className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
                         <input
                           type="text"
                           required
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          className="w-full bg-[#1c1e27] border border-zinc-800/80 rounded-xl pl-11 pr-4 py-3 text-sm font-medium text-zinc-200 focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500 transition-all"
+                          value={firstName}
+                          onChange={(e) => setFirstName(e.target.value)}
+                          className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl pl-4 pr-11 py-3 text-xs text-white placeholder-slate-500 focus:outline-none transition-all font-semibold"
                         />
+                        <UserIcon className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
                       </div>
                     </div>
-
-                    <div className="space-y-2">
-                      <label className="block text-xs font-bold text-zinc-450 uppercase tracking-widest">
-                        Email Address (Read Only)
+                    <div className="space-y-1.5">
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                        Last Name
                       </label>
                       <div className="relative">
-                        <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-650" />
-                        <input
-                          type="email"
-                          disabled
-                          value={user?.email || ''}
-                          className="w-full bg-[#14161f]/60 border border-zinc-850 rounded-xl pl-11 pr-4 py-3 text-sm font-medium text-zinc-500 cursor-not-allowed"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="block text-xs font-bold text-zinc-450 uppercase tracking-widest">
-                        Phone Number
-                      </label>
-                      <div className="relative">
-                        <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
                         <input
                           type="text"
-                          value={phone}
-                          onChange={(e) => setPhone(e.target.value)}
-                          placeholder="e.g. +94771234567"
-                          className="w-full bg-[#1c1e27] border border-zinc-800/80 rounded-xl pl-11 pr-4 py-3 text-sm font-medium text-zinc-200 focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500 transition-all"
+                          required
+                          value={lastName}
+                          onChange={(e) => setLastName(e.target.value)}
+                          className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl pl-4 pr-11 py-3 text-xs text-white placeholder-slate-500 focus:outline-none transition-all font-semibold"
                         />
+                        <UserIcon className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
                       </div>
                     </div>
+                  </div>
 
-                    <div className="flex justify-end pt-5 border-t border-zinc-800/60">
+                  {/* Username */}
+                  <div className="space-y-1.5">
+                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                      Username
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        required
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl pl-4 pr-11 py-3 text-xs text-white placeholder-slate-500 focus:outline-none transition-all font-semibold"
+                      />
+                      <UserIcon className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                    </div>
+                  </div>
+
+                  {/* Bio textarea */}
+                  <div className="space-y-1.5">
+                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                      Bio
+                    </label>
+                    <textarea
+                      value={bio}
+                      onChange={(e) => setBio(e.target.value)}
+                      rows={3}
+                      className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-4 py-3 text-xs text-white placeholder-slate-500 focus:outline-none transition-all font-semibold resize-none"
+                    />
+                  </div>
+
+                  {/* Birthday & Website */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-1.5">
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                        Birthday
+                      </label>
+                      <div className="relative">
+                        <input
+                          type="text"
+                          value={birthday}
+                          onChange={(e) => setBirthday(e.target.value)}
+                          className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl pl-4 pr-11 py-3 text-xs text-white placeholder-slate-500 focus:outline-none transition-all font-semibold"
+                        />
+                        <Calendar className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                      </div>
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                        Website
+                      </label>
+                      <div className="relative">
+                        <input
+                          type="text"
+                          value={website}
+                          onChange={(e) => setWebsite(e.target.value)}
+                          className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl pl-4 pr-11 py-3 text-xs text-white placeholder-slate-500 focus:outline-none transition-all font-semibold"
+                        />
+                        <Globe className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Company & Location */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-1.5">
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                        Company
+                      </label>
+                      <div className="relative">
+                        <input
+                          type="text"
+                          value={company}
+                          onChange={(e) => setCompany(e.target.value)}
+                          className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl pl-4 pr-11 py-3 text-xs text-white placeholder-slate-500 focus:outline-none transition-all font-semibold"
+                        />
+                        <Building2 className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                      </div>
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                        Location
+                      </label>
+                      <div className="relative">
+                        <input
+                          type="text"
+                          value={location}
+                          onChange={(e) => setLocation(e.target.value)}
+                          className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl pl-4 pr-11 py-3 text-xs text-white placeholder-slate-500 focus:outline-none transition-all font-semibold"
+                        />
+                        <MapPin className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Phone Number */}
+                  <div className="space-y-1.5">
+                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                      Phone Number
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl pl-4 pr-11 py-3 text-xs text-white placeholder-slate-500 focus:outline-none transition-all font-semibold"
+                      />
+                      <Phone className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                    </div>
+                  </div>
+
+                  {/* Action buttons */}
+                  <div className="flex justify-end space-x-3 pt-5 border-t border-white/10">
+                    <button
+                      type="button"
+                      onClick={() => navigate('/dashboard')}
+                      className="px-6 py-3 border border-white/10 hover:bg-[#7c3aed]/10 text-slate-400 hover:text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      disabled={updateProfileMutation.isPending}
+                      className="flex items-center justify-center px-6 py-3 bg-gradient-to-r from-[#7c3aed] via-[#6366f1] to-[#00d2ff] hover:from-[#8b5cf6] hover:via-[#4f46e5] hover:to-[#00f0ff] text-white rounded-xl text-xs font-extrabold uppercase tracking-wider transition-all shadow-md shadow-purple-500/20 active:scale-95 disabled:opacity-50 cursor-pointer"
+                    >
+                      {updateProfileMutation.isPending ? (
+                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      ) : (
+                        <Save className="h-4 w-4 mr-2" />
+                      )}
+                      Save Changes
+                    </button>
+                  </div>
+                </form>
+              )}
+
+              {/* 2. Security / Change Password Tab */}
+              {activeTab === 'security' && (
+                <form onSubmit={handleSavePassword} className="space-y-5">
+                  <div className="border-b border-white/5 pb-3">
+                    <h3 className="text-lg font-black text-white tracking-tight">Security & Password</h3>
+                  </div>
+
+                  {pwSuccess && (
+                    <div className="p-3.5 bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs rounded-xl font-bold tracking-wide flex items-center">
+                      <CheckCircle className="h-4 w-4 mr-2" />
+                      <span>{pwSuccess}</span>
+                    </div>
+                  )}
+                  {pwError && (
+                    <div className="p-3.5 bg-rose-500/10 border border-rose-500/25 text-rose-400 text-xs rounded-xl font-bold flex items-center">
+                      <AlertTriangle className="h-4 w-4 mr-2" />
+                      <span>{pwError}</span>
+                    </div>
+                  )}
+
+                  {/* Current Password */}
+                  <div className="space-y-1.5">
+                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                      Current Password *
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="password"
+                        required
+                        value={currentPassword}
+                        onChange={(e) => setCurrentPassword(e.target.value)}
+                        className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl pl-4 pr-11 py-3 text-xs text-white placeholder-slate-500 focus:outline-none transition-all font-semibold"
+                      />
+                      <Key className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                    </div>
+                  </div>
+
+                  {/* New Password */}
+                  <div className="space-y-1.5">
+                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                      New Password *
+                    </label>
+                    <div className="relative">
+                      <input
+                        type={showPassword ? 'text' : 'password'}
+                        required
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl pl-4 pr-11 py-3 text-xs text-white placeholder-slate-500 focus:outline-none transition-all font-semibold"
+                      />
                       <button
-                        type="submit"
-                        disabled={updateProfileMutation.isPending}
-                        className="flex items-center justify-center px-6 py-3 bg-violet-650 hover:bg-violet-700 text-white rounded-xl text-xs font-extrabold uppercase tracking-widest transition-all shadow-lg hover:shadow-violet-600/20 active:scale-95 disabled:opacity-50 cursor-pointer"
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-350"
+                        tabIndex={-1}
                       >
-                        {updateProfileMutation.isPending ? (
-                          <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                        ) : (
-                          <Save className="h-4 w-4 mr-2" />
-                        )}
-                        Save Changes
+                        {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                       </button>
                     </div>
-                  </form>
-                )}
+                  </div>
 
-                {/* 2. Security / Change Password Tab */}
-                {activeTab === 'security' && (
-                  <form onSubmit={handleSavePassword} className="space-y-5">
-                    {pwSuccess && (
-                      <div className="p-3.5 bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs rounded-xl font-bold tracking-wide flex items-center">
-                        <CheckCircle className="h-4 w-4 mr-2" />
-                        <span>{pwSuccess}</span>
-                      </div>
-                    )}
-                    {pwError && (
-                      <div className="p-3.5 bg-rose-500/10 border border-rose-500/25 text-rose-400 text-xs rounded-xl font-bold flex items-center">
-                        <AlertTriangle className="h-4 w-4 mr-2" />
-                        <span>{pwError}</span>
-                      </div>
-                    )}
-
-                    <div className="space-y-2">
-                      <label className="block text-xs font-bold text-zinc-450 uppercase tracking-widest">
-                        Current Password *
-                      </label>
-                      <div className="relative">
-                        <Key className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
-                        <input
-                          type="password"
-                          required
-                          value={currentPassword}
-                          onChange={(e) => setCurrentPassword(e.target.value)}
-                          className="w-full bg-[#1c1e27] border border-zinc-800/80 rounded-xl pl-11 pr-4 py-3 text-sm font-medium text-zinc-200 focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500 transition-all"
-                        />
-                      </div>
+                  {/* Confirm New Password */}
+                  <div className="space-y-1.5">
+                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                      Confirm New Password *
+                    </label>
+                    <div className="relative">
+                      <input
+                        type={showPassword ? 'text' : 'password'}
+                        required
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl pl-4 pr-11 py-3 text-xs text-white placeholder-slate-500 focus:outline-none transition-all font-semibold"
+                      />
+                      <Key className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
                     </div>
+                  </div>
 
-                    <div className="space-y-2">
-                      <label className="block text-xs font-bold text-zinc-450 uppercase tracking-widest">
-                        New Password *
-                      </label>
-                      <div className="relative">
-                        <Key className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
-                        <input
-                          type={showPassword ? 'text' : 'password'}
-                          required
-                          value={newPassword}
-                          onChange={(e) => setNewPassword(e.target.value)}
-                          className="w-full bg-[#1c1e27] border border-zinc-800/80 rounded-xl pl-11 pr-12 py-3 text-sm font-medium text-zinc-200 focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500 transition-all"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => setShowPassword(!showPassword)}
-                          className="absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300"
-                        >
-                          {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="block text-xs font-bold text-zinc-450 uppercase tracking-widest">
-                        Confirm New Password *
-                      </label>
-                      <div className="relative">
-                        <Key className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
-                        <input
-                          type={showPassword ? 'text' : 'password'}
-                          required
-                          value={confirmPassword}
-                          onChange={(e) => setConfirmPassword(e.target.value)}
-                          className="w-full bg-[#1c1e27] border border-zinc-800/80 rounded-xl pl-11 pr-4 py-3 text-sm font-medium text-zinc-200 focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500 transition-all"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="flex justify-end pt-5 border-t border-zinc-800/60">
-                      <button
-                        type="submit"
-                        disabled={changePasswordMutation.isPending}
-                        className="flex items-center justify-center px-6 py-3 bg-violet-650 hover:bg-violet-700 text-white rounded-xl text-xs font-extrabold uppercase tracking-widest transition-all shadow-lg hover:shadow-violet-600/20 active:scale-95 disabled:opacity-50 cursor-pointer"
-                      >
-                        {changePasswordMutation.isPending ? (
-                          <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                        ) : (
-                          <Save className="h-4 w-4 mr-2" />
-                        )}
-                        Update Password
-                      </button>
-                    </div>
-                  </form>
-                )}
-              </div>
+                  {/* Action buttons */}
+                  <div className="flex justify-end space-x-3 pt-5 border-t border-white/10">
+                    <button
+                      type="button"
+                      onClick={() => navigate('/dashboard')}
+                      className="px-6 py-3 border border-white/10 hover:bg-[#7c3aed]/10 text-slate-400 hover:text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      disabled={changePasswordMutation.isPending}
+                      className="flex items-center justify-center px-6 py-3 bg-gradient-to-r from-[#7c3aed] via-[#6366f1] to-[#00d2ff] hover:from-[#8b5cf6] hover:via-[#4f46e5] hover:to-[#00f0ff] text-white rounded-xl text-xs font-extrabold uppercase tracking-wider transition-all shadow-md shadow-purple-500/20 active:scale-95 disabled:opacity-50 cursor-pointer"
+                    >
+                      {changePasswordMutation.isPending ? (
+                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      ) : (
+                        <Save className="h-4 w-4 mr-2" />
+                      )}
+                      Update Password
+                    </button>
+                  </div>
+                </form>
+              )}
             </div>
           </div>
         </div>

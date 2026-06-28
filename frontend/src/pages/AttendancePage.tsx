@@ -142,7 +142,7 @@ const AttendancePage: React.FC = () => {
     <SidebarLayout>
       <div className="space-y-6">
         {/* Page Header */}
-        <div className="flex justify-between items-center border-b border-[#1a2535] pb-5">
+        <div className="flex justify-between items-center border-b border-white/10 pb-5">
           <div>
             <h1 className="text-2xl font-black text-white tracking-tight">Daily Timesheets</h1>
             <p className="text-slate-500 text-xs font-medium mt-1">Manage and audit labor wages and overtime allocations</p>
@@ -150,13 +150,14 @@ const AttendancePage: React.FC = () => {
         </div>
 
         {/* Filters Panel */}
-        <div className="bg-[#0d1526] border border-[#1a2535] rounded-2xl p-6 shadow-xl">
-          <h3 className="text-slate-500 text-[10px] font-black uppercase tracking-[0.14em] mb-4">Select Period & Site</h3>
+        <div className="bg-[#0d1322]/70 border border-white/10 rounded-2xl p-6 shadow-xl backdrop-blur-xl relative">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
+          <h3 className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-4">Select Period & Site</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-2">Calendar Date</label>
+              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Calendar Date</label>
               <div className="relative">
-                <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-700" />
+                <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-500" />
                 <input
                   type="date"
                   value={selectedDate}
@@ -165,16 +166,16 @@ const AttendancePage: React.FC = () => {
                     setSelectedDate(e.target.value)
                     setStatusMessage(null)
                   }}
-                  className="pl-10 w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200"
+                  className="pl-10 w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:outline-none transition-all duration-200 font-semibold"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-2">Construction Project</label>
+              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Construction Project</label>
               {isProjectsLoading ? (
                 <div className="flex items-center h-11">
-                  <Loader2 className="h-5 w-5 text-blue-500 animate-spin mr-2" />
+                  <Loader2 className="h-5 w-5 text-[#7c3aed] animate-spin mr-2" />
                   <span className="text-xs text-slate-500">Loading projects...</span>
                 </div>
               ) : (
@@ -184,7 +185,7 @@ const AttendancePage: React.FC = () => {
                     setSelectedProject(e.target.value)
                     setStatusMessage(null)
                   }}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-3 py-2.5 text-sm text-slate-355 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200 cursor-pointer"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-3 py-2.5 text-xs text-slate-355 focus:outline-none transition-all duration-200 cursor-pointer font-semibold"
                 >
                   {projects?.map((project) => (
                     <option key={project.id} value={project.id}>
@@ -212,15 +213,16 @@ const AttendancePage: React.FC = () => {
         )}
 
         {/* Timesheet List Table */}
-        <div className="bg-[#0d1526] border border-[#1a2535] rounded-2xl overflow-hidden shadow-xl">
-          <div className="px-6 py-4 border-b border-[#1a2535] bg-white/[0.005] flex justify-between items-center">
+        <div className="bg-[#0d1322]/70 border border-white/10 rounded-2xl overflow-hidden shadow-xl backdrop-blur-xl relative">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
+          <div className="px-6 py-4 border-b border-white/10 bg-white/[0.005] flex justify-between items-center">
             <div className="flex items-center space-x-3">
               <Users className="h-5 w-5 text-slate-500" />
               <h3 className="font-black text-sm text-slate-350">Worker Registry & Payroll</h3>
             </div>
             {isFetching && (
-              <span className="flex items-center text-[10px] text-blue-400 font-bold uppercase tracking-wider animate-pulse">
-                <Loader2 className="h-3 w-3 mr-1 animate-spin text-blue-500" /> Syncing...
+              <span className="flex items-center text-[10px] text-[#00d2ff] font-bold uppercase tracking-wider animate-pulse">
+                <Loader2 className="h-3 w-3 mr-1 animate-spin text-[#00d2ff]" /> Syncing...
               </span>
             )}
           </div>
@@ -228,10 +230,10 @@ const AttendancePage: React.FC = () => {
           {isAttendanceLoading ? (
             <div className="flex flex-col items-center justify-center py-20 space-y-4">
               <div className="relative">
-                <Loader2 className="h-9 w-9 text-blue-500 animate-spin" />
-                <div className="absolute inset-0 rounded-full blur-xl bg-blue-500/20 animate-pulse" />
+                <Loader2 className="h-9 w-9 text-[#7c3aed] animate-spin" />
+                <div className="absolute inset-0 rounded-full blur-xl bg-[#7c3aed]/20 animate-pulse" />
               </div>
-              <p className="text-slate-500 text-xs font-bold uppercase tracking-wider">Reading attendance logs...</p>
+              <p className="text-slate-400 font-semibold text-xs font-bold uppercase tracking-wider">Reading attendance logs...</p>
             </div>
           ) : !selectedProject ? (
             <div className="p-10 text-center text-slate-500 text-xs font-black uppercase tracking-wider">
@@ -246,7 +248,7 @@ const AttendancePage: React.FC = () => {
               <table className="w-full text-left border-collapse min-w-[800px]">
                 <thead>
                   {/* Columns Labels */}
-                  <tr className="text-[10px] text-slate-655 font-black tracking-widest uppercase bg-white/[0.002] border-b border-[#1a2535]">
+                  <tr className="text-[10px] text-slate-600 font-black tracking-widest uppercase bg-white/[0.002] border-b border-white/10">
                     <th className="py-4 px-6 w-12 text-center">ID</th>
                     <th className="py-4 px-6">WORKER NAME</th>
                     <th className="py-4 px-4">TRADE</th>
@@ -256,7 +258,7 @@ const AttendancePage: React.FC = () => {
                     <th className="py-4 px-6 text-center w-40">ACTIONS</th>
                   </tr>
                   {/* Inline search fields */}
-                  <tr className="bg-white/[0.005] border-b border-[#1a2535]">
+                  <tr className="bg-white/[0.005] border-b border-white/10">
                     <td className="py-2.5 px-4 text-center text-slate-700 font-bold">-</td>
                     <td className="py-2.5 px-6">
                       <input
@@ -264,7 +266,7 @@ const AttendancePage: React.FC = () => {
                         placeholder="Search name..."
                         value={searchName}
                         onChange={(e) => setSearchName(e.target.value)}
-                        className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-2.5 py-1.5 text-xs text-slate-200 placeholder-slate-800 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all"
+                        className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-2.5 py-1.5 text-xs text-slate-200 placeholder-slate-655 focus:outline-none transition-all font-semibold"
                       />
                     </td>
                     <td className="py-2.5 px-4">
@@ -273,13 +275,13 @@ const AttendancePage: React.FC = () => {
                         placeholder="Search trade..."
                         value={searchTrade}
                         onChange={(e) => setSearchTrade(e.target.value)}
-                        className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-2.5 py-1.5 text-xs text-slate-200 placeholder-slate-800 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all"
+                        className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-2.5 py-1.5 text-xs text-slate-200 placeholder-slate-655 focus:outline-none transition-all font-semibold"
                       />
                     </td>
                     <td colSpan={4}></td>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#1a2535] text-xs">
+                <tbody className="divide-y divide-white/10 text-xs">
                   {filteredAttendance.map((worker, index) => (
                     <tr 
                       key={worker.workerId} 
@@ -294,7 +296,7 @@ const AttendancePage: React.FC = () => {
                         <span className="block font-bold text-white text-sm">{worker.name}</span>
                       </td>
                       <td className="py-4 px-4">
-                        <span className="px-2 py-0.5 text-[10px] font-bold text-slate-300 bg-[#0b1220] border border-[#1a2535] rounded-lg uppercase tracking-wide">
+                        <span className="px-2 py-0.5 text-[10px] font-bold text-slate-300 bg-[#0a0f1d]/60 border border-white/10 rounded-lg uppercase tracking-wide">
                           {worker.trade}
                         </span>
                       </td>
@@ -311,10 +313,10 @@ const AttendancePage: React.FC = () => {
                           value={worker.present ? worker.overtimeHours : ''}
                           onChange={(e) => handleOvertimeChange(worker.workerId, e.target.value)}
                           placeholder="0.0"
-                          className="w-16 px-2 py-1 bg-[#0b1220] border border-[#1a2535] rounded-xl focus:ring-1 focus:ring-blue-500 focus:outline-none disabled:opacity-40 disabled:bg-[#060b14] text-center text-slate-200 font-bold"
+                          className="w-16 px-2 py-1 bg-[#0a0f1d]/60 border border-white/10 rounded-xl focus:ring-1 focus:ring-[#7c3aed] focus:outline-none disabled:opacity-40 disabled:bg-[#060b14] text-center text-slate-200 font-bold"
                         />
                       </td>
-                      <td className="py-4 px-4 text-right font-black text-blue-400 tabular-nums">
+                      <td className="py-4 px-4 text-right font-black text-[#00d2ff] tabular-nums">
                         {calculateTotalPay(worker).toLocaleString()} LKR
                       </td>
                       <td className="py-4 px-6 text-center">
@@ -352,7 +354,7 @@ const AttendancePage: React.FC = () => {
           )}
 
           {/* Footer Save Row */}
-          <div className="px-6 py-4 bg-white/[0.005] border-t border-[#1a2535] flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
+          <div className="px-6 py-4 bg-white/[0.005] border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
             <div className="font-bold text-slate-500 uppercase tracking-widest text-[9px]">
               Present Summary: <span className="text-emerald-400 font-extrabold">{presentCount}</span> / {attendanceList.length} Workers Logged
             </div>
@@ -364,10 +366,10 @@ const AttendancePage: React.FC = () => {
               <button
                 onClick={handleSave}
                 disabled={saveMutation.isPending}
-                className="w-full sm:w-auto flex items-center justify-center px-6 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-xl font-black text-xs uppercase tracking-wider transition-all duration-200 shadow-md shadow-blue-500/10 hover:shadow-blue-500/25 disabled:opacity-50"
+                className="w-full sm:w-auto flex items-center justify-center px-6 py-2.5 bg-gradient-to-r from-[#7c3aed] via-[#6366f1] to-[#00d2ff] hover:from-[#8b5cf6] hover:via-[#4f46e5] hover:to-[#00f0ff] text-white rounded-xl font-black text-xs uppercase tracking-wider transition-all duration-200 shadow-md shadow-purple-500/20 disabled:opacity-50 cursor-pointer"
               >
                 {saveMutation.isPending ? (
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin text-blue-500" />
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin text-white" />
                 ) : (
                   <Save className="h-4 w-4 mr-2" />
                 )}

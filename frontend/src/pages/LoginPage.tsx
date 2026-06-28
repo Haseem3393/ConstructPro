@@ -6,6 +6,7 @@ import {
   HardHat, Eye, EyeOff, Loader2,
   Building2, Shield, BarChart3, Users,
   ChevronRight, Zap, AlertCircle,
+  User, Lock
 } from 'lucide-react'
 
 const LoginPage: React.FC = () => {
@@ -59,150 +60,174 @@ const LoginPage: React.FC = () => {
   ]
 
   return (
-    <div className="min-h-screen flex bg-[#060b14]">
-
-      {/* ════ LEFT PANEL ════ */}
-      <div className="hidden lg:flex flex-col w-[52%] bg-[#09101e] relative overflow-hidden border-r border-[#1a2535]">
-        {/* Animated orbs */}
-        <div className="absolute top-[-100px] left-[-100px] w-[420px] h-[420px] rounded-full blur-[140px] pointer-events-none orb-float"
-          style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.18) 0%, transparent 70%)' }} />
-        <div className="absolute bottom-[-80px] right-[-80px] w-[340px] h-[340px] rounded-full blur-[120px] pointer-events-none"
-          style={{ background: 'radial-gradient(circle, rgba(99,102,241,0.10) 0%, transparent 70%)', animationDelay: '2s' }} />
-        <div className="absolute top-[40%] right-[15%] w-[200px] h-[200px] rounded-full blur-[100px] pointer-events-none orb-float"
-          style={{ background: 'radial-gradient(circle, rgba(16,185,129,0.07) 0%, transparent 70%)', animationDelay: '4s' }} />
-
-        {/* Line grid */}
-        <div className="absolute inset-0 line-grid-bg pointer-events-none" />
-
-        <div className="relative z-10 flex flex-col h-full p-10 xl:p-14">
-          {/* Logo */}
-          <div className="flex items-center gap-3.5 mb-auto">
-            <div className="p-2.5 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl shadow-xl shadow-blue-500/30 text-white">
-              <HardHat className="h-6 w-6" />
-            </div>
-            <div>
-              <span className="font-black text-[22px] text-white tracking-tight">ConstructPro</span>
-              <span className="block text-[10px] text-blue-400/70 font-bold tracking-[0.18em] uppercase mt-0.5">Munaf &amp; Sons Contractors</span>
-            </div>
+    <div 
+      className="min-h-screen flex bg-[#060b14] font-sans relative overflow-hidden"
+      style={{ 
+        backgroundImage: "url('/login_ui.png')", 
+        backgroundSize: '100% 100%', 
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      {/* ════ LEFT PANEL (Image Blueprint Overlay) ════ */}
+      <div className="hidden lg:flex flex-col w-[50%] border-r border-[#1a2535]/30 relative p-14 justify-between bg-black/10">
+        {/* Logo and title */}
+        <div className="relative z-10 flex items-center gap-3.5">
+          <div className="p-3 bg-gradient-to-br from-[#7c3aed] to-[#00d2ff] rounded-2xl shadow-[0_4px_20px_rgba(124,58,237,0.35)] text-white">
+            <HardHat className="h-6 w-6 stroke-[2.5]" />
           </div>
-
-          {/* Hero */}
-          <div className="flex-1 flex flex-col justify-center max-w-md">
-            <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 rounded-full px-4 py-1.5 w-fit mb-7">
-              <Zap className="h-3.5 w-3.5 text-blue-400 shrink-0" />
-              <span className="text-[11px] font-bold text-blue-400 tracking-wide">Construction ERP Platform</span>
-            </div>
-
-            <h1 className="text-[36px] xl:text-[42px] font-black text-white leading-[1.15] mb-5">
-              Build smarter,<br />
-              <span className="gradient-text-blue">manage better.</span>
-            </h1>
-
-            <p className="text-slate-500 text-[15px] leading-relaxed mb-10">
-              Complete construction project management — from site attendance to financial analytics, all in one powerful platform.
-            </p>
-
-            <div className="grid grid-cols-1 gap-2.5">
-              {features.map((f, i) => {
-                const Icon = f.icon
-                return (
-                  <div key={i} className="flex items-center gap-3.5 p-3.5 bg-white/[0.03] border border-white/[0.06] hover:border-blue-500/20 rounded-xl transition-all duration-200 group">
-                    <div className={`p-2 ${f.bg} ${f.color} rounded-lg shrink-0`}><Icon className="h-4 w-4" /></div>
-                    <div className="flex-1 min-w-0">
-                      <span className="block text-sm font-bold text-slate-200">{f.label}</span>
-                      <span className="block text-xs text-slate-600 mt-0.5 leading-relaxed">{f.desc}</span>
-                    </div>
-                    <ChevronRight className="h-4 w-4 text-slate-800 group-hover:text-slate-600 shrink-0 transition-colors" />
-                  </div>
-                )
-              })}
-            </div>
+          <div>
+            <h2 className="font-black text-2xl text-white tracking-tight leading-none">ConstructPro</h2>
+            <span className="block text-[9px] text-[#a78bfa] font-black tracking-[0.25em] uppercase mt-1">Build. Manage. Deliver. With precision.</span>
           </div>
+        </div>
 
-          <div className="text-[11px] text-slate-800 font-semibold mt-10">
-            © {new Date().getFullYear()} ConstructPro · Munaf &amp; Sons Contractors · Sri Lanka
-          </div>
+        {/* Bottom copyright overlay */}
+        <div className="relative z-10 flex justify-between items-center text-[10px] text-slate-500 font-bold uppercase tracking-wider">
+          <span>Munaf &amp; Sons Contractors</span>
+          <span>© {new Date().getFullYear()} ConstructPro</span>
         </div>
       </div>
 
-      {/* ════ RIGHT PANEL — Form ════ */}
-      <div className="flex-1 flex items-center justify-center p-6 md:p-10 relative overflow-hidden">
-        <div className="absolute inset-0 dot-grid-bg pointer-events-none" />
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
+      {/* ════ RIGHT PANEL (Form and blurred bg overlay) ════ */}
+      <div className="flex-1 flex items-center justify-center p-6 md:p-12 relative bg-black/35 backdrop-blur-[2px]">
+        {/* Dark overlay to enhance text readability */}
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-[3px] pointer-events-none" />
 
-        <div className="w-full max-w-[400px] relative fade-up">
-          {/* Mobile logo */}
-          <div className="flex lg:hidden items-center gap-3 justify-center mb-10">
-            <div className="p-2.5 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl text-white shadow-lg shadow-blue-500/30">
-              <HardHat className="h-6 w-6" />
+        {/* Glassmorphic Card Container */}
+        <div className="w-full max-w-[430px] backdrop-blur-xl bg-[#0d1322]/70 border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.55)] rounded-3xl p-8 md:p-10 relative overflow-hidden transition-all duration-300 z-10">
+          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#7c3aed]/50 to-transparent" />
+
+          {/* Logo on mobile view */}
+          <div className="flex lg:hidden items-center gap-3.5 mb-8 justify-center">
+            <div className="p-2.5 bg-gradient-to-br from-[#7c3aed] to-[#00d2ff] rounded-xl text-white shadow-lg shadow-purple-500/20">
+              <HardHat className="h-5.5 w-5.5 stroke-[2.5]" />
             </div>
             <div>
-              <span className="font-black text-xl text-white tracking-tight block">ConstructPro</span>
-              <span className="text-[9px] text-blue-400/70 font-bold tracking-widest uppercase">Munaf &amp; Sons</span>
+              <span className="font-black text-xl text-white tracking-tight">ConstructPro</span>
+              <span className="block text-[8px] text-[#a78bfa] font-bold tracking-widest uppercase mt-0.5">Munaf &amp; Sons</span>
             </div>
           </div>
 
-          <div className="mb-8">
-            <h2 className="text-2xl font-black text-white mb-1.5 tracking-tight">Welcome back</h2>
-            <p className="text-slate-500 text-sm">Sign in to access your workspace</p>
+          {/* Heading */}
+          <div className="mb-8 text-center lg:text-left">
+            <h1 className="text-[28px] font-black text-white tracking-tight">Welcome Back</h1>
+            <p className="text-slate-405 text-xs font-semibold mt-1.5 leading-normal">
+              Log in to your ConstructPro account
+            </p>
           </div>
 
+          {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4" id="login-form">
             {error && (
-              <div className="flex items-start gap-2.5 bg-rose-500/8 border border-rose-500/20 text-rose-400 text-xs p-3.5 rounded-xl">
-                <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" /><span>{error}</span>
+              <div className="flex items-start gap-2.5 bg-rose-500/8 border border-rose-500/20 text-rose-455 text-xs p-3.5 rounded-xl">
+                <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
+                <span className="font-semibold leading-relaxed">{error}</span>
               </div>
             )}
 
+            {/* Email Field */}
             <div className="space-y-1.5">
-              <label htmlFor="email" className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em]">Email Address</label>
-              <input
-                id="email" name="email" type="email" placeholder="name@company.com"
-                value={formData.email} onChange={handleChange}
-                disabled={loginMutation.isPending} required
-                className="w-full bg-white/[0.03] border border-[#1a2535] hover:border-[#253550] rounded-xl px-4 py-3 text-sm text-slate-200 placeholder-slate-800 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200 disabled:opacity-50"
-              />
+              <label htmlFor="email" className="block text-[9.5px] font-black text-slate-400 uppercase tracking-widest">
+                Email Address
+              </label>
+              <div className="relative">
+                <User className="absolute left-4 top-1/2 -translate-y-1/2 h-4.5 w-4.5 text-slate-500" />
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="david.chen@constructpro.com"
+                  value={formData.email}
+                  onChange={handleChange}
+                  disabled={loginMutation.isPending}
+                  required
+                  className="w-full bg-white/[0.03] border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl pl-11 pr-4 py-3.5 text-xs text-slate-200 placeholder-slate-655 focus:outline-none focus:bg-white/[0.05] transition-all duration-300 disabled:opacity-50 font-semibold"
+                />
+              </div>
             </div>
 
+            {/* Password Field */}
             <div className="space-y-1.5">
               <div className="flex justify-between items-center">
-                <label htmlFor="password" className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em]">Password</label>
-                <Link to="/forgot-password" className="text-[11px] text-blue-400 hover:text-blue-300 font-semibold transition-colors">Forgot Password?</Link>
+                <label htmlFor="password" className="block text-[9.5px] font-black text-slate-400 uppercase tracking-widest">
+                  Password
+                </label>
+                <Link
+                  to="/forgot-password"
+                  className="text-[10px] text-[#a78bfa] hover:text-[#c4b5fd] font-extrabold transition-colors"
+                >
+                  Forgot Password?
+                </Link>
               </div>
               <div className="relative">
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-4.5 w-4.5 text-slate-500" />
                 <input
-                  id="password" name="password" type={showPassword ? 'text' : 'password'} placeholder="••••••••"
-                  value={formData.password} onChange={handleChange}
-                  disabled={loginMutation.isPending} required
-                  className="w-full bg-white/[0.03] border border-[#1a2535] hover:border-[#253550] rounded-xl pl-4 pr-11 py-3 text-sm text-slate-200 placeholder-slate-800 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all duration-200 disabled:opacity-50"
+                  id="password"
+                  name="password"
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="••••••••"
+                  value={formData.password}
+                  onChange={handleChange}
+                  disabled={loginMutation.isPending}
+                  required
+                  className="w-full bg-white/[0.03] border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl pl-11 pr-11 py-3.5 text-xs text-slate-200 placeholder-slate-655 focus:outline-none focus:bg-white/[0.05] transition-all duration-300 disabled:opacity-50 font-semibold"
                 />
-                <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-700 hover:text-slate-400 transition-colors" tabIndex={-1}>
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-400 transition-colors"
+                  tabIndex={-1}
+                >
                   {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
               </div>
             </div>
 
+            {/* Checkbox options */}
+            <div className="flex items-center justify-between pt-1">
+              <label className="flex items-center space-x-2 text-slate-400 text-xs font-semibold select-none cursor-pointer">
+                <input
+                  type="checkbox"
+                  className="rounded border-white/10 bg-white/[0.02] text-[#7c3aed] focus:ring-0 focus:ring-offset-0 h-4 w-4 transition-colors"
+                />
+                <span>Remember me</span>
+              </label>
+            </div>
+
+            {/* Sign-in Button */}
             <button
-              id="sign-in-btn" type="submit"
+              id="sign-in-btn"
+              type="submit"
               disabled={loginMutation.isPending}
-              className="w-full flex justify-center items-center gap-2 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-xl font-black text-sm tracking-wide transition-all duration-200 shadow-lg shadow-blue-500/20 hover:shadow-blue-500/35 hover:-translate-y-px disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none mt-2"
+              className="w-full py-3.5 bg-gradient-to-r from-[#7c3aed] via-[#6366f1] to-[#00d2ff] hover:from-[#8b5cf6] hover:via-[#4f46e5] hover:to-[#00f0ff] text-white font-black text-xs tracking-widest uppercase rounded-xl shadow-[0_4px_25px_rgba(124,58,237,0.3)] hover:shadow-[0_4px_35px_rgba(124,58,237,0.5)] active:scale-[0.98] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed mt-4 flex items-center justify-center gap-2 cursor-pointer"
             >
               {loginMutation.isPending ? (
-                <><Loader2 className="h-4 w-4 animate-spin" />Signing in...</>
-              ) : 'Sign In to Workspace'}
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  <span>Signing In...</span>
+                </>
+              ) : (
+                <span>Sign In</span>
+              )}
             </button>
           </form>
 
-          {/* Demo credentials */}
-          <div className="mt-8 border-t border-[#1a2535] pt-6">
-            <p className="text-center text-[10px] font-black text-slate-700 uppercase tracking-[0.16em] mb-3">Demo Credentials</p>
-            <div className="grid grid-cols-2 gap-2">
+          {/* Demo Profiles Dropdown / Selector (Perfect UX) */}
+          <div className="mt-8 border-t border-white/[0.06] pt-6 relative z-20">
+            <span className="block text-[9px] font-black text-slate-500 uppercase tracking-widest text-center mb-3">
+              Demo Access Profiles
+            </span>
+            <div className="flex flex-wrap gap-2 justify-center">
               {demoCredentials.map((c) => (
-                <div key={c.role} className="bg-white/[0.02] border border-[#1a2535] hover:border-[#253550] p-3 rounded-xl transition-colors cursor-default">
-                  <span className={`block text-[10px] font-black ${c.color} mb-1.5`}>{c.role}</span>
-                  <span className="block text-[9px] text-slate-600 truncate leading-relaxed">{c.email}</span>
-                  <span className="block text-[9px] text-slate-800 leading-relaxed">{c.pass}</span>
-                </div>
+                <button
+                  key={c.role}
+                  type="button"
+                  onClick={() => setFormData({ email: c.email, password: c.pass })}
+                  className="px-3 py-1.5 bg-white/[0.02] hover:bg-[#7c3aed]/10 border border-white/[0.06] hover:border-[#7c3aed]/30 rounded-lg text-[9.5px] font-extrabold text-slate-400 hover:text-[#a78bfa] transition-all cursor-pointer"
+                >
+                  {c.role}
+                </button>
               ))}
             </div>
           </div>
