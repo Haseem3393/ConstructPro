@@ -30,19 +30,19 @@ const MachineryListPage: React.FC = () => {
     switch (status) {
       case 'ACTIVE':
         return (
-          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-green-500/10 text-green-400 border border-green-500/25">
+          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest bg-emerald-500/10 text-emerald-400 border border-emerald-500/22">
             Active
           </span>
         )
       case 'MAINTENANCE':
         return (
-          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-amber-500/10 text-amber-400 border border-amber-500/25">
+          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest bg-amber-500/10 text-amber-400 border border-amber-500/22">
             Maintenance
           </span>
         )
       default:
         return (
-          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-zinc-500/10 text-zinc-400 border border-zinc-500/25">
+          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest bg-zinc-500/10 text-slate-400 border border-white/10">
             Inactive
           </span>
         )
@@ -55,16 +55,16 @@ const MachineryListPage: React.FC = () => {
     <SidebarLayout>
       <div className="space-y-6">
         {/* Page Header */}
-        <div className="border-b border-zinc-800 pb-5 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+        <div className="border-b border-white/10 pb-5 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
           <div>
-            <h1 className="text-3xl font-extrabold text-white">Machinery & Equipment</h1>
-            <p className="text-zinc-400 text-sm mt-1">Manage company assets and hired equipment tracking logs</p>
+            <h1 className="text-3xl font-black text-white tracking-tight">Machinery & Equipment</h1>
+            <p className="text-slate-400 text-xs font-semibold mt-1">Manage company assets and hired equipment tracking logs</p>
           </div>
 
           {isEditable && (
             <Link
               to="/machinery/new"
-              className="inline-flex items-center justify-center px-4 py-2.5 bg-violet-600 hover:bg-violet-700 text-white rounded-lg transition-colors font-bold text-xs uppercase tracking-wider shadow-lg shadow-violet-600/10 shrink-0"
+              className="inline-flex items-center justify-center px-4 py-2.5 bg-gradient-to-r from-[#7c3aed] via-[#6366f1] to-[#00d2ff] hover:from-[#8b5cf6] hover:via-[#4f46e5] hover:to-[#00f0ff] text-white rounded-xl transition-all duration-200 font-black text-xs uppercase tracking-widest shadow-md shadow-purple-500/20 shrink-0 cursor-pointer"
             >
               <Plus className="h-4 w-4 mr-2" /> Add Machinery
             </Link>
@@ -74,15 +74,15 @@ const MachineryListPage: React.FC = () => {
         {/* List Cards Grid */}
         {isLoading ? (
           <div className="flex flex-col items-center justify-center py-20 space-y-3">
-            <Loader2 className="h-8 w-8 text-violet-500 animate-spin" />
-            <p className="text-xs text-zinc-400 font-medium">Synchronizing equipment fleet...</p>
+            <Loader2 className="h-8 w-8 text-[#7c3aed] animate-spin" />
+            <p className="text-xs text-slate-400 font-bold uppercase tracking-widest">Synchronizing equipment fleet...</p>
           </div>
         ) : isError ? (
-          <div className="p-16 text-center text-rose-455 bg-[#14161f] border border-rose-500/20 rounded-xl shadow-xl">
+          <div className="p-16 text-center text-rose-455 bg-[#0d1322]/70 border border-white/10 rounded-2xl shadow-xl backdrop-blur-xl">
             Failed to load machinery fleet logs.
           </div>
         ) : !machineries || machineries.length === 0 ? (
-          <div className="p-16 text-center text-zinc-550 text-xs font-semibold bg-[#14161f] border border-zinc-800 rounded-xl shadow-xl">
+          <div className="p-16 text-center text-slate-500 text-xs font-bold bg-[#0d1322]/70 border border-white/10 rounded-2xl shadow-xl backdrop-blur-xl">
             No machinery logged in registry.
           </div>
         ) : (
@@ -90,27 +90,28 @@ const MachineryListPage: React.FC = () => {
             {machineries.map((machine) => (
               <div 
                 key={machine.id}
-                className="bg-[#14161f] border border-zinc-800 rounded-xl p-5 shadow-xl hover:border-zinc-700/80 transition-all flex flex-col justify-between space-y-4 group"
+                className="bg-[#0d1322]/70 border border-white/10 rounded-2xl p-5 shadow-xl hover:border-white/20 transition-all flex flex-col justify-between space-y-4 group backdrop-blur-xl relative overflow-hidden"
               >
+                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
                 <div>
                   <div className="flex justify-between items-start">
-                    <div className="w-10 h-10 rounded-lg bg-violet-600/10 border border-violet-500/20 flex items-center justify-center text-violet-400 font-black text-sm">
+                    <div className="w-10 h-10 rounded-lg bg-[#7c3aed]/10 border border-[#7c3aed]/22 flex items-center justify-center text-[#00d2ff] font-black text-sm">
                       <Cpu className="h-5 w-5" />
                     </div>
-                    <span className="text-[9px] font-black text-zinc-550 uppercase tracking-widest bg-zinc-900 border border-zinc-850 px-2.5 py-0.5 rounded">
+                    <span className="text-[9px] font-black text-[#00d2ff] uppercase tracking-widest bg-[#7c3aed]/10 border border-[#7c3aed]/22 px-2.5 py-0.5 rounded">
                       {machine.ownership}
                     </span>
                   </div>
 
-                  <h3 className="text-white font-extrabold text-base mt-3.5 group-hover:text-violet-400 transition-colors">
+                  <h3 className="text-white font-extrabold text-base mt-3.5 group-hover:text-[#00d2ff] transition-colors">
                     {machine.name}
                   </h3>
-                  <span className="block text-[10px] text-zinc-500 font-semibold">{machine.brand || 'Generic Brand'}</span>
+                  <span className="block text-[10px] text-slate-500 font-bold">{machine.brand || 'Generic Brand'}</span>
 
                   {/* Pricing Rate Details */}
-                  <div className="mt-4 pt-3.5 border-t border-zinc-850 space-y-2.5 text-xs text-zinc-400">
+                  <div className="mt-4 pt-3.5 border-t border-white/10 space-y-2.5 text-xs text-slate-400">
                     <div className="flex justify-between items-center">
-                      <span className="text-zinc-500 uppercase tracking-wider text-[9px] font-bold">Standard Rate</span>
+                      <span className="text-slate-500 uppercase tracking-widest text-[9px] font-black">Standard Rate</span>
                       <span className="text-white font-extrabold">
                         {formatCurrency(machine.rate)} / {machine.paymentType.toLowerCase()}
                       </span>
@@ -118,8 +119,8 @@ const MachineryListPage: React.FC = () => {
 
                     {machine.ownership === 'HIRED' && (
                       <div className="flex justify-between items-center">
-                        <span className="text-zinc-500 uppercase tracking-wider text-[9px] font-bold">Hire Provider</span>
-                        <span className="text-zinc-300 font-semibold truncate max-w-[150px]">
+                        <span className="text-slate-500 uppercase tracking-widest text-[9px] font-black">Hire Provider</span>
+                        <span className="text-slate-300 font-semibold truncate max-w-[150px]">
                           {machine.hireSource}
                         </span>
                       </div>
@@ -127,12 +128,12 @@ const MachineryListPage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-zinc-850 flex justify-between items-center text-xs">
+                <div className="pt-3 border-t border-white/10 flex justify-between items-center text-xs">
                   {getStatusBadge(machine.status)}
                   
                   <Link
                     to={`/machinery/${machine.id}`}
-                    className="inline-flex items-center gap-1 font-bold text-zinc-350 hover:text-white uppercase tracking-wider text-[10px] transition-colors"
+                    className="inline-flex items-center gap-1 font-bold text-slate-400 hover:text-white uppercase tracking-widest text-[10px] transition-colors cursor-pointer"
                   >
                     Usage Card
                     <ArrowRight className="h-3 w-3" />

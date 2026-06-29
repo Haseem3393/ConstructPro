@@ -120,9 +120,12 @@ const TimesheetDetailsPage: React.FC = () => {
   if (isLoading) {
     return (
       <SidebarLayout>
-        <div className="flex flex-col items-center justify-center py-40 space-y-3">
-          <Loader2 className="h-10 w-10 text-blue-500 animate-spin" />
-          <p className="text-slate-500 text-sm font-semibold">Loading timesheet details...</p>
+        <div className="flex flex-col items-center justify-center py-40 space-y-4">
+          <div className="relative">
+            <Loader2 className="h-10 w-10 text-[#7c3aed] animate-spin" />
+            <div className="absolute inset-0 rounded-full blur-xl bg-[#7c3aed]/20 animate-pulse" />
+          </div>
+          <p className="text-slate-400 font-semibold text-sm">Loading timesheet details...</p>
         </div>
       </SidebarLayout>
     )
@@ -212,7 +215,7 @@ const TimesheetDetailsPage: React.FC = () => {
         <div className="flex items-center">
           <Link
             to="/timesheets"
-            className="inline-flex items-center text-xs font-bold text-slate-400 hover:text-white uppercase tracking-wider transition-colors"
+            className="inline-flex items-center text-xs font-bold text-slate-400 hover:text-white uppercase tracking-widest transition-colors cursor-pointer"
           >
             <ArrowLeft className="h-4 w-4 mr-1.5" />
             Back to Timesheets
@@ -220,7 +223,7 @@ const TimesheetDetailsPage: React.FC = () => {
         </div>
 
         {/* Header Section */}
-        <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-6 border-b border-[#1a2535] pb-6">
+        <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-6 border-b border-white/10 pb-6">
           <div>
             <div className="flex items-center space-x-3">
               <span className={`inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider ${
@@ -234,27 +237,27 @@ const TimesheetDetailsPage: React.FC = () => {
               }`}>
                 {timesheet.status}
               </span>
-              <span className="text-slate-500 text-xs font-semibold">• ID: {timesheet.id.substring(0, 8)}</span>
+              <span className="text-slate-550 text-xs font-semibold">• ID: {timesheet.id.substring(0, 8)}</span>
             </div>
             <h1 className="text-3xl font-black text-white tracking-tight mt-2">
               Weekly Timesheet Period
             </h1>
-            <p className="text-slate-350 text-sm mt-1 flex items-center">
-              <Calendar className="h-4 w-4 mr-1.5 text-blue-400" />
+            <p className="text-slate-400 text-xs font-semibold mt-1 flex items-center">
+              <Calendar className="h-4 w-4 mr-1.5 text-[#7c3aed]" />
               {formatDate(timesheet.startDate)} — {formatDate(timesheet.endDate)}
             </p>
           </div>
 
-          <div className="bg-[#0d1526] border border-[#1a2535] p-4 rounded-xl flex gap-6">
+          <div className="bg-[#0d1322]/70 border border-white/10 p-4 rounded-xl flex gap-6 backdrop-blur-xl">
             <div>
               <span className="block text-[9px] font-black text-slate-500 uppercase tracking-widest">Project</span>
               <span className="block text-white font-extrabold text-sm mt-0.5">{timesheet.project?.name}</span>
               <span className="block text-slate-400 text-xs font-semibold">{timesheet.project?.location}</span>
             </div>
-            <div className="w-px bg-[#1a2535]"></div>
+            <div className="w-px bg-white/10"></div>
             <div>
               <span className="block text-[9px] font-black text-slate-500 uppercase tracking-widest">Total Hours</span>
-              <span className="block text-blue-400 font-black text-lg mt-0.5">{totalHoursCombined} hrs</span>
+              <span className="block text-[#00d2ff] font-black text-lg mt-0.5">{totalHoursCombined} hrs</span>
             </div>
           </div>
         </div>
@@ -263,15 +266,16 @@ const TimesheetDetailsPage: React.FC = () => {
         {getStatusBanner()}
 
         {/* Matrix Grid Card */}
-        <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl overflow-hidden shadow-xl">
-          <div className="px-6 py-4 border-b border-[#1a2535] bg-white/[0.01] flex justify-between items-center">
-            <h3 className="font-extrabold text-xs text-white uppercase tracking-wider">Worker Weekly Matrix (Mon-Sun)</h3>
+        <div className="bg-[#0d1322]/70 border border-white/10 rounded-xl overflow-hidden shadow-xl backdrop-blur-xl relative">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
+          <div className="px-6 py-4 border-b border-white/10 bg-white/[0.01] flex justify-between items-center">
+            <h3 className="font-extrabold text-xs text-white uppercase tracking-widest">Worker Weekly Matrix (Mon-Sun)</h3>
           </div>
 
           <div className="overflow-x-auto w-full">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="text-[10px] text-slate-400 font-black tracking-widest uppercase bg-white/[0.01] border-b border-[#1a2535]">
+                <tr className="text-[10px] text-slate-400 font-black tracking-widest uppercase bg-white/[0.01] border-b border-white/10">
                   <th className="py-4 px-6 min-w-[180px]">WORKER / TRADE</th>
                   <th className="py-4 px-3 text-center">MON</th>
                   <th className="py-4 px-3 text-center">TUE</th>
@@ -285,7 +289,7 @@ const TimesheetDetailsPage: React.FC = () => {
                   <th className="py-4 px-6 text-right">EST. PAY</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#1a2535] text-xs">
+              <tbody className="divide-y divide-white/10 text-xs">
                 {timesheet.rows?.map((row) => {
                   const estPay = calculateWorkerWeeklyPay(row)
                   return (
@@ -315,13 +319,13 @@ const TimesheetDetailsPage: React.FC = () => {
                       <td className="py-4 px-3 text-center font-bold text-slate-300 bg-white/[0.005]">
                         {row.sundayHours || '-'}
                       </td>
-                      <td className="py-4 px-4 text-center font-black text-blue-400">
+                      <td className="py-4 px-4 text-center font-black text-[#00d2ff]">
                         {row.totalHours} hrs
                       </td>
                       <td className="py-4 px-4 text-right text-slate-400 font-semibold">
                         {formatCurrency(row.worker.dailyWage)}
                       </td>
-                      <td className="py-4 px-6 text-right font-black text-white">
+                      <td className="py-4 px-6 text-right font-black text-emerald-400">
                         {formatCurrency(estPay)}
                       </td>
                     </tr>
@@ -329,10 +333,10 @@ const TimesheetDetailsPage: React.FC = () => {
                 })}
               </tbody>
               <tfoot>
-                <tr className="bg-white/[0.01] font-black text-xs border-t border-[#1a2535] text-white">
-                  <td className="py-4 px-6 uppercase tracking-wider">Grand Total</td>
+                <tr className="bg-white/[0.01] font-black text-xs border-t border-white/10 text-white">
+                  <td className="py-4 px-6 uppercase tracking-widest">Grand Total</td>
                   <td colSpan={7}></td>
-                  <td className="py-4 px-4 text-center text-blue-405 font-black">{totalHoursCombined} hrs</td>
+                  <td className="py-4 px-4 text-center text-[#00d2ff] font-black">{totalHoursCombined} hrs</td>
                   <td></td>
                   <td className="py-4 px-6 text-right text-emerald-400 font-black">{formatCurrency(totalEstimatedPayroll)}</td>
                 </tr>
@@ -342,7 +346,8 @@ const TimesheetDetailsPage: React.FC = () => {
         </div>
 
         {/* Action Panel */}
-        <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-6 shadow-xl flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="bg-[#0d1322]/70 border border-white/10 rounded-xl p-6 shadow-xl flex flex-col md:flex-row justify-between items-center gap-4 backdrop-blur-xl relative">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
           <div className="flex items-center space-x-3 text-slate-400 text-xs">
             <Lock className="h-4 w-4 text-slate-500 shrink-0" />
             <span>
@@ -358,10 +363,10 @@ const TimesheetDetailsPage: React.FC = () => {
               <button
                 onClick={handleSubmit}
                 disabled={submitTimesheetMutation.isPending}
-                className="w-full md:w-auto inline-flex items-center justify-center px-5 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-200 shadow-md shadow-blue-500/10 hover:shadow-blue-500/25 disabled:opacity-50"
+                className="w-full md:w-auto inline-flex items-center justify-center px-5 py-2.5 bg-gradient-to-r from-[#7c3aed] via-[#6366f1] to-[#00d2ff] hover:from-[#8b5cf6] hover:via-[#4f46e5] hover:to-[#00f0ff] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-200 shadow-md shadow-purple-500/20 disabled:opacity-50 cursor-pointer"
               >
                 {submitTimesheetMutation.isPending ? (
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin text-blue-500" />
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin text-white" />
                 ) : (
                   <Check className="h-4 w-4 mr-2" />
                 )}
@@ -378,7 +383,7 @@ const TimesheetDetailsPage: React.FC = () => {
                     setRejectReason('')
                     setIsRejectOpen(true)
                   }}
-                  className="flex-1 md:flex-none inline-flex items-center justify-center px-5 py-2.5 bg-rose-500/10 hover:bg-rose-500/20 text-rose-455 border border-rose-500/22 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors"
+                  className="flex-1 md:flex-none inline-flex items-center justify-center px-5 py-2.5 bg-rose-500/10 hover:bg-rose-500/20 text-rose-455 border border-rose-500/22 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
                 >
                   <X className="h-4 w-4 mr-2" />
                   Reject
@@ -386,10 +391,10 @@ const TimesheetDetailsPage: React.FC = () => {
                 <button
                   onClick={handleApprove}
                   disabled={approveTimesheetMutation.isPending}
-                  className="flex-1 md:flex-none inline-flex items-center justify-center px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-200 shadow-md shadow-emerald-500/10 hover:shadow-emerald-500/25 disabled:opacity-50"
+                  className="flex-1 md:flex-none inline-flex items-center justify-center px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-200 shadow-md shadow-emerald-500/20 disabled:opacity-50 cursor-pointer"
                 >
                   {approveTimesheetMutation.isPending ? (
-                    <Loader2 className="h-4 w-4 mr-2 animate-spin text-emerald-500" />
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin text-white" />
                   ) : (
                     <Check className="h-4 w-4 mr-2" />
                   )}
@@ -404,13 +409,13 @@ const TimesheetDetailsPage: React.FC = () => {
       {/* Reject Reason Confirmation Modal */}
       {isRejectOpen && (
         <div className="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-[#0d1526] border border-[#1a2535] rounded-2xl max-w-md w-full overflow-hidden shadow-2xl relative animate-in zoom-in-95 duration-200">
-            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-blue-500 via-blue-400 to-transparent" />
-            <div className="px-6 py-4 border-b border-[#1a2535] bg-white/[0.01] flex justify-between items-center">
+          <div className="bg-[#0d1322]/90 border border-white/10 rounded-2xl max-w-md w-full overflow-hidden shadow-2xl relative animate-in zoom-in-95 duration-200 backdrop-blur-xl">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
+            <div className="px-6 py-4 border-b border-white/10 bg-white/[0.01] flex justify-between items-center">
               <h3 className="font-black text-sm text-white uppercase tracking-wider">Reject Weekly Timesheet</h3>
               <button
                 onClick={() => setIsRejectOpen(false)}
-                className="p-1.5 rounded-lg bg-white/[0.04] text-slate-500 hover:text-white transition-colors"
+                className="p-1.5 rounded-lg bg-white/[0.04] text-slate-500 hover:text-white transition-colors cursor-pointer"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -424,32 +429,32 @@ const TimesheetDetailsPage: React.FC = () => {
               )}
 
               <div>
-                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Rejection Reason</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Rejection Reason</label>
                 <textarea
                   value={rejectReason}
                   onChange={(e) => setRejectReason(e.target.value)}
                   required
                   rows={4}
                   placeholder="Describe why this timesheet is being rejected (e.g., incorrect overtime logged on Tuesday)..."
-                  className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.02] transition-all font-semibold placeholder-slate-650"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#7c3aed] transition-all font-semibold placeholder-slate-600 resize-none"
                 />
               </div>
 
               {/* Action Buttons */}
-              <div className="pt-2 border-t border-[#1a2535] flex gap-2">
+              <div className="pt-2 border-t border-white/10 flex gap-2">
                 <button
                   type="button"
                   onClick={() => setIsRejectOpen(false)}
-                  className="flex-1 py-2.5 bg-[#0b1220] hover:bg-[#111d33] border border-[#1a2535] text-slate-350 rounded-xl font-bold text-xs uppercase tracking-wider hover:text-white transition-colors"
+                  className="flex-1 py-2.5 bg-[#0a0f1d]/60 hover:bg-[#7c3aed]/10 border border-white/10 text-slate-400 rounded-xl font-bold text-xs uppercase tracking-wider hover:text-white transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={rejectTimesheetMutation.isPending}
-                  className="flex-1 py-2.5 bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-400 hover:to-rose-500 text-white rounded-xl font-black text-xs uppercase tracking-wider flex items-center justify-center transition-all duration-200 shadow-md shadow-rose-500/10 hover:shadow-rose-500/25 disabled:opacity-50"
+                  className="flex-1 py-2.5 bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-400 hover:to-rose-500 text-white rounded-xl font-black text-xs uppercase tracking-wider flex items-center justify-center transition-all duration-200 shadow-md shadow-rose-500/25 disabled:opacity-50 cursor-pointer"
                 >
-                  {rejectTimesheetMutation.isPending ? <Loader2 className="h-4 w-4 mr-2 animate-spin text-rose-500" /> : <XCircle className="h-4 w-4 mr-2" />}
+                  {rejectTimesheetMutation.isPending ? <Loader2 className="h-4 w-4 mr-2 animate-spin text-white" /> : <XCircle className="h-4 w-4 mr-2" />}
                   Confirm Reject
                 </button>
               </div>

@@ -41,24 +41,25 @@ const UsersPage: React.FC = () => {
     <SidebarLayout>
       <div className="space-y-6">
         {/* Header */}
-        <div className="flex justify-between items-center border-b border-[#1a2535] pb-5">
+        <div className="flex justify-between items-center border-b border-white/10 pb-5">
           <div>
             <h1 className="text-3xl font-black text-white tracking-tight">Users Registry</h1>
             <p className="text-slate-400 text-xs font-semibold mt-1">Configure system credentials, module permissions, and user accounts</p>
           </div>
           <Link
             to="/users/new"
-            className="flex items-center px-4 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-xl transition-all font-black text-xs uppercase tracking-wider duration-200 shadow-md shadow-blue-500/10 hover:shadow-blue-500/25"
+            className="flex items-center px-4 py-2.5 bg-gradient-to-r from-[#7c3aed] via-[#6366f1] to-[#00d2ff] hover:opacity-90 text-white rounded-xl transition-all font-black text-xs uppercase tracking-widest duration-200 shadow-lg shadow-violet-500/10 cursor-pointer"
           >
             <Plus className="h-4 w-4 mr-2" /> Add New User
           </Link>
         </div>
 
         {/* Data Table */}
-        <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl overflow-hidden shadow-xl">
-          <div className="px-6 py-4 border-b border-[#1a2535] bg-white/[0.01] flex justify-between items-center">
-            <h3 className="font-bold text-sm text-slate-350">User Records</h3>
-            <span className="text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/22 px-2.5 py-0.5 rounded font-black uppercase">
+        <div className="bg-[#0d1322]/70 border border-white/10 rounded-2xl overflow-hidden shadow-xl backdrop-blur-xl relative">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
+          <div className="px-6 py-4 border-b border-white/10 bg-white/[0.01] flex justify-between items-center">
+            <h3 className="font-extrabold text-sm text-[#00d2ff] uppercase tracking-widest">User Records</h3>
+            <span className="text-[10px] bg-[#7c3aed]/10 text-[#00d2ff] border border-[#7c3aed]/22 px-2.5 py-0.5 rounded-xl font-black uppercase tracking-widest">
               {users?.length || 0} accounts synced
             </span>
           </div>
@@ -67,7 +68,7 @@ const UsersPage: React.FC = () => {
             <table className="w-full text-left border-collapse min-w-[800px]">
               <thead>
                 {/* Column Labels */}
-                <tr className="text-[10px] text-slate-400 font-black tracking-widest uppercase bg-white/[0.01] border-b border-[#1a2535]">
+                <tr className="text-[9px] text-slate-400 font-black tracking-widest uppercase bg-white/[0.01] border-b border-white/10">
                   <th className="py-4 px-6 w-12 text-center">#</th>
                   <th className="py-4 px-6">USER DETAILS</th>
                   <th className="py-4 px-4">EMAIL ADDRESS</th>
@@ -77,7 +78,7 @@ const UsersPage: React.FC = () => {
                   <th className="py-4 px-6 text-center w-40">ACTIONS</th>
                 </tr>
                 {/* Column Searches */}
-                <tr className="bg-white/[0.005] border-b border-[#1a2535]">
+                <tr className="bg-white/[0.005] border-b border-white/10">
                   <td className="py-2.5 px-4 text-center text-slate-600 font-bold">-</td>
                   <td className="py-2.5 px-6">
                     <div className="relative flex items-center">
@@ -87,7 +88,7 @@ const UsersPage: React.FC = () => {
                         placeholder="Search users..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl pl-8 pr-2.5 py-1.5 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.02] transition-all font-semibold"
+                        className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl pl-8 pr-2.5 py-1.5 text-xs text-slate-200 placeholder-slate-600 focus:outline-none transition-all font-semibold"
                       />
                     </div>
                   </td>
@@ -96,7 +97,7 @@ const UsersPage: React.FC = () => {
                     <select
                       value={roleFilter}
                       onChange={(e) => setRoleFilter(e.target.value)}
-                      className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.02] transition-all font-semibold"
+                      className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none transition-all font-semibold cursor-pointer"
                     >
                       <option value="">All Roles</option>
                       <option value="ADMIN">Admin</option>
@@ -109,25 +110,25 @@ const UsersPage: React.FC = () => {
                   <td className="py-2.5 px-6 text-center">-</td>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#1a2535] text-xs">
+              <tbody className="divide-y divide-white/10 text-xs text-slate-300">
                 {isLoading ? (
                   <tr>
-                    <td colSpan={7} className="py-12 text-center">
+                    <td colSpan={7} className="py-12 text-center bg-[#0d1322]/70">
                       <div className="flex justify-center items-center space-x-2">
-                        <Loader2 className="h-5 w-5 text-blue-500 animate-spin" />
-                        <span className="text-slate-505 font-semibold">Fetching accounts...</span>
+                        <Loader2 className="h-5 w-5 text-[#7c3aed] animate-spin" />
+                        <span className="text-slate-400 font-bold uppercase tracking-widest text-xs">Fetching accounts...</span>
                       </div>
                     </td>
                   </tr>
                 ) : error ? (
                   <tr>
-                    <td colSpan={7} className="py-8 text-center text-rose-455 font-bold">
+                    <td colSpan={7} className="py-8 text-center text-rose-455 font-bold bg-[#0d1322]/70">
                       {(error as any)?.response?.data?.error || 'Failed to sync users.'}
                     </td>
                   </tr>
                 ) : users?.length === 0 ? (
                   <tr>
-                    <td colSpan={7} className="py-12 text-center text-slate-500 font-semibold">
+                    <td colSpan={7} className="py-12 text-center text-slate-500 font-bold uppercase tracking-widest bg-[#0d1322]/70">
                       No user records match the search filter.
                     </td>
                   </tr>
@@ -140,33 +141,33 @@ const UsersPage: React.FC = () => {
                     return (
                       <tr 
                         key={userItem.id} 
-                        className={`transition-colors ${
-                          !isActive ? 'opacity-50 hover:bg-white/[0.01]' : 'hover:bg-white/[0.02]'
+                        className={`transition-colors hover:bg-white/[0.015] group ${
+                          !isActive ? 'opacity-50' : ''
                         }`}
                       >
                         <td className="py-4 px-6 text-center font-bold text-slate-500">{index + 1}</td>
                         <td className="py-4 px-6 font-bold text-white text-sm">
-                          <Link to={`/users/${userItem.id}`} className="hover:text-blue-400 transition-colors">
+                          <Link to={`/users/${userItem.id}`} className="hover:text-[#00d2ff] transition-colors">
                             {userItem.name}
                           </Link>
                         </td>
-                        <td className="py-4 px-4 font-semibold text-slate-350">{userItem.email}</td>
+                        <td className="py-4 px-4 font-semibold text-slate-400">{userItem.email}</td>
                         <td className="py-4 px-4">
-                          <span className={`inline-block px-2 py-0.5 text-[9px] font-black rounded uppercase tracking-wider ${
+                          <span className={`inline-block px-2 py-0.5 text-[9px] font-black rounded-xl uppercase tracking-widest border ${
                             userItem.role === 'ADMIN'
-                              ? 'bg-blue-500/10 text-blue-400 border border-blue-500/22'
+                              ? 'bg-[#00d2ff]/10 text-[#00d2ff] border-[#00d2ff]/22'
                               : userItem.role === 'PROJECT_MANAGER'
-                              ? 'bg-violet-500/10 text-violet-405 border border-violet-500/22'
+                              ? 'bg-[#7c3aed]/10 text-violet-405 border border-[#7c3aed]/22'
                               : userItem.role === 'SUPERVISOR'
                               ? 'bg-amber-500/10 text-amber-400 border border-amber-500/22'
-                              : 'bg-slate-500/10 text-slate-400 border border-slate-500/22'
+                              : 'bg-[#0a0f1d]/60 border border-white/10 text-slate-400'
                           }`}>
                             {userItem.role}
                           </span>
                         </td>
                         <td className="py-4 px-4 font-semibold text-slate-400">{phone}</td>
                         <td className="py-4 px-4 text-center">
-                          <span className={`inline-block px-2.5 py-0.5 text-[9px] font-black rounded-full uppercase tracking-wider ${
+                          <span className={`inline-block px-2.5 py-0.5 text-[9px] font-black rounded-xl uppercase tracking-widest border ${
                             isActive
                               ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/22'
                               : 'bg-rose-500/10 text-rose-455 border border-rose-500/22'
@@ -179,7 +180,7 @@ const UsersPage: React.FC = () => {
                             {/* Edit Profile */}
                             <button
                               onClick={() => navigate(`/users/${userItem.id}`)}
-                              className="p-1.5 bg-blue-500/10 text-blue-400 hover:bg-blue-500 hover:text-white rounded-xl border border-blue-500/22 transition-all"
+                              className="p-1.5 bg-[#0a0f1d]/60 border border-white/10 text-[#00d2ff] hover:bg-white/[0.04] rounded-xl transition-all cursor-pointer"
                               title="Profile Details"
                             >
                               <Edit2 className="h-3.5 w-3.5" />
@@ -187,7 +188,7 @@ const UsersPage: React.FC = () => {
                             {/* Edit Permissions Matrix */}
                             <button
                               onClick={() => navigate(`/users/${userItem.id}/permissions`)}
-                              className="p-1.5 bg-violet-500/10 text-violet-405 hover:bg-violet-605 hover:text-white rounded-xl border border-violet-500/22 transition-all"
+                              className="p-1.5 bg-[#0a0f1d]/60 border border-white/10 text-violet-405 hover:bg-white/[0.04] rounded-xl transition-all cursor-pointer"
                               title="Module Permissions"
                             >
                               <Sliders className="h-3.5 w-3.5" />
@@ -195,7 +196,7 @@ const UsersPage: React.FC = () => {
                             {/* Activate / Deactivate Toggle */}
                             <button
                               onClick={() => handleToggleActive(userItem.id, isActive)}
-                              className={`p-1.5 rounded-xl border transition-all ${
+                              className={`p-1.5 rounded-xl border transition-all cursor-pointer ${
                                 isActive
                                   ? 'bg-rose-500/10 text-rose-455 border border-rose-500/22 hover:bg-rose-600 hover:text-white'
                                   : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/22 hover:bg-emerald-600 hover:text-white'

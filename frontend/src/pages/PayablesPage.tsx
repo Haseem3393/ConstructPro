@@ -37,19 +37,19 @@ const PayablesPage: React.FC = () => {
     switch (status) {
       case 'PAID':
         return (
-          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-green-500/10 text-green-400 border border-green-500/20">
+          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/22">
             Paid
           </span>
         )
       case 'OVERDUE':
         return (
-          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-rose-500/10 text-rose-455 border border-rose-500/25 animate-pulse">
+          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-rose-500/10 text-rose-455 border border-rose-500/22 animate-pulse">
             Overdue
           </span>
         )
       default:
         return (
-          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-amber-500/10 text-amber-400 border border-amber-500/20">
+          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-amber-500/10 text-amber-400 border border-amber-500/22">
             Pending
           </span>
         )
@@ -62,7 +62,7 @@ const PayablesPage: React.FC = () => {
     <SidebarLayout>
       <div className="space-y-6">
         {/* Header */}
-        <div className="border-b border-[#1a2535] pb-5 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+        <div className="border-b border-white/10 pb-5 flex flex-col sm:flex-row justify-between sm:items-center gap-4">
           <div>
             <h1 className="text-3xl font-black text-white tracking-tight">Accounts Payable</h1>
             <p className="text-slate-400 text-xs font-semibold mt-1">Track pending invoices, sub-contractor bills, and outstanding payables liabilities</p>
@@ -71,7 +71,7 @@ const PayablesPage: React.FC = () => {
           {isEditable && (
             <Link
               to="/payables/new"
-              className="inline-flex items-center justify-center px-4 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-xl transition-all font-bold text-xs uppercase tracking-wider shadow-lg shadow-blue-500/10 shrink-0"
+              className="inline-flex items-center justify-center px-4 py-2.5 bg-gradient-to-r from-[#7c3aed] via-[#6366f1] to-[#00d2ff] hover:from-[#8b5cf6] hover:via-[#4f46e5] hover:to-[#00f0ff] text-white rounded-xl transition-all font-bold text-xs uppercase tracking-wider shadow-lg shadow-purple-500/20 shrink-0 cursor-pointer"
             >
               <Plus className="h-4 w-4 mr-2" /> New Payable
             </Link>
@@ -79,12 +79,13 @@ const PayablesPage: React.FC = () => {
         </div>
 
         {/* Outstanding Liability metrics */}
-        <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-5 shadow-xl flex items-center justify-between">
+        <div className="bg-[#0d1322]/70 border border-white/10 rounded-xl p-5 shadow-xl flex items-center justify-between backdrop-blur-xl relative">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
           <div className="space-y-1">
             <span className="block text-[9px] font-black text-slate-500 uppercase tracking-widest">Total Outstanding Liabilities</span>
             <span className="block text-3xl font-black text-rose-455">
               {isLoading ? (
-                <Loader2 className="h-6 w-6 animate-spin text-blue-500 inline-block" />
+                <Loader2 className="h-6 w-6 animate-spin text-[#7c3aed] inline-block" />
               ) : (
                 formatCurrency(data?.totalOutstanding || 0)
               )}
@@ -96,13 +97,14 @@ const PayablesPage: React.FC = () => {
         </div>
 
         {/* Filter Toolbar */}
-        <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-4 shadow-xl">
+        <div className="bg-[#0d1322]/70 border border-white/10 rounded-xl p-4 shadow-xl backdrop-blur-xl relative">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
           <div className="max-w-xs">
-            <label className="block text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1.5">Filter by Invoice Status</label>
+            <label className="block text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Filter by Invoice Status</label>
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2 text-xs font-semibold text-slate-350 focus:outline-none focus:border-blue-500/60 transition-all cursor-pointer"
+              className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-3 py-2 text-xs font-semibold text-slate-200 focus:outline-none transition-all cursor-pointer"
             >
               <option value="">All Statuses</option>
               <option value="PENDING">Pending (Unpaid)</option>
@@ -114,24 +116,25 @@ const PayablesPage: React.FC = () => {
 
         {/* Payables List Table */}
         {isLoading ? (
-          <div className="flex flex-col items-center justify-center py-20 space-y-3 bg-[#0d1526] border border-[#1a2535] rounded-xl shadow-xl">
-            <Loader2 className="h-8 w-8 text-blue-500 animate-spin" />
+          <div className="flex flex-col items-center justify-center py-20 space-y-3 bg-[#0d1322]/70 border border-white/10 rounded-xl shadow-xl backdrop-blur-xl">
+            <Loader2 className="h-8 w-8 text-[#7c3aed] animate-spin" />
             <p className="text-xs text-slate-400 font-semibold">Synchronizing invoices...</p>
           </div>
         ) : isError ? (
-          <div className="p-16 text-center text-rose-455 bg-[#0d1526] border border-rose-500/22 rounded-xl shadow-xl">
+          <div className="p-16 text-center text-rose-455 bg-[#0d1322]/70 border border-white/10 rounded-xl shadow-xl backdrop-blur-xl font-semibold">
             Failed to load payables invoices.
           </div>
         ) : !data?.payables || data.payables.length === 0 ? (
-          <div className="p-16 text-center text-slate-500 text-xs font-semibold bg-[#0d1526] border border-[#1a2535] rounded-xl shadow-xl">
+          <div className="p-16 text-center text-slate-500 text-xs font-bold bg-[#0d1322]/70 border border-white/10 rounded-xl shadow-xl backdrop-blur-xl">
             No accounts payables records found.
           </div>
         ) : (
-          <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl overflow-hidden shadow-xl">
+          <div className="bg-[#0d1322]/70 border border-white/10 rounded-xl overflow-hidden shadow-xl backdrop-blur-xl relative">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
             <div className="overflow-x-auto w-full">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="text-[10px] text-slate-500 font-bold tracking-wider uppercase bg-white/[0.005] border-b border-[#1a2535]">
+                  <tr className="text-[10px] text-slate-400 font-black tracking-widest uppercase bg-white/[0.01] border-b border-white/10">
                     <th className="py-3.5 px-6">PAYEE (SUPPLIER / SUBCONTRACTOR)</th>
                     <th className="py-3.5 px-4">PROJECT</th>
                     <th className="py-3.5 px-4">DESCRIPTION / REF</th>
@@ -140,7 +143,7 @@ const PayablesPage: React.FC = () => {
                     <th className="py-3.5 px-6">STATUS</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#1a2535] text-xs">
+                <tbody className="divide-y divide-white/10 text-xs">
                   {data.payables.map((p) => {
                     const payeeName = p.supplier?.name || p.subcontractor?.name || 'Generic Payee'
                     const payeeType = p.supplier ? 'Supplier' : 'Subcontractor'
@@ -158,21 +161,21 @@ const PayablesPage: React.FC = () => {
 
                         {/* Description / Reference */}
                         <td className="py-3.5 px-4 text-slate-400 max-w-[200px] truncate leading-normal" title={p.description || ''}>
-                          <span className="block text-slate-300 font-medium truncate">{p.description || 'No description'}</span>
+                          <span className="block text-slate-300 font-semibold truncate">{p.description || 'No description'}</span>
                           {p.reference && (
-                            <span className="inline-block mt-0.5 text-[9px] font-black text-blue-405 bg-blue-500/10 border border-blue-500/22 px-1.5 py-0.2 rounded-lg">
+                            <span className="inline-block mt-0.5 text-[9px] font-black text-[#00d2ff] bg-[#7c3aed]/10 border border-[#7c3aed]/20 px-1.5 py-0.2 rounded-lg">
                               Ref: {p.reference}
                             </span>
                           )}
                         </td>
 
                         {/* Amount */}
-                        <td className="py-3.5 px-4 text-right text-white font-black text-sm">
+                        <td className="py-3.5 px-4 text-right text-[#00d2ff] font-black text-sm tabular-nums">
                           {formatCurrency(p.amount)}
                         </td>
 
                         {/* Due Date */}
-                        <td className="py-3.5 px-4 text-slate-400 font-medium">{formatDate(p.dueDate)}</td>
+                        <td className="py-3.5 px-4 text-slate-400 font-semibold">{formatDate(p.dueDate)}</td>
 
                         {/* Status */}
                         <td className="py-3.5 px-6">

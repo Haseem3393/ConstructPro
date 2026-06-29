@@ -79,8 +79,8 @@ const PaymentDetailsPage: React.FC = () => {
     return (
       <SidebarLayout>
         <div className="flex flex-col items-center justify-center py-40 space-y-3">
-          <Loader2 className="h-10 w-10 text-violet-500 animate-spin" />
-          <p className="text-zinc-500 text-sm font-medium">Loading milestone payment logs...</p>
+          <Loader2 className="h-10 w-10 text-[#7c3aed] animate-spin" />
+          <p className="text-slate-400 text-sm font-semibold">Loading milestone payment logs...</p>
         </div>
       </SidebarLayout>
     )
@@ -89,10 +89,10 @@ const PaymentDetailsPage: React.FC = () => {
   if (isError || !payment) {
     return (
       <SidebarLayout>
-        <div className="p-8 text-center text-rose-455 bg-rose-500/10 border border-rose-500/20 rounded-xl space-y-4 max-w-md mx-auto">
-          <p className="font-extrabold text-sm uppercase tracking-wider">Milestone Ledger Error</p>
-          <p className="text-xs text-zinc-400">The requested payment schedule details could not be found.</p>
-          <Link to="/payments" className="inline-flex text-xs font-bold text-violet-400 hover:text-violet-300">
+        <div className="p-8 text-center text-rose-455 bg-[#0d1322]/70 border border-rose-500/22 rounded-xl space-y-4 max-w-md mx-auto backdrop-blur-xl">
+          <p className="font-extrabold text-sm uppercase tracking-widest">Milestone Ledger Error</p>
+          <p className="text-xs text-slate-400 font-semibold">The requested payment schedule details could not be found.</p>
+          <Link to="/payments" className="inline-flex text-xs font-bold text-[#00d2ff] hover:text-[#00d2ff]/80 cursor-pointer">
             Back to Payments
           </Link>
         </div>
@@ -110,7 +110,7 @@ const PaymentDetailsPage: React.FC = () => {
         <div className="flex items-center">
           <Link
             to={payment.contractId ? `/contracts/${payment.contractId}` : '/payments'}
-            className="inline-flex items-center text-xs font-bold text-zinc-400 hover:text-white uppercase tracking-wider transition-colors"
+            className="inline-flex items-center text-xs font-bold text-slate-400 hover:text-white uppercase tracking-widest transition-colors cursor-pointer"
           >
             <ArrowLeft className="h-4 w-4 mr-1.5" />
             Back to Contract / List
@@ -118,35 +118,36 @@ const PaymentDetailsPage: React.FC = () => {
         </div>
 
         {/* Header */}
-        <div className="border-b border-zinc-800 pb-5">
-          <h1 className="text-3xl font-extrabold text-white">Payment Clearance details</h1>
-          <p className="text-zinc-400 text-sm mt-1">
-            Milestone details for <span className="text-violet-400 font-extrabold">{formatPercentageName(payment.percentage)}</span> on project <span className="text-white font-extrabold">{payment.project?.name}</span>
+        <div className="border-b border-white/10 pb-5">
+          <h1 className="text-3xl font-black text-white tracking-tight">Payment Clearance details</h1>
+          <p className="text-slate-400 text-xs font-semibold mt-1">
+            Milestone details for <span className="text-[#00d2ff] font-extrabold">{formatPercentageName(payment.percentage)}</span> on project <span className="text-white font-extrabold">{payment.project?.name}</span>
           </p>
         </div>
 
         {/* Milestone info summary */}
-        <div className="bg-[#14161f] border border-zinc-800 rounded-xl p-5 shadow-xl space-y-3 text-xs text-zinc-400">
-          <div className="flex justify-between items-center border-b border-zinc-850 pb-2.5">
-            <span className="text-zinc-550 font-bold uppercase tracking-wider text-[9px]">Milestone Share</span>
+        <div className="bg-[#0d1322]/70 border border-white/10 rounded-xl p-5 shadow-xl space-y-3 text-xs text-slate-400 backdrop-blur-xl relative">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
+          <div className="flex justify-between items-center border-b border-white/5 pb-2.5">
+            <span className="text-slate-500 font-bold uppercase tracking-wider text-[9px]">Milestone Share</span>
             <span className="text-white font-extrabold">{formatPercentageName(payment.percentage)}</span>
           </div>
-          <div className="flex justify-between items-center border-b border-zinc-850 pb-2.5">
-            <span className="text-zinc-550 font-bold uppercase tracking-wider text-[9px]">Bill Target Amount</span>
-            <span className="text-violet-400 font-black text-sm">{formatCurrency(payment.amount)}</span>
+          <div className="flex justify-between items-center border-b border-white/5 pb-2.5">
+            <span className="text-slate-500 font-bold uppercase tracking-wider text-[9px]">Bill Target Amount</span>
+            <span className="text-[#00d2ff] font-black text-sm tabular-nums">{formatCurrency(payment.amount)}</span>
           </div>
-          <div className="flex justify-between items-center border-b border-zinc-850 pb-2.5">
-            <span className="text-zinc-550 font-bold uppercase tracking-wider text-[9px]">Associated Contract Base</span>
-            <span className="text-zinc-200 font-extrabold">{formatCurrency(payment.contractValue)}</span>
+          <div className="flex justify-between items-center border-b border-white/5 pb-2.5">
+            <span className="text-slate-500 font-bold uppercase tracking-wider text-[9px]">Associated Contract Base</span>
+            <span className="text-slate-200 font-extrabold tabular-nums">{formatCurrency(payment.contractValue)}</span>
           </div>
-          <div className="flex justify-between items-center border-b border-zinc-850 pb-2.5">
-            <span className="text-zinc-550 font-bold uppercase tracking-wider text-[9px]">Scheduled Due Date</span>
-            <span className="text-zinc-200 font-bold">{payment.dueDate ? formatDate(payment.dueDate) : 'Not Scheduled'}</span>
+          <div className="flex justify-between items-center border-b border-white/5 pb-2.5">
+            <span className="text-slate-500 font-bold uppercase tracking-wider text-[9px]">Scheduled Due Date</span>
+            <span className="text-slate-200 font-bold">{payment.dueDate ? formatDate(payment.dueDate) : 'Not Scheduled'}</span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-zinc-550 font-bold uppercase tracking-wider text-[9px]">Current Settlement Status</span>
+            <span className="text-slate-500 font-bold uppercase tracking-wider text-[9px]">Current Settlement Status</span>
             {isPaid ? (
-              <span className="inline-flex px-2.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-green-500/10 text-green-400 border border-green-500/25">
+              <span className="inline-flex px-2.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/25">
                 Paid (Cleared)
               </span>
             ) : (
@@ -159,37 +160,38 @@ const PaymentDetailsPage: React.FC = () => {
 
         {/* Paid details if already settled */}
         {isPaid && (
-          <div className="bg-[#14161f] border border-green-500/20 rounded-xl p-6 shadow-xl space-y-4">
-            <div className="flex items-center space-x-2.5 text-green-400 font-extrabold text-sm">
+          <div className="bg-[#0d1322]/70 border border-emerald-500/20 rounded-xl p-6 shadow-xl space-y-4 backdrop-blur-xl relative">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#10b981] via-[#34d399] to-transparent" />
+            <div className="flex items-center space-x-2.5 text-emerald-400 font-extrabold text-sm">
               <CheckCircle className="h-5 w-5" />
               <span className="uppercase tracking-wider">Payment Transaction Settled</span>
             </div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs pt-2 border-t border-zinc-850 text-zinc-400">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs pt-2 border-t border-white/5 text-slate-400">
               <div>
-                <span className="block text-[9px] text-zinc-550 font-bold uppercase tracking-wider">Settle Method</span>
-                <span className="text-zinc-200 font-extrabold">{payment.method}</span>
+                <span className="block text-[9px] text-slate-500 font-bold uppercase tracking-wider">Settle Method</span>
+                <span className="text-slate-200 font-extrabold">{payment.method}</span>
               </div>
               <div>
-                <span className="block text-[9px] text-zinc-550 font-bold uppercase tracking-wider">Cleared Date</span>
-                <span className="text-zinc-200 font-bold">{payment.paidDate ? formatDate(payment.paidDate) : '-'}</span>
+                <span className="block text-[9px] text-slate-500 font-bold uppercase tracking-wider">Cleared Date</span>
+                <span className="text-slate-200 font-bold">{payment.paidDate ? formatDate(payment.paidDate) : '-'}</span>
               </div>
               <div>
-                <span className="block text-[9px] text-zinc-550 font-bold uppercase tracking-wider">Approved By Auditor</span>
-                <span className="text-zinc-200 font-semibold">{payment.paidBy?.name || 'Authorized Auditor'}</span>
+                <span className="block text-[9px] text-slate-500 font-bold uppercase tracking-wider">Approved By Auditor</span>
+                <span className="text-slate-200 font-semibold">{payment.paidBy?.name || 'Authorized Auditor'}</span>
               </div>
               {payment.cheque && (
                 <div>
-                  <span className="block text-[9px] text-zinc-550 font-bold uppercase tracking-wider">Cleared Cheque No</span>
-                  <span className="text-violet-400 font-bold">
+                  <span className="block text-[9px] text-slate-500 font-bold uppercase tracking-wider">Cleared Cheque No</span>
+                  <span className="text-[#00d2ff] font-bold">
                     {payment.cheque.chequeNo} ({payment.cheque.bank})
                   </span>
                 </div>
               )}
               {payment.receiptUrl && (
                 <div className="sm:col-span-2">
-                  <span className="block text-[9px] text-zinc-550 font-bold uppercase tracking-wider">Receipt Reference</span>
-                  <span className="text-zinc-300 font-medium font-mono">📎 {payment.receiptUrl}</span>
+                  <span className="block text-[9px] text-slate-500 font-bold uppercase tracking-wider">Receipt Reference</span>
+                  <span className="text-slate-300 font-medium font-mono">📎 {payment.receiptUrl}</span>
                 </div>
               )}
             </div>
@@ -198,30 +200,31 @@ const PaymentDetailsPage: React.FC = () => {
 
         {/* Audit Form to clear payment (Admins only, if not paid) */}
         {!isPaid && (
-          <div className="bg-[#14161f] border border-zinc-800 rounded-xl p-6 shadow-xl">
-            <h3 className="font-extrabold text-sm text-white uppercase tracking-wider mb-4 border-b border-zinc-850 pb-2">
-              Settle Payment Schedule Milestone
+          <div className="bg-[#0d1322]/70 border border-white/10 rounded-xl p-6 shadow-xl backdrop-blur-xl relative">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
+            <h3 className="font-extrabold text-sm text-white uppercase tracking-wider mb-4 border-b border-white/10 pb-2">
+              Settle Payment Milestone
             </h3>
 
             {!isAdmin ? (
-              <div className="p-4 bg-zinc-900/40 border border-zinc-800 rounded-lg text-xs text-zinc-500 font-bold">
+              <div className="p-4 bg-[#0a0f1d]/60 border border-white/10 rounded-xl text-xs text-slate-500 font-bold">
                 ⚠️ ACCESS RESTRICTED: Only administrators are authorized to process payment schedule clearances.
               </div>
             ) : (
               <form onSubmit={handleMarkPaid} className="space-y-4">
                 {formError && (
-                  <div className="p-3 bg-rose-500/10 border border-rose-500/20 text-rose-400 rounded text-xs font-bold">
+                  <div className="p-3 bg-rose-500/10 border border-rose-500/22 text-rose-455 rounded text-xs font-bold">
                     {formError}
                   </div>
                 )}
 
                 {/* Settle Method */}
                 <div>
-                  <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Payment Method *</label>
+                  <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Payment Method *</label>
                   <select
                     value={method}
                     onChange={(e) => setMethod(e.target.value as 'Cash' | 'Cheque' | 'Transfer')}
-                    className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3 py-2.5 text-xs text-zinc-350 focus:outline-none focus:border-violet-650 font-semibold cursor-pointer"
+                    className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none transition-all font-semibold cursor-pointer"
                   >
                     <option value="Cash">Cash Settlement</option>
                     <option value="Cheque">Bank Cheque Clearance</option>
@@ -232,12 +235,12 @@ const PaymentDetailsPage: React.FC = () => {
                 {/* Conditional Cheque link dropdown */}
                 {method === 'Cheque' && (
                   <div>
-                    <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Link Issued Cheque *</label>
+                    <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Link Issued Cheque *</label>
                     <select
                       value={chequeId}
                       onChange={(e) => setChequeId(e.target.value)}
                       required
-                      className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3 py-2.5 text-xs text-zinc-350 focus:outline-none focus:border-violet-650 font-semibold cursor-pointer"
+                      className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none transition-all font-semibold cursor-pointer"
                     >
                       <option value="">Select Issued Cheque</option>
                       {cheques?.length === 0 ? (
@@ -250,7 +253,7 @@ const PaymentDetailsPage: React.FC = () => {
                         ))
                       )}
                     </select>
-                    <p className="text-[10px] text-zinc-500 mt-1">
+                    <p className="text-[10px] text-slate-500 mt-1">
                       Link this schedule invoice payment directly to an uncleared cheque in the ledger.
                     </p>
                   </div>
@@ -258,8 +261,8 @@ const PaymentDetailsPage: React.FC = () => {
 
                 {/* Receipt Upload Mock */}
                 <div>
-                  <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Upload Clearance Receipt (Optional)</label>
-                  <div className="relative flex items-center justify-center border border-dashed border-zinc-800 hover:border-zinc-700/80 bg-[#161720] rounded-xl p-4 transition-all group">
+                  <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Upload Clearance Receipt (Optional)</label>
+                  <div className="relative flex items-center justify-center border-2 border-dashed border-white/10 hover:border-[#7c3aed]/50 bg-[#0a0f1d]/60 rounded-xl p-4 transition-all group cursor-pointer">
                     <input
                       type="file"
                       onChange={handleFileChange}
@@ -267,8 +270,8 @@ const PaymentDetailsPage: React.FC = () => {
                       className="absolute inset-0 opacity-0 cursor-pointer"
                     />
                     <div className="text-center space-y-1">
-                      <Paperclip className="h-5 w-5 text-zinc-500 mx-auto group-hover:text-violet-400 transition-colors" />
-                      <span className="block text-xs font-bold text-zinc-300">
+                      <Paperclip className="h-5 w-5 text-slate-500 mx-auto group-hover:text-[#00d2ff] transition-colors" />
+                      <span className="block text-xs font-bold text-slate-355">
                         {receiptName ? receiptName : 'Select transaction confirmation receipt PDF/Image'}
                       </span>
                     </div>
@@ -279,10 +282,10 @@ const PaymentDetailsPage: React.FC = () => {
                 <button
                   type="submit"
                   disabled={markPaidMutation.isPending}
-                  className="w-full py-3 bg-violet-650 hover:bg-violet-700 text-white rounded-lg font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-colors disabled:opacity-50"
+                  className="w-full py-3 bg-gradient-to-r from-[#7c3aed] via-[#6366f1] to-[#00d2ff] hover:from-[#8b5cf6] hover:via-[#4f46e5] hover:to-[#00f0ff] text-white rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center transition-all shadow-md shadow-purple-500/20 disabled:opacity-50 cursor-pointer"
                 >
                   {markPaidMutation.isPending ? (
-                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin text-white" />
                   ) : (
                     <CheckCircle className="h-4 w-4 mr-2" />
                   )}

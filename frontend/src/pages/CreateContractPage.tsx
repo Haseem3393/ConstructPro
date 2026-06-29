@@ -118,7 +118,7 @@ const CreateContractPage: React.FC = () => {
         <div className="flex items-center">
           <Link
             to="/contracts"
-            className="inline-flex items-center text-xs font-bold text-slate-400 hover:text-white uppercase tracking-wider transition-colors"
+            className="inline-flex items-center text-xs font-bold text-slate-400 hover:text-white uppercase tracking-widest transition-colors cursor-pointer"
           >
             <ArrowLeft className="h-4 w-4 mr-1.5" />
             Back to Registry
@@ -126,24 +126,25 @@ const CreateContractPage: React.FC = () => {
         </div>
 
         {/* Header */}
-        <div className="border-b border-[#1a2535] pb-5">
+        <div className="border-b border-white/10 pb-5">
           <h1 className="text-2xl font-black text-white tracking-tight">Register Construction Contract</h1>
-          <p className="text-slate-500 text-xs font-medium mt-1">Register main client project binders or legal subcontractor agreements, initializing payment terms schedules</p>
+          <p className="text-slate-400 text-xs font-semibold mt-1">Register main client project binders or legal subcontractor agreements, initializing payment terms schedules</p>
         </div>
 
         {/* Form Card */}
-        <div className="bg-[#0d1526] border border-[#1a2535] rounded-2xl p-6 shadow-xl">
+        <div className="bg-[#0d1322]/70 border border-white/10 rounded-2xl p-6 shadow-xl backdrop-blur-xl relative">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
           <form onSubmit={handleSubmit} className="space-y-4">
             {formError && (
-              <div className="p-3.5 bg-rose-500/8 border border-rose-500/20 text-rose-450 rounded-xl text-xs font-semibold">
+              <div className="p-3.5 bg-rose-500/8 border border-rose-500/20 text-rose-455 rounded-xl text-xs font-semibold">
                 {formError}
               </div>
             )}
 
             {/* Type Toggle */}
             <div>
-              <label className="block text-[10px] font-black text-slate-655 uppercase tracking-[0.14em] mb-2">Contract Classification *</label>
-              <div className="grid grid-cols-2 gap-2 bg-[#0b1220] p-1 rounded-xl border border-[#1a2535]">
+              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Contract Classification *</label>
+              <div className="grid grid-cols-2 gap-2 bg-[#0a0f1d]/60 p-1 rounded-xl border border-white/10">
                 <button
                   type="button"
                   onClick={() => {
@@ -151,7 +152,7 @@ const CreateContractPage: React.FC = () => {
                     setSubcontractorId('')
                     setClientName('')
                   }}
-                  className={`py-2 text-xs font-bold rounded-lg transition-all ${type === 'MAIN' ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow shadow-blue-500/10' : 'text-slate-500 hover:text-slate-200 hover:bg-[#111d33]'}`}
+                  className={`py-2 text-xs font-bold rounded-lg transition-all cursor-pointer ${type === 'MAIN' ? 'bg-gradient-to-r from-[#7c3aed] via-[#6366f1] to-[#00d2ff] text-white shadow shadow-purple-500/10' : 'text-slate-400 hover:text-slate-200'}`}
                 >
                   Main Contract (Client Client)
                 </button>
@@ -161,7 +162,7 @@ const CreateContractPage: React.FC = () => {
                     setType('SUBCONTRACTOR')
                     setClientName('')
                   }}
-                  className={`py-2 text-xs font-bold rounded-lg transition-all ${type === 'SUBCONTRACTOR' ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow shadow-blue-500/10' : 'text-slate-500 hover:text-slate-200 hover:bg-[#111d33]'}`}
+                  className={`py-2 text-xs font-bold rounded-lg transition-all cursor-pointer ${type === 'SUBCONTRACTOR' ? 'bg-gradient-to-r from-[#7c3aed] via-[#6366f1] to-[#00d2ff] text-white shadow shadow-purple-500/10' : 'text-slate-400 hover:text-slate-200'}`}
                 >
                   Subcontractor Binder
                 </button>
@@ -170,12 +171,12 @@ const CreateContractPage: React.FC = () => {
 
             {/* Project Selector */}
             <div>
-              <label className="block text-[10px] font-black text-slate-655 uppercase tracking-[0.14em] mb-2">Project Site *</label>
+              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Project Site *</label>
               <select
                 value={projectId}
                 onChange={(e) => setProjectId(e.target.value)}
                 required
-                className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-3 py-2.5 text-xs text-slate-350 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all font-semibold cursor-pointer"
+                className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 transition-all font-semibold cursor-pointer"
               >
                 <option value="">Select Project</option>
                 {isProjectsLoading ? (
@@ -192,12 +193,12 @@ const CreateContractPage: React.FC = () => {
             {type === 'SUBCONTRACTOR' ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[10px] font-black text-slate-655 uppercase tracking-[0.14em] mb-2">Subcontractor Payee *</label>
+                  <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Subcontractor Payee *</label>
                   <select
                     value={subcontractorId}
                     onChange={(e) => setSubcontractorId(e.target.value)}
                     required
-                    className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-3 py-2.5 text-xs text-slate-355 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all font-semibold cursor-pointer"
+                    className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 transition-all font-semibold cursor-pointer"
                   >
                     <option value="">Select Subcontractor</option>
                     {subcontractors?.map((s) => (
@@ -206,34 +207,34 @@ const CreateContractPage: React.FC = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-[10px] font-black text-slate-600 uppercase tracking-[0.14em] mb-2">Payee Name Display *</label>
+                  <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Payee Name Display *</label>
                   <input
                     type="text"
                     required
                     readOnly
                     placeholder="Auto-populated from select"
                     value={clientName}
-                    className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-500 font-semibold focus:outline-none"
+                    className="w-full bg-[#0a0f1d]/60 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-slate-500 font-semibold focus:outline-none cursor-not-allowed"
                   />
                 </div>
               </div>
             ) : (
               <div>
-                <label className="block text-[10px] font-black text-slate-655 uppercase tracking-[0.14em] mb-2">Client / Owner Name *</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Client / Owner Name *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Haseem Munaf, Ministry of Roads"
                   value={clientName}
                   onChange={(e) => setClientName(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all font-semibold"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 transition-all font-semibold"
                 />
               </div>
             )}
 
             {/* Contract Value LKR */}
             <div>
-              <label className="block text-[10px] font-black text-slate-655 uppercase tracking-[0.14em] mb-2">Contract Value (LKR) *</label>
+              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Contract Value (LKR) *</label>
               <input
                 type="number"
                 required
@@ -242,63 +243,63 @@ const CreateContractPage: React.FC = () => {
                 placeholder="e.g. 50000000"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
-                className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all font-semibold"
+                className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 transition-all font-semibold"
               />
             </div>
 
             {/* Timeline Dates */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[10px] font-black text-slate-655 uppercase tracking-[0.14em] mb-2">Start Date *</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Start Date *</label>
                 <input
                   type="date"
                   required
                   value={startDate}
                   onChange={(e) => setStartDate(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all font-semibold cursor-pointer"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 transition-all font-semibold cursor-pointer"
                 />
               </div>
 
               <div>
-                <label className="block text-[10px] font-black text-slate-655 uppercase tracking-[0.14em] mb-2">End Date *</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">End Date *</label>
                 <input
                   type="date"
                   required
                   value={endDate}
                   onChange={(e) => setEndDate(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all font-semibold cursor-pointer"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 transition-all font-semibold cursor-pointer"
                 />
               </div>
             </div>
 
             {/* Payment Terms */}
             <div>
-              <label className="block text-[10px] font-black text-slate-655 uppercase tracking-[0.14em] mb-2">Payment Terms</label>
+              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Payment Terms</label>
               <input
                 type="text"
                 placeholder="e.g. Net 30, Milestone schedule logs"
                 value={paymentTerms}
                 onChange={(e) => setPaymentTerms(e.target.value)}
-                className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all font-semibold"
+                className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 transition-all font-semibold"
               />
             </div>
 
             {/* Scope of Work */}
             <div>
-              <label className="block text-[10px] font-black text-slate-655 uppercase tracking-[0.14em] mb-2">Scope of Work / Description</label>
+              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Scope of Work / Description</label>
               <textarea
                 rows={4}
                 placeholder="Details of agreement scope, structural milestones, and concrete targets."
                 value={scope}
                 onChange={(e) => setScope(e.target.value)}
-                className="w-full bg-[#0b1220] border border-[#1a2535] hover:border-[#253550] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.05] transition-all font-semibold"
+                className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 transition-all font-semibold resize-none"
               />
             </div>
 
             {/* Document upload mock */}
             <div>
-              <label className="block text-[10px] font-black text-slate-655 uppercase tracking-[0.14em] mb-2">Upload Signed Agreement Document</label>
-              <div className="relative flex items-center justify-center border-2 border-dashed border-[#1a2535] hover:border-blue-500/30 bg-[#0b1220] rounded-xl p-5 transition-all group">
+              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Upload Signed Agreement Document</label>
+              <div className="relative flex items-center justify-center border-2 border-dashed border-white/10 hover:border-[#7c3aed]/30 bg-[#0a0f1d]/60 rounded-xl p-5 transition-all group cursor-pointer">
                 <input
                   type="file"
                   onChange={handleFileChange}
@@ -306,11 +307,11 @@ const CreateContractPage: React.FC = () => {
                   className="absolute inset-0 opacity-0 cursor-pointer"
                 />
                 <div className="text-center space-y-1">
-                  <Paperclip className="h-5 w-5 text-slate-500 mx-auto group-hover:text-blue-400 transition-colors" />
-                  <span className="block text-xs font-bold text-slate-350">
+                  <Paperclip className="h-5 w-5 text-slate-500 mx-auto group-hover:text-[#00d2ff] transition-colors" />
+                  <span className="block text-xs font-bold text-slate-355">
                     {uploadedDocName ? uploadedDocName : 'Choose contract PDF/Word file'}
                   </span>
-                  <span className="block text-[9px] text-slate-550 uppercase font-black">
+                  <span className="block text-[9px] text-slate-500 uppercase font-black">
                     Valid formats: PDF, DOC, DOCX up to 10MB
                   </span>
                 </div>
@@ -318,20 +319,20 @@ const CreateContractPage: React.FC = () => {
             </div>
 
             {/* Action Buttons */}
-            <div className="pt-4 border-t border-[#1a2535] flex gap-3">
+            <div className="pt-4 border-t border-white/10 flex gap-3">
               <Link
                 to="/contracts"
-                className="flex-1 py-3 bg-[#0b1220] hover:bg-[#111d33] border border-[#1a2535] text-slate-350 hover:text-white rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-colors"
+                className="flex-1 py-3 bg-[#0a0f1d]/60 border border-white/10 text-slate-400 hover:bg-[#7c3aed]/10 hover:text-white rounded-xl font-bold text-xs uppercase tracking-widest flex items-center justify-center transition-colors cursor-pointer"
               >
                 Cancel
               </Link>
               <button
                 type="submit"
                 disabled={createContractMutation.isPending}
-                className="flex-1 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-xl font-black text-xs uppercase tracking-wider flex items-center justify-center transition-all duration-200 shadow-md shadow-blue-500/10 hover:shadow-blue-500/25 disabled:opacity-50"
+                className="flex-1 py-3 bg-gradient-to-r from-[#7c3aed] via-[#6366f1] to-[#00d2ff] hover:from-[#8b5cf6] hover:via-[#4f46e5] hover:to-[#00f0ff] text-white rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center transition-all duration-200 shadow-md shadow-purple-500/20 disabled:opacity-50 cursor-pointer"
               >
                 {createContractMutation.isPending ? (
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin text-white" />
                 ) : (
                   <Save className="h-4 w-4 mr-2" />
                 )}

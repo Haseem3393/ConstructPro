@@ -64,8 +64,8 @@ const MachineryMaintenanceLogPage: React.FC = () => {
     return (
       <SidebarLayout>
         <div className="flex flex-col items-center justify-center py-40 space-y-3">
-          <Loader2 className="h-10 w-10 text-violet-500 animate-spin" />
-          <p className="text-zinc-500 text-sm font-medium">Loading asset context...</p>
+          <Loader2 className="h-10 w-10 text-[#7c3aed] animate-spin" />
+          <p className="text-slate-400 text-sm font-semibold">Loading asset context...</p>
         </div>
       </SidebarLayout>
     )
@@ -74,10 +74,10 @@ const MachineryMaintenanceLogPage: React.FC = () => {
   if (isMachineryError || !machinery) {
     return (
       <SidebarLayout>
-        <div className="p-8 text-center text-rose-455 bg-rose-500/10 border border-rose-500/20 rounded-xl space-y-4 max-w-md mx-auto">
-          <p className="font-extrabold text-sm uppercase tracking-wider">Asset Registry Error</p>
-          <p className="text-xs text-zinc-400">The machinery equipment details could not be found.</p>
-          <Link to="/machinery" className="inline-flex text-xs font-bold text-violet-400 hover:text-violet-300">
+        <div className="p-8 text-center text-rose-455 bg-[#0d1322]/70 border border-white/10 rounded-2xl space-y-4 max-w-md mx-auto backdrop-blur-xl">
+          <p className="font-extrabold text-sm uppercase tracking-widest">Asset Registry Error</p>
+          <p className="text-xs text-slate-400 font-semibold">The machinery equipment details could not be found.</p>
+          <Link to="/machinery" className="inline-flex text-xs font-bold text-[#00d2ff] hover:text-[#00d2ff]/80 uppercase tracking-widest">
             Back to Registry
           </Link>
         </div>
@@ -92,7 +92,7 @@ const MachineryMaintenanceLogPage: React.FC = () => {
         <div className="flex items-center">
           <Link
             to={`/machinery/${id}`}
-            className="inline-flex items-center text-xs font-bold text-zinc-400 hover:text-white uppercase tracking-wider transition-colors"
+            className="inline-flex items-center text-xs font-bold text-slate-400 hover:text-white uppercase tracking-widest transition-colors cursor-pointer"
           >
             <ArrowLeft className="h-4 w-4 mr-1.5" />
             Back to Machinery Detail
@@ -100,30 +100,31 @@ const MachineryMaintenanceLogPage: React.FC = () => {
         </div>
 
         {/* Header */}
-        <div className="border-b border-zinc-800 pb-5">
-          <h1 className="text-3xl font-extrabold text-white">Log Maintenance Service</h1>
-          <p className="text-zinc-400 text-sm mt-1">
-            Record repairs, servicing, and technical maintenance for <span className="text-violet-400 font-extrabold">{machinery.name}</span>
+        <div className="border-b border-white/10 pb-5">
+          <h1 className="text-3xl font-black text-white tracking-tight">Log Maintenance Service</h1>
+          <p className="text-slate-400 text-xs font-semibold mt-1">
+            Record repairs, servicing, and technical maintenance for <span className="text-[#00d2ff] font-extrabold">{machinery.name}</span>
           </p>
         </div>
 
         {/* Form Card */}
-        <div className="bg-[#14161f] border border-zinc-800 rounded-xl p-6 shadow-xl">
+        <div className="bg-[#0d1322]/70 border border-white/10 rounded-2xl p-6 shadow-xl backdrop-blur-xl relative overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
           <form onSubmit={handleSubmit} className="space-y-4">
             {formError && (
-              <div className="p-3 bg-rose-500/10 border border-rose-500/20 text-rose-400 rounded text-xs font-bold">
+              <div className="p-3.5 bg-rose-500/8 border border-rose-500/20 text-rose-455 rounded-xl text-xs font-semibold">
                 {formError}
               </div>
             )}
 
             {/* Project Select */}
             <div>
-              <label className="block text-[10px] font-black text-zinc-455 uppercase tracking-widest mb-2">Allocate Expense Project *</label>
+              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Allocate Expense Project *</label>
               <select
                 value={projectId}
                 onChange={(e) => setProjectId(e.target.value)}
                 required
-                className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3 py-2.5 text-xs text-zinc-350 focus:outline-none focus:border-violet-600 font-semibold cursor-pointer"
+                className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 font-semibold cursor-pointer"
               >
                 <option value="">Select Project</option>
                 {isProjectsLoading ? (
@@ -141,19 +142,19 @@ const MachineryMaintenanceLogPage: React.FC = () => {
             {/* Date and Cost */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Service Date *</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Service Date *</label>
                 <input
                   type="date"
                   required
                   value={date}
                   max={new Date().toISOString().split('T')[0]}
                   onChange={(e) => setDate(e.target.value)}
-                  className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3.5 py-2.5 text-xs text-zinc-300 focus:outline-none focus:border-violet-600 font-semibold cursor-pointer"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 font-semibold cursor-pointer"
                 />
               </div>
 
               <div>
-                <label className="block text-[10px] font-black text-zinc-455 uppercase tracking-widest mb-2">Maintenance Cost (LKR) *</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Maintenance Cost (LKR) *</label>
                 <input
                   type="number"
                   required
@@ -162,33 +163,33 @@ const MachineryMaintenanceLogPage: React.FC = () => {
                   placeholder="e.g. 15000 (Enter 0 if covered under free warranty)"
                   value={cost}
                   onChange={(e) => setCost(e.target.value)}
-                  className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3.5 py-2.5 text-xs text-zinc-300 focus:outline-none focus:border-violet-600 font-semibold"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 font-semibold"
                 />
               </div>
             </div>
 
             {/* Done By / Technician */}
             <div>
-              <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Service Technician / Workshop Agency</label>
+              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Service Technician / Workshop Agency</label>
               <input
                 type="text"
                 placeholder="e.g. DIMO Machinery, Local Mechanic Workshop"
                 value={doneBy}
                 onChange={(e) => setDoneBy(e.target.value)}
-                className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3.5 py-2.5 text-xs text-zinc-300 focus:outline-none focus:border-violet-600 font-semibold"
+                className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 font-semibold"
               />
             </div>
 
             {/* Description / Work Details */}
             <div>
-              <label className="block text-[10px] font-black text-zinc-450 uppercase tracking-widest mb-2">Service Description / Repairs Performed *</label>
+              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Service Description / Repairs Performed *</label>
               <textarea
                 required
                 rows={3}
                 placeholder="e.g. Engine oil replacement, filter swap, hydraulic pump seal repairs."
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full bg-[#1b1c25] border border-zinc-800 rounded-lg px-3.5 py-2.5 text-xs text-zinc-300 focus:outline-none focus:border-violet-600 font-semibold"
+                className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 font-semibold"
               />
             </div>
 
@@ -201,29 +202,29 @@ const MachineryMaintenanceLogPage: React.FC = () => {
                   onChange={(e) => setSetStatusMaintenance(e.target.checked)}
                   className="sr-only peer"
                 />
-                <div className="relative w-9 h-5 bg-zinc-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-zinc-400 after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-600 peer-checked:after:bg-white border border-zinc-750"></div>
-                <span className="ms-3 text-xs font-bold text-zinc-300 uppercase tracking-wide flex items-center gap-1.5">
-                  <Wrench className="h-3.5 w-3.5 text-amber-400" />
+                <div className="relative w-9 h-5 bg-[#0a0f1d]/60 border border-white/10 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-zinc-400 after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-600 peer-checked:after:bg-white"></div>
+                <span className="ms-3 text-xs font-bold text-slate-300 uppercase tracking-widest flex items-center gap-1.5">
+                  <Wrench className="h-3.5 w-3.5 text-amber-450" />
                   Flag machinery status to MAINTENANCE automatically
                 </span>
               </label>
             </div>
 
             {/* Action Buttons */}
-            <div className="pt-4 border-t border-zinc-850 flex gap-2">
+            <div className="pt-4 border-t border-white/10 flex gap-2">
               <Link
                 to={`/machinery/${id}`}
-                className="flex-1 py-3 bg-[#1b1c25] border border-zinc-800 text-zinc-450 hover:text-white rounded-lg font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-colors"
+                className="flex-1 py-3 bg-[#0a0f1d]/60 border border-white/10 text-slate-400 hover:bg-[#7c3aed]/10 hover:text-white rounded-xl font-bold text-xs uppercase tracking-widest flex items-center justify-center transition-colors cursor-pointer"
               >
                 Cancel
               </Link>
               <button
                 type="submit"
                 disabled={logMaintenanceMutation.isPending}
-                className="flex-1 py-3 bg-violet-600 hover:bg-violet-700 text-white rounded-lg font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-colors disabled:opacity-50"
+                className="flex-1 py-3 bg-gradient-to-r from-[#7c3aed] via-[#6366f1] to-[#00d2ff] hover:from-[#8b5cf6] hover:via-[#4f46e5] hover:to-[#00f0ff] text-white rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center transition-all duration-200 shadow-md shadow-purple-500/20 disabled:opacity-50 cursor-pointer"
               >
                 {logMaintenanceMutation.isPending ? (
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin text-white" />
                 ) : (
                   <Save className="h-4 w-4 mr-2" />
                 )}

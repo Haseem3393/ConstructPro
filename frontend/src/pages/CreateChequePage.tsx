@@ -88,7 +88,7 @@ const CreateChequePage: React.FC = () => {
         <div className="flex items-center">
           <Link
             to="/cheques"
-            className="inline-flex items-center text-xs font-bold text-slate-400 hover:text-white uppercase tracking-wider transition-colors"
+            className="inline-flex items-center text-xs font-bold text-slate-400 hover:text-white uppercase tracking-widest transition-colors cursor-pointer"
           >
             <ArrowLeft className="h-4 w-4 mr-1.5" />
             Back to Register
@@ -96,13 +96,14 @@ const CreateChequePage: React.FC = () => {
         </div>
 
         {/* Header */}
-        <div className="border-b border-[#1a2535] pb-5">
+        <div className="border-b border-white/10 pb-5">
           <h1 className="text-3xl font-black text-white tracking-tight">Issue Corporate Cheque</h1>
           <p className="text-slate-400 text-xs font-semibold mt-1">Register corporate cheque details, link them to outstanding supplier bills, and log payment clearances</p>
         </div>
 
         {/* Form Card */}
-        <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-6 shadow-xl">
+        <div className="bg-[#0d1322]/70 border border-white/10 rounded-xl p-6 shadow-xl backdrop-blur-xl relative">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
           <form onSubmit={handleSubmit} className="space-y-4">
             {formError && (
               <div className="p-3 bg-rose-500/10 border border-rose-500/22 text-rose-455 rounded text-xs font-bold">
@@ -112,11 +113,11 @@ const CreateChequePage: React.FC = () => {
 
             {/* Optional Link to Payable */}
             <div>
-              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Link Outstanding Bill (Optional)</label>
+              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Link Outstanding Bill (Optional)</label>
               <select
                 value={payableId}
                 onChange={(e) => setPayableId(e.target.value)}
-                className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2.5 text-xs text-slate-300 focus:outline-none focus:border-blue-500/60 transition-all font-semibold cursor-pointer"
+                className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none transition-all font-semibold cursor-pointer"
               >
                 <option value="">Do not link (Custom Payee)</option>
                 {isPayablesLoading ? (
@@ -139,47 +140,47 @@ const CreateChequePage: React.FC = () => {
             {/* Cheque No and Bank Name */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Cheque Number *</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Cheque Number *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. CQ-909876"
                   value={chequeNo}
                   onChange={(e) => setChequeNo(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none transition-all font-semibold"
                 />
               </div>
 
               <div>
-                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Bank Name *</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Bank Name *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Commercial Bank, HNB"
                   value={bank}
                   onChange={(e) => setBank(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none transition-all font-semibold"
                 />
               </div>
             </div>
 
             {/* Payee Name */}
             <div>
-              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Payee Name *</label>
+              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Payee Name *</label>
               <input
                 type="text"
                 required
                 placeholder="Name of the person/firm the cheque is issued to"
                 value={payee}
                 onChange={(e) => setPayee(e.target.value)}
-                className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold"
+                className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none transition-all font-semibold"
               />
             </div>
 
             {/* Amount and Issue Date */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Cheque Amount (LKR) *</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Cheque Amount (LKR) *</label>
                 <input
                   type="number"
                   required
@@ -188,49 +189,49 @@ const CreateChequePage: React.FC = () => {
                   placeholder="e.g. 150000"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none transition-all font-semibold"
                 />
               </div>
 
               <div>
-                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Cheque Issue Date *</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Cheque Issue Date *</label>
                 <input
                   type="date"
                   required
                   value={issueDate}
                   onChange={(e) => setIssueDate(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold cursor-pointer"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none transition-all font-semibold cursor-pointer"
                 />
               </div>
             </div>
 
             {/* Notes */}
             <div>
-              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Notes / Memo (Optional)</label>
+              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Notes / Memo (Optional)</label>
               <textarea
                 rows={2}
                 placeholder="Optional notes or cheque description"
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
-                className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold"
+                className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none transition-all font-semibold resize-none"
               />
             </div>
 
             {/* Action Buttons */}
-            <div className="pt-4 border-t border-[#1a2535] flex gap-2">
+            <div className="pt-4 border-t border-white/10 flex gap-2">
               <Link
                 to="/cheques"
-                className="flex-1 py-3 bg-[#0b1220] border border-[#1a2535] text-slate-400 hover:text-white rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-all"
+                className="flex-1 py-3 bg-[#0a0f1d]/60 border border-white/10 text-slate-400 hover:bg-[#7c3aed]/10 hover:text-white rounded-xl font-bold text-xs uppercase tracking-widest flex items-center justify-center transition-all cursor-pointer"
               >
                 Cancel
               </Link>
               <button
                 type="submit"
                 disabled={createChequeMutation.isPending}
-                className="flex-1 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-all shadow-lg shadow-blue-500/10 disabled:opacity-50"
+                className="flex-1 py-3 bg-gradient-to-r from-[#7c3aed] via-[#6366f1] to-[#00d2ff] hover:from-[#8b5cf6] hover:via-[#4f46e5] hover:to-[#00f0ff] text-white rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center transition-all shadow-md shadow-purple-500/20 disabled:opacity-50 cursor-pointer"
               >
                 {createChequeMutation.isPending ? (
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin text-white" />
                 ) : (
                   <Save className="h-4 w-4 mr-2" />
                 )}

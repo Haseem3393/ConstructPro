@@ -81,9 +81,10 @@ const UserPermissionsPage: React.FC = () => {
   if (isLoading) {
     return (
       <SidebarLayout>
-        <div className="flex flex-col items-center justify-center py-32 space-y-4">
-          <Loader2 className="h-10 w-10 text-blue-500 animate-spin" />
-          <p className="text-slate-505 font-semibold text-sm">Loading security descriptors...</p>
+        <div className="flex flex-col items-center justify-center py-32 bg-[#0d1322]/70 border border-white/10 rounded-2xl shadow-xl backdrop-blur-xl relative max-w-lg mx-auto">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
+          <Loader2 className="h-10 w-10 text-[#7c3aed] animate-spin" />
+          <p className="text-slate-405 font-bold text-xs uppercase tracking-widest mt-3">Loading security descriptors...</p>
         </div>
       </SidebarLayout>
     )
@@ -92,9 +93,10 @@ const UserPermissionsPage: React.FC = () => {
   if (error || !userDetails) {
     return (
       <SidebarLayout>
-        <div className="bg-rose-500/10 border border-rose-500/22 rounded-xl p-6 max-w-lg mx-auto text-center">
-          <p className="text-rose-455 font-bold mb-2">Error loading descriptors</p>
-          <p className="text-slate-400 text-sm mb-4">
+        <div className="bg-[#0d1322]/70 border border-white/10 rounded-2xl p-6 max-w-lg mx-auto text-center backdrop-blur-xl relative overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-rose-500" />
+          <p className="text-rose-455 font-black uppercase tracking-widest mb-2">Error loading descriptors</p>
+          <p className="text-slate-400 text-xs font-semibold mb-4">
             {(error as any)?.response?.data?.error || 'User details not found.'}
           </p>
         </div>
@@ -109,7 +111,7 @@ const UserPermissionsPage: React.FC = () => {
         <div className="flex items-center space-x-4">
           <button
             onClick={() => navigate(-1)}
-            className="p-2 bg-[#0d1526] border border-[#1a2535] rounded-xl text-slate-405 hover:text-white hover:bg-[#111d33] transition-all"
+            className="p-2 bg-[#0a0f1d]/60 border border-white/10 rounded-xl text-slate-400 hover:text-white hover:bg-white/[0.04] transition-all cursor-pointer"
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
@@ -120,8 +122,8 @@ const UserPermissionsPage: React.FC = () => {
         </div>
 
         {/* Permissions Form */}
-        <form onSubmit={handleSave} className="bg-[#0d1526] border border-[#1a2535] rounded-2xl overflow-hidden shadow-xl p-6 space-y-6 relative">
-          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-blue-500 via-blue-400 to-transparent" />
+        <form onSubmit={handleSave} className="bg-[#0d1322]/70 border border-white/10 rounded-2xl overflow-hidden shadow-xl p-6 space-y-6 relative backdrop-blur-xl">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
           {successMsg && (
             <div className="p-3.5 bg-emerald-500/10 border border-emerald-500/22 text-emerald-400 text-xs rounded-xl font-semibold tracking-wide">
               {successMsg}
@@ -134,40 +136,40 @@ const UserPermissionsPage: React.FC = () => {
           )}
 
           {/* Module Toggles List */}
-          <div className="space-y-6 divide-y divide-[#1a2535]">
+          <div className="space-y-6 divide-y divide-white/10">
             {/* Projects Module */}
             <div className="pt-0 space-y-3">
               <div className="flex items-center space-x-2">
-                <ShieldCheck className="h-4 w-4 text-blue-500" />
-                <h3 className="font-bold text-sm text-slate-205">Projects Module</h3>
+                <ShieldCheck className="h-4 w-4 text-[#00d2ff]" />
+                <h3 className="font-extrabold text-sm text-white uppercase tracking-widest">Projects Module</h3>
               </div>
               <div className="flex flex-wrap gap-4 text-xs font-semibold text-slate-350 pl-6">
-                <label className="flex items-center space-x-2.5 cursor-pointer bg-[#0b1220] border border-[#1a2535] px-3.5 py-2.5 rounded-xl hover:border-blue-500/30 transition-all select-none text-slate-300">
+                <label className="flex items-center space-x-2.5 cursor-pointer bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 px-3.5 py-2.5 rounded-xl transition-all select-none text-slate-300">
                   <input
                     type="checkbox"
                     checked={modules.projects.view}
                     onChange={() => handleToggle('projects', 'view')}
-                    className="rounded bg-[#0b1220] border-[#1a2535] text-blue-505 focus:ring-0"
+                    className="rounded bg-[#0a0f1d]/60 border-white/10 text-[#7c3aed] focus:ring-0 focus:ring-offset-0 cursor-pointer"
                   />
                   <span>Read/View Details</span>
                 </label>
                 
-                <label className="flex items-center space-x-2.5 cursor-pointer bg-[#0b1220] border border-[#1a2535] px-3.5 py-2.5 rounded-xl hover:border-blue-500/30 transition-all select-none text-slate-300">
+                <label className="flex items-center space-x-2.5 cursor-pointer bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 px-3.5 py-2.5 rounded-xl transition-all select-none text-slate-300">
                   <input
                     type="checkbox"
                     checked={modules.projects.edit}
                     onChange={() => handleToggle('projects', 'edit')}
-                    className="rounded bg-[#0b1220] border-[#1a2535] text-blue-505 focus:ring-0"
+                    className="rounded bg-[#0a0f1d]/60 border-white/10 text-[#7c3aed] focus:ring-0 focus:ring-offset-0 cursor-pointer"
                   />
                   <span>Create / Update Details</span>
                 </label>
 
-                <label className="flex items-center space-x-2.5 cursor-pointer bg-[#0b1220] border border-[#1a2535] px-3.5 py-2.5 rounded-xl hover:border-blue-500/30 transition-all select-none text-slate-300">
+                <label className="flex items-center space-x-2.5 cursor-pointer bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 px-3.5 py-2.5 rounded-xl transition-all select-none text-slate-300">
                   <input
                     type="checkbox"
                     checked={modules.projects.delete}
                     onChange={() => handleToggle('projects', 'delete')}
-                    className="rounded bg-[#0b1220] border-[#1a2535] text-blue-505 focus:ring-0"
+                    className="rounded bg-[#0a0f1d]/60 border-white/10 text-[#7c3aed] focus:ring-0 focus:ring-offset-0 cursor-pointer"
                   />
                   <span>Delete Projects</span>
                 </label>
@@ -177,26 +179,26 @@ const UserPermissionsPage: React.FC = () => {
             {/* Finance Module */}
             <div className="pt-5 space-y-3">
               <div className="flex items-center space-x-2">
-                <ShieldCheck className="h-4 w-4 text-blue-500" />
-                <h3 className="font-bold text-sm text-slate-205">Finance & Expense Module</h3>
+                <ShieldCheck className="h-4 w-4 text-[#00d2ff]" />
+                <h3 className="font-extrabold text-sm text-white uppercase tracking-widest">Finance & Expense Module</h3>
               </div>
               <div className="flex flex-wrap gap-4 text-xs font-semibold text-slate-350 pl-6">
-                <label className="flex items-center space-x-2.5 cursor-pointer bg-[#0b1220] border border-[#1a2535] px-3.5 py-2.5 rounded-xl hover:border-blue-500/30 transition-all select-none text-slate-300">
+                <label className="flex items-center space-x-2.5 cursor-pointer bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 px-3.5 py-2.5 rounded-xl transition-all select-none text-slate-300">
                   <input
                     type="checkbox"
                     checked={modules.finance.view}
                     onChange={() => handleToggle('finance', 'view')}
-                    className="rounded bg-[#0b1220] border-[#1a2535] text-blue-505 focus:ring-0"
+                    className="rounded bg-[#0a0f1d]/60 border-white/10 text-[#7c3aed] focus:ring-0 focus:ring-offset-0 cursor-pointer"
                   />
                   <span>View Expenses / Budgets</span>
                 </label>
                 
-                <label className="flex items-center space-x-2.5 cursor-pointer bg-[#0b1220] border border-[#1a2535] px-3.5 py-2.5 rounded-xl hover:border-blue-500/30 transition-all select-none text-slate-300">
+                <label className="flex items-center space-x-2.5 cursor-pointer bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 px-3.5 py-2.5 rounded-xl transition-all select-none text-slate-300">
                   <input
                     type="checkbox"
                     checked={modules.finance.edit}
                     onChange={() => handleToggle('finance', 'edit')}
-                    className="rounded bg-[#0b1220] border-[#1a2535] text-blue-505 focus:ring-0"
+                    className="rounded bg-[#0a0f1d]/60 border-white/10 text-[#7c3aed] focus:ring-0 focus:ring-offset-0 cursor-pointer"
                   />
                   <span>Record Payments / Expense logs</span>
                 </label>
@@ -206,16 +208,16 @@ const UserPermissionsPage: React.FC = () => {
             {/* Reports Module */}
             <div className="pt-5 space-y-3">
               <div className="flex items-center space-x-2">
-                <ShieldCheck className="h-4 w-4 text-blue-500" />
-                <h3 className="font-bold text-sm text-slate-205">Reports & Analytics</h3>
+                <ShieldCheck className="h-4 w-4 text-[#00d2ff]" />
+                <h3 className="font-extrabold text-sm text-white uppercase tracking-widest">Reports & Analytics</h3>
               </div>
               <div className="flex flex-wrap gap-4 text-xs font-semibold text-slate-350 pl-6">
-                <label className="flex items-center space-x-2.5 cursor-pointer bg-[#0b1220] border border-[#1a2535] px-3.5 py-2.5 rounded-xl hover:border-blue-500/30 transition-all select-none text-slate-300">
+                <label className="flex items-center space-x-2.5 cursor-pointer bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 px-3.5 py-2.5 rounded-xl transition-all select-none text-slate-300">
                   <input
                     type="checkbox"
                     checked={modules.reports.view}
                     onChange={() => handleToggle('reports', 'view')}
-                    className="rounded bg-[#0b1220] border-[#1a2535] text-blue-505 focus:ring-0"
+                    className="rounded bg-[#0a0f1d]/60 border-white/10 text-[#7c3aed] focus:ring-0 focus:ring-offset-0 cursor-pointer"
                   />
                   <span>Access & Export Reports</span>
                 </label>
@@ -224,21 +226,21 @@ const UserPermissionsPage: React.FC = () => {
           </div>
 
           {/* Action buttons */}
-          <div className="flex justify-end space-x-3 border-t border-[#1a2535] pt-5 mt-6">
+          <div className="flex justify-end space-x-3 border-t border-white/10 pt-5 mt-6">
             <button
               type="button"
               onClick={() => navigate(-1)}
-              className="px-4 py-2.5 bg-[#0b1220] hover:bg-[#111d33] border border-[#1a2535] text-slate-355 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors"
+              className="px-4 py-2.5 bg-[#0a0f1d]/60 hover:bg-white/[0.04] border border-white/10 text-slate-400 rounded-xl font-bold text-xs uppercase tracking-widest transition-colors cursor-pointer"
             >
               Back
             </button>
             <button
               type="submit"
               disabled={updatePermissionsMutation.isPending}
-              className="flex items-center px-4 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-xl font-black text-xs uppercase tracking-wider transition-all duration-200 shadow-md shadow-blue-500/10 hover:shadow-blue-500/25 disabled:opacity-50"
+              className="flex items-center px-4 py-2.5 bg-gradient-to-r from-[#7c3aed] via-[#6366f1] to-[#00d2ff] hover:opacity-90 text-white rounded-xl font-black text-xs uppercase tracking-widest transition-all duration-200 shadow-lg shadow-violet-500/10 cursor-pointer disabled:opacity-50"
             >
               {updatePermissionsMutation.isPending ? (
-                <Loader2 className="h-4 w-4 mr-2 animate-spin text-blue-500" />
+                <Loader2 className="h-4 w-4 mr-2 animate-spin text-white" />
               ) : (
                 <Save className="h-4 w-4 mr-2" />
               )}

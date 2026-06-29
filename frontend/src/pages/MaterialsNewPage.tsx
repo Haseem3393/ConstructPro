@@ -54,7 +54,7 @@ const MaterialsNewPage: React.FC = () => {
         <div className="flex items-center">
           <Link
             to="/materials"
-            className="inline-flex items-center text-xs font-bold text-slate-400 hover:text-white uppercase tracking-wider transition-colors"
+            className="inline-flex items-center text-xs font-bold text-slate-400 hover:text-white uppercase tracking-widest transition-colors cursor-pointer"
           >
             <ArrowLeft className="h-4 w-4 mr-1.5" />
             Back to Materials
@@ -62,40 +62,40 @@ const MaterialsNewPage: React.FC = () => {
         </div>
 
         {/* Header */}
-        <div className="border-b border-[#1a2535] pb-5">
+        <div className="border-b border-white/10 pb-5">
           <h1 className="text-3xl font-black text-white tracking-tight">Register Material Type</h1>
           <p className="text-slate-400 text-xs font-semibold mt-1">Register a new stock item type and assign it to a project context</p>
         </div>
 
         {/* Form Card */}
-        <div className="bg-[#0d1526] border border-[#1a2535] rounded-2xl p-6 shadow-xl relative">
-          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-blue-500 via-blue-400 to-transparent" />
+        <div className="bg-[#0d1322]/70 border border-white/10 rounded-2xl p-6 shadow-xl backdrop-blur-xl relative">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
           <form onSubmit={handleSubmit} className="space-y-4">
             {formError && (
-              <div className="p-3.5 bg-rose-500/10 border border-rose-500/22 text-rose-455 rounded-xl text-xs font-semibold">
+              <div className="p-3.5 bg-rose-500/8 border border-rose-500/20 text-rose-455 rounded-xl text-xs font-semibold">
                 {formError}
               </div>
             )}
 
             <div>
-              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Material Name *</label>
+              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Material Name *</label>
               <input
                 type="text"
                 required
                 placeholder="e.g. Portland Cement, Sand, 16mm Steel Rebar"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.02] transition-all font-semibold"
+                className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 transition-all font-semibold"
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Category</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Category</label>
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.02] transition-all font-semibold cursor-pointer"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 transition-all font-semibold cursor-pointer"
                 >
                   <option value="Masonry">Masonry</option>
                   <option value="Formwork">Formwork</option>
@@ -105,11 +105,11 @@ const MaterialsNewPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Item Type</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Item Type</label>
                 <select
                   value={itemType}
                   onChange={(e) => setItemType(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.02] transition-all font-semibold cursor-pointer"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 transition-all font-semibold cursor-pointer"
                 >
                   <option value="consumables">Consumables</option>
                   <option value="raw_materials">Raw Materials</option>
@@ -121,11 +121,11 @@ const MaterialsNewPage: React.FC = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Standard Unit *</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Standard Unit *</label>
                 <select
                   value={unit}
                   onChange={(e) => setUnit(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.02] transition-all font-semibold cursor-pointer"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 transition-all font-semibold cursor-pointer"
                 >
                   <option value="kg">kg</option>
                   <option value="bags">bags</option>
@@ -138,7 +138,7 @@ const MaterialsNewPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Minimum stock level threshold</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Minimum stock level threshold</label>
                 <input
                   type="number"
                   required
@@ -146,19 +146,17 @@ const MaterialsNewPage: React.FC = () => {
                   placeholder="e.g. 10"
                   value={minimumLevel}
                   onChange={(e) => setMinimumLevel(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.02] transition-all font-semibold"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 transition-all font-semibold"
                 />
               </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            </div>            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Assign to Project *</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Assign to Project *</label>
                 <select
                   value={projectId}
                   onChange={(e) => setProjectId(e.target.value)}
                   required
-                  className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.02] transition-all font-semibold cursor-pointer"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 transition-all font-semibold cursor-pointer"
                 >
                   <option value="">Select Project</option>
                   {isProjectsLoading ? (
@@ -174,11 +172,11 @@ const MaterialsNewPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Primary Supplier (Optional)</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Primary Supplier (Optional)</label>
                 <select
                   value={supplierId}
                   onChange={(e) => setSupplierId(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 focus:bg-white/[0.02] transition-all font-semibold cursor-pointer"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 transition-all font-semibold cursor-pointer"
                 >
                   <option value="">Select Supplier</option>
                   {suppliers?.map((s) => (
@@ -190,26 +188,26 @@ const MaterialsNewPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="p-3 bg-[#0b1220] border border-[#1a2535] rounded-xl">
-              <span className="block text-[10px] font-black text-slate-500 uppercase tracking-widest">Initial Balance</span>
-              <p className="text-slate-400 text-xs mt-0.5">Note: Re-registering items default with an initial stock balance of 0. Log standard deliveries to register deliveries.</p>
+            <div className="p-3 bg-[#0a0f1d]/60 border border-white/10 rounded-xl">
+              <span className="block text-[10px] font-black text-slate-450 uppercase tracking-widest">Initial Balance</span>
+              <p className="text-slate-400 text-xs mt-0.5 font-semibold">Note: Re-registering items default with an initial stock balance of 0. Log standard deliveries to register deliveries.</p>
             </div>
 
             {/* Action Buttons */}
-            <div className="pt-4 border-t border-[#1a2535] flex gap-2">
+            <div className="pt-4 border-t border-white/10 flex gap-2">
               <Link
                 to="/materials"
-                className="flex-1 py-2.5 bg-[#0b1220] hover:bg-[#111d33] border border-[#1a2535] text-slate-355 hover:text-white rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-all"
+                className="flex-1 py-2.5 bg-[#0a0f1d]/60 border border-white/10 text-slate-400 hover:bg-[#7c3aed]/10 hover:text-white rounded-xl font-bold text-xs uppercase tracking-widest flex items-center justify-center transition-all cursor-pointer"
               >
                 Cancel
               </Link>
               <button
                 type="submit"
                 disabled={createMaterialMutation.isPending}
-                className="flex-1 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-505 text-white rounded-xl font-black text-xs uppercase tracking-wider flex items-center justify-center transition-all duration-200 shadow-md shadow-blue-500/10 hover:shadow-blue-500/25 disabled:opacity-50"
+                className="flex-1 py-2.5 bg-gradient-to-r from-[#7c3aed] via-[#6366f1] to-[#00d2ff] hover:from-[#8b5cf6] hover:via-[#4f46e5] hover:to-[#00f0ff] text-white rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center transition-all duration-200 shadow-md shadow-purple-500/20 disabled:opacity-50 cursor-pointer"
               >
                 {createMaterialMutation.isPending ? (
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin text-blue-550" />
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin text-white" />
                 ) : (
                   <Save className="h-4 w-4 mr-2" />
                 )}

@@ -70,7 +70,7 @@ const CreateExpensePage: React.FC = () => {
         <div className="flex items-center">
           <Link
             to="/expenses"
-            className="inline-flex items-center text-xs font-bold text-slate-400 hover:text-white uppercase tracking-wider transition-colors"
+            className="inline-flex items-center text-xs font-bold text-slate-400 hover:text-white uppercase tracking-widest transition-colors cursor-pointer"
           >
             <ArrowLeft className="h-4 w-4 mr-1.5" />
             Back to Ledger
@@ -78,13 +78,14 @@ const CreateExpensePage: React.FC = () => {
         </div>
 
         {/* Header */}
-        <div className="border-b border-[#1a2535] pb-5">
+        <div className="border-b border-white/10 pb-5">
           <h1 className="text-3xl font-black text-white tracking-tight">Record Project Expense</h1>
           <p className="text-slate-400 text-xs font-semibold mt-1">Manually log project expenditures, site costs, subcontractor fees, or transport charges</p>
         </div>
 
         {/* Form Card */}
-        <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-6 shadow-xl">
+        <div className="bg-[#0d1322]/70 border border-white/10 rounded-xl p-6 shadow-xl backdrop-blur-xl relative">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
           <form onSubmit={handleSubmit} className="space-y-4">
             {formError && (
               <div className="p-3 bg-rose-500/10 border border-rose-500/22 text-rose-455 rounded text-xs font-bold">
@@ -94,12 +95,12 @@ const CreateExpensePage: React.FC = () => {
 
             {/* Project Select */}
             <div>
-              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Project context *</label>
+              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Project context *</label>
               <select
                 value={projectId}
                 onChange={(e) => setProjectId(e.target.value)}
                 required
-                className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2.5 text-xs text-slate-300 focus:outline-none focus:border-blue-500/60 transition-all font-semibold cursor-pointer"
+                className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none transition-all font-semibold cursor-pointer"
               >
                 <option value="">Select Project</option>
                 {isProjectsLoading ? (
@@ -117,11 +118,11 @@ const CreateExpensePage: React.FC = () => {
             {/* Category and Amount */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Expense Category *</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Expense Category *</label>
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3 py-2.5 text-xs text-slate-300 focus:outline-none focus:border-blue-500/60 transition-all font-semibold cursor-pointer"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none transition-all font-semibold cursor-pointer"
                 >
                   <option value="LABOUR">Labour & Payroll</option>
                   <option value="MATERIAL">Materials & Stock</option>
@@ -133,7 +134,7 @@ const CreateExpensePage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Amount (LKR / Rs.) *</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Amount (LKR / Rs.) *</label>
                 <input
                   type="number"
                   required
@@ -142,7 +143,7 @@ const CreateExpensePage: React.FC = () => {
                   placeholder="e.g. 25000"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none transition-all font-semibold"
                 />
               </div>
             </div>
@@ -150,45 +151,45 @@ const CreateExpensePage: React.FC = () => {
             {/* Date and Invoice/Reference */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Expense Date *</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Expense Date *</label>
                 <input
                   type="date"
                   required
                   value={date}
                   max={new Date().toISOString().split('T')[0]}
                   onChange={(e) => setDate(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold cursor-pointer"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none transition-all font-semibold cursor-pointer"
                 />
               </div>
 
               <div>
-                <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Reference / Invoice Number</label>
+                <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Reference / Invoice Number</label>
                 <input
                   type="text"
                   placeholder="e.g. INV-9908"
                   value={reference}
                   onChange={(e) => setReference(e.target.value)}
-                  className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold"
+                  className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none transition-all font-semibold"
                 />
               </div>
             </div>
 
             {/* Description */}
             <div>
-              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Description / Notes</label>
+              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Description / Notes</label>
               <textarea
                 rows={3}
                 placeholder="Details of expense (e.g. sand unloading charges, machine replacement parts, etc.)"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full bg-[#0b1220] border border-[#1a2535] rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500/60 transition-all font-semibold"
+                className="w-full bg-[#0a0f1d]/60 border border-white/10 hover:border-white/20 focus:border-[#7c3aed] focus:ring-1 focus:ring-[#7c3aed]/30 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none transition-all font-semibold resize-none"
               />
             </div>
 
             {/* Receipt Attachment */}
             <div>
-              <label className="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Attach Receipt (Photo/PDF)</label>
-              <div className="relative flex items-center justify-center border-2 border-dashed border-[#1a2535] hover:border-blue-500/50 bg-[#0b1220] rounded-xl p-6 transition-all group">
+              <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Attach Receipt (Photo/PDF)</label>
+              <div className="relative flex items-center justify-center border-2 border-dashed border-white/10 hover:border-[#7c3aed]/50 bg-[#0a0f1d]/60 rounded-xl p-6 transition-all group cursor-pointer">
                 <input
                   type="file"
                   onChange={handleFileChange}
@@ -196,8 +197,8 @@ const CreateExpensePage: React.FC = () => {
                   className="absolute inset-0 opacity-0 cursor-pointer"
                 />
                 <div className="text-center space-y-2">
-                  <Paperclip className="h-6 w-6 text-slate-500 mx-auto group-hover:text-blue-400 transition-colors" />
-                  <span className="block text-xs font-bold text-slate-350">
+                  <Paperclip className="h-6 w-6 text-slate-500 mx-auto group-hover:text-[#00d2ff] transition-colors" />
+                  <span className="block text-xs font-bold text-slate-355">
                     {attachedFileName ? attachedFileName : 'Select or drag receipt file'}
                   </span>
                   <span className="block text-[9px] text-slate-500 uppercase font-black">
@@ -208,20 +209,20 @@ const CreateExpensePage: React.FC = () => {
             </div>
 
             {/* Action Buttons */}
-            <div className="pt-4 border-t border-[#1a2535] flex gap-2">
+            <div className="pt-4 border-t border-white/10 flex gap-2">
               <Link
                 to="/expenses"
-                className="flex-1 py-3 bg-[#0b1220] border border-[#1a2535] text-slate-400 hover:text-white rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-all"
+                className="flex-1 py-3 bg-[#0a0f1d]/60 border border-white/10 text-slate-400 hover:bg-[#7c3aed]/10 hover:text-white rounded-xl font-bold text-xs uppercase tracking-widest flex items-center justify-center transition-all cursor-pointer"
               >
                 Cancel
               </Link>
               <button
                 type="submit"
                 disabled={createExpenseMutation.isPending}
-                className="flex-1 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-all shadow-lg shadow-blue-500/10 disabled:opacity-50"
+                className="flex-1 py-3 bg-gradient-to-r from-[#7c3aed] via-[#6366f1] to-[#00d2ff] hover:from-[#8b5cf6] hover:via-[#4f46e5] hover:to-[#00f0ff] text-white rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center transition-all shadow-md shadow-purple-500/20 disabled:opacity-50 cursor-pointer"
               >
                 {createExpenseMutation.isPending ? (
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin text-white" />
                 ) : (
                   <Save className="h-4 w-4 mr-2" />
                 )}

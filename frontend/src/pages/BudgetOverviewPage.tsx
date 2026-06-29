@@ -26,31 +26,31 @@ const BudgetOverviewPage: React.FC = () => {
     switch (status) {
       case 'ON_TRACK':
         return (
-          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-405 border border-emerald-500/22">
+          <span className="inline-flex px-2 py-0.5 rounded-xl text-[9px] font-black uppercase tracking-widest bg-emerald-500/10 text-emerald-400 border border-emerald-500/22">
             On Track
           </span>
         )
       case 'WARNING':
         return (
-          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-amber-500/10 text-amber-500 border border-amber-500/22">
+          <span className="inline-flex px-2 py-0.5 rounded-xl text-[9px] font-black uppercase tracking-widest bg-amber-500/10 text-amber-500 border border-amber-500/22">
             Warning
           </span>
         )
       case 'CRITICAL':
         return (
-          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-rose-500/10 text-rose-455 border border-rose-500/22">
+          <span className="inline-flex px-2 py-0.5 rounded-xl text-[9px] font-black uppercase tracking-widest bg-rose-500/10 text-rose-455 border border-rose-500/22">
             Critical
           </span>
         )
       case 'OVERSPENT':
         return (
-          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-rose-600/90 text-white border border-rose-500/22 animate-pulse">
+          <span className="inline-flex px-2 py-0.5 rounded-xl text-[9px] font-black uppercase tracking-widest bg-rose-605/90 text-white border border-rose-505/22 animate-pulse">
             Overspent
           </span>
         )
       default:
         return (
-          <span className="inline-flex px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-slate-500/10 text-slate-400 border border-slate-500/22">
+          <span className="inline-flex px-2 py-0.5 rounded-xl text-[9px] font-black uppercase tracking-widest bg-slate-500/10 text-slate-400 border border-slate-500/22">
             Unknown
           </span>
         )
@@ -80,7 +80,7 @@ const BudgetOverviewPage: React.FC = () => {
     <SidebarLayout>
       <div className="space-y-6">
         {/* Header */}
-        <div className="border-b border-[#1a2535] pb-5">
+        <div className="border-b border-white/10 pb-5">
           <h1 className="text-3xl font-black text-white tracking-tight">Project Budget Tracker</h1>
           <p className="text-slate-400 text-xs font-semibold mt-1">Monitor budget limits, active expenditures, and cash depletion status across all project sites</p>
         </div>
@@ -88,33 +88,36 @@ const BudgetOverviewPage: React.FC = () => {
         {/* Executive Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {/* Card 1: Total Portfolio Budget */}
-          <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-5 shadow-xl flex items-center justify-between">
+          <div className="bg-[#0d1322]/70 border border-white/10 rounded-2xl p-5 shadow-xl backdrop-blur-xl relative overflow-hidden flex items-center justify-between">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
             <div className="space-y-1">
               <span className="block text-[9px] font-black text-slate-500 uppercase tracking-widest">Portfolio Budget</span>
               <span className="block text-xl font-black text-white">
                 {isLoading ? '...' : formatCurrency(stats.totalBudget)}
               </span>
             </div>
-            <div className="p-3 rounded-xl bg-[#0b1220] text-slate-400 border border-[#1a2535]">
+            <div className="p-3 rounded-xl bg-[#0a0f1d]/60 text-slate-400 border border-white/10">
               <DollarSign className="h-5 w-5" />
             </div>
           </div>
 
           {/* Card 2: Total Portfolio Spent */}
-          <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-5 shadow-xl flex items-center justify-between">
+          <div className="bg-[#0d1322]/70 border border-white/10 rounded-2xl p-5 shadow-xl backdrop-blur-xl relative overflow-hidden flex items-center justify-between">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
             <div className="space-y-1">
               <span className="block text-[9px] font-black text-slate-500 uppercase tracking-widest">Portfolio Spent</span>
-              <span className="block text-xl font-black text-blue-505">
+              <span className="block text-xl font-black text-[#00d2ff]">
                 {isLoading ? '...' : formatCurrency(stats.totalSpent)}
               </span>
             </div>
-            <div className="p-3 rounded-xl bg-blue-500/10 text-blue-450 border border-blue-500/22">
+            <div className="p-3 rounded-xl bg-[#00d2ff]/10 text-[#00d2ff] border border-[#00d2ff]/22">
               <TrendingUp className="h-5 w-5" />
             </div>
           </div>
 
           {/* Card 3: Critical Warnings */}
-          <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-5 shadow-xl flex items-center justify-between">
+          <div className="bg-[#0d1322]/70 border border-white/10 rounded-2xl p-5 shadow-xl backdrop-blur-xl relative overflow-hidden flex items-center justify-between">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
             <div className="space-y-1">
               <span className="block text-[9px] font-black text-slate-500 uppercase tracking-widest">Critical Alert Sites</span>
               <span className="block text-2xl font-black text-amber-500">{stats.criticalCount}</span>
@@ -125,7 +128,8 @@ const BudgetOverviewPage: React.FC = () => {
           </div>
 
           {/* Card 4: Overspent Projects */}
-          <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-5 shadow-xl flex items-center justify-between">
+          <div className="bg-[#0d1322]/70 border border-white/10 rounded-2xl p-5 shadow-xl backdrop-blur-xl relative overflow-hidden flex items-center justify-between">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
             <div className="space-y-1">
               <span className="block text-[9px] font-black text-slate-500 uppercase tracking-widest">Overspent Sites</span>
               <span className="block text-2xl font-black text-rose-455">{stats.overspentCount}</span>
@@ -141,7 +145,7 @@ const BudgetOverviewPage: React.FC = () => {
           <div className="p-4 bg-rose-500/10 border border-rose-500/22 text-rose-455 rounded-xl text-xs font-bold flex items-start space-x-3">
             <AlertOctagon className="h-5 w-5 shrink-0 text-rose-455 animate-bounce" />
             <div>
-              <p className="uppercase tracking-wide">⚠️ Budget Attention Required</p>
+              <p className="uppercase tracking-widest font-black">⚠️ Budget Attention Required</p>
               <p className="text-slate-400 font-medium normal-case mt-0.5">
                 {stats.overspentCount > 0 && `${stats.overspentCount} site(s) have exceeded their budget caps. `}
                 {stats.criticalCount > 0 && `${stats.criticalCount} site(s) are utilizing more than 80% of allocated capital reserves.`}
@@ -152,24 +156,28 @@ const BudgetOverviewPage: React.FC = () => {
 
         {/* Budget List Table */}
         {isLoading ? (
-          <div className="flex flex-col items-center justify-center py-20 space-y-3 bg-[#0d1526] border border-[#1a2535] rounded-xl shadow-xl">
-            <Loader2 className="h-8 w-8 text-blue-505 animate-spin" />
-            <p className="text-xs text-slate-500 font-semibold">Computing project spent balances...</p>
+          <div className="flex flex-col items-center justify-center py-20 space-y-3 bg-[#0d1322]/70 border border-white/10 rounded-2xl shadow-xl backdrop-blur-xl relative">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
+            <Loader2 className="h-8 w-8 text-[#7c3aed] animate-spin" />
+            <p className="text-xs text-slate-400 font-bold uppercase tracking-widest">Computing project spent balances...</p>
           </div>
         ) : isError ? (
-          <div className="p-16 text-center text-rose-455 bg-[#0d1526] border border-rose-500/22 rounded-xl shadow-xl">
+          <div className="p-16 text-center text-rose-455 bg-[#0d1322]/70 border border-rose-505/22 rounded-2xl shadow-xl backdrop-blur-xl relative">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-rose-500" />
             Failed to fetch projects budget data.
           </div>
         ) : budgets?.length === 0 ? (
-          <div className="p-16 text-center text-slate-500 text-xs font-semibold bg-[#0d1526] border border-[#1a2535] rounded-xl shadow-xl">
+          <div className="p-16 text-center text-slate-500 text-xs font-bold uppercase tracking-widest bg-[#0d1322]/70 border border-white/10 rounded-2xl shadow-xl backdrop-blur-xl relative">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
             No projects found in system registry.
           </div>
         ) : (
-          <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl overflow-hidden shadow-xl">
+          <div className="bg-[#0d1322]/70 border border-white/10 rounded-2xl overflow-hidden shadow-xl backdrop-blur-xl relative">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
             <div className="overflow-x-auto w-full">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="text-[10px] text-slate-550 font-bold tracking-wider uppercase bg-white/[0.005] border-b border-[#1a2535]">
+                  <tr className="text-[9px] text-slate-400 font-black tracking-widest uppercase bg-white/[0.01] border-b border-white/10">
                     <th className="py-3.5 px-6">PROJECT</th>
                     <th className="py-3.5 px-4 text-right">TOTAL BUDGET</th>
                     <th className="py-3.5 px-4 text-right">SPENT SO FAR</th>
@@ -179,14 +187,14 @@ const BudgetOverviewPage: React.FC = () => {
                     <th className="py-3.5 px-6">ACTION</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#1a2535] text-xs">
+                <tbody className="divide-y divide-white/10 text-xs text-slate-350">
                   {budgets?.map((b) => {
                     const isOver = b.percentUsed > 100
                     const isCritical = b.percentUsed >= 80 && b.percentUsed <= 100
                     const isWarning = b.percentUsed >= 50 && b.percentUsed < 80
  
-                    let barColor = 'bg-emerald-500'
-                    let textColor = 'text-emerald-450'
+                    let barColor = 'bg-[#7c3aed]'
+                    let textColor = 'text-slate-400'
                     if (isOver) {
                       barColor = 'bg-rose-600'
                       textColor = 'text-rose-455'
@@ -199,10 +207,10 @@ const BudgetOverviewPage: React.FC = () => {
                     }
  
                     return (
-                      <tr key={b.id} className="hover:bg-white/[0.02] transition-colors group">
+                      <tr key={b.id} className="hover:bg-white/[0.015] transition-colors group">
                         {/* Project Name */}
                         <td className="py-4 px-6 font-extrabold text-white">
-                          <Link to={`/budget/${b.id}`} className="hover:text-blue-400 transition-colors">
+                          <Link to={`/budget/${b.id}`} className="hover:text-[#00d2ff] transition-colors">
                             {b.name}
                           </Link>
                         </td>
@@ -225,7 +233,7 @@ const BudgetOverviewPage: React.FC = () => {
                         {/* Progress Bar & percentage */}
                         <td className="py-4 px-6 min-w-[200px]">
                           <div className="flex items-center space-x-3">
-                            <div className="w-full bg-[#0b1220] h-2 rounded-full overflow-hidden border border-[#1a2535]">
+                            <div className="w-full bg-[#0a0f1d]/60 h-2 rounded-full overflow-hidden border border-white/10">
                               <div 
                                 className={`h-full ${barColor} rounded-full`}
                                 style={{ width: `${Math.min(b.percentUsed, 100)}%` }}
@@ -246,7 +254,7 @@ const BudgetOverviewPage: React.FC = () => {
                         <td className="py-4 px-6">
                           <Link 
                             to={`/budget/${b.id}`}
-                            className="inline-flex items-center text-[10px] font-black uppercase tracking-wider text-slate-400 group-hover:text-blue-400 transition-colors"
+                            className="inline-flex items-center text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-[#00d2ff] transition-colors"
                           >
                             Breakdown <ArrowRight className="h-3 w-3 ml-1" />
                           </Link>

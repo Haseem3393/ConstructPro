@@ -20,6 +20,7 @@ import {
   Receipt,
   Settings,
   Key,
+  CircleDot,
 } from 'lucide-react'
 
 interface SidebarLayoutProps { children: React.ReactNode }
@@ -37,6 +38,14 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({ children }) => {
   const [isMobileOpen, setIsMobileOpen] = useState(false)
   const [isProfileOpen, setIsProfileOpen] = useState(false)
   const { data } = useNotifications()
+
+  // Sidebar pin and hover collapse state variables
+  const [isPinned, setIsPinned] = useState(() => {
+    const saved = localStorage.getItem('sidebar-pinned')
+    return saved !== null ? JSON.parse(saved) : true
+  })
+  const [isHovered, setIsHovered] = useState(false)
+  const isExpanded = isPinned || isHovered
 
   const groupedMenuItems: GroupedMenuItem[] = [
     {
@@ -125,14 +134,15 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({ children }) => {
 
   const renderSidebarItem = (item: GroupedMenuItem, isMobile = false) => {
     const Icon = item.icon
+    const isSidebarExpanded = isMobile ? true : isExpanded
 
     if (item.subItems) {
-      const isExpanded = openGroups[item.name]
+      const isExpandedGroup = openGroups[item.name]
       const isActive   = hasActiveSubItem(item)
       return (
         <div key={item.name}>
           <button
-            onClick={() => toggleGroup(item.name)}
+            onClick={() => isSidebarExpanded && toggleGroup(item.name)}
             className={`group flex items-center justify-between w-full px-3 py-2.5 rounded-xl text-[13px] font-semibold transition-all duration-200 cursor-pointer ${
               isActive ? 'text-[#a78bfa] bg-[#7c3aed]/10' : 'text-slate-400 hover:text-slate-100 hover:bg-white/[0.04]'
             }`}
@@ -145,36 +155,42 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({ children }) => {
               }`}>
                 <Icon className="h-[15px] w-[15px] shrink-0" />
               </div>
-              <span>{item.name}</span>
+              <span className={`transition-all duration-350 ${isSidebarExpanded ? 'opacity-100 w-auto ml-0' : 'opacity-0 w-0 overflow-hidden ml-0'}`}>
+                {item.name}
+              </span>
             </div>
-            <ChevronDown className={`h-3.5 w-3.5 shrink-0 transition-transform duration-200 ${
-              isExpanded ? 'rotate-0 text-slate-500' : '-rotate-90 text-slate-655'
-            }`} />
+            {isSidebarExpanded && (
+              <ChevronDown className={`h-3.5 w-3.5 shrink-0 transition-transform duration-200 ${
+                isExpandedGroup ? 'rotate-0 text-slate-500' : '-rotate-90 text-slate-655'
+              }`} />
+            )}
           </button>
 
-          <div className={`overflow-hidden transition-all duration-200 ${isExpanded ? 'max-h-[600px] opacity-100 mt-0.5' : 'max-h-0 opacity-0'}`}>
-            <div className="ml-[42px] border-l border-[#7c3aed]/20 pl-3 space-y-0.5 pb-1">
-              {item.subItems.map((sub) => {
-                const isSubActive = location.pathname === sub.path
-                return (
-                  <Link
-                    key={sub.path} to={sub.path}
-                    onClick={() => isMobile && setIsMobileOpen(false)}
-                    className={`flex items-center gap-2.5 py-2 px-2.5 rounded-lg text-xs font-semibold transition-all duration-155 ${
-                      isSubActive
-                        ? 'text-[#a78bfa] bg-[#7c3aed]/10'
-                        : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.04]'
-                    }`}
-                  >
-                    <span className={`w-1.5 h-1.5 rounded-full shrink-0 transition-all ${
-                      isSubActive ? 'bg-[#a78bfa] shadow-[0_0_6px_rgba(167,139,250,0.75)]' : 'bg-slate-800'
-                    }`} />
-                    <span>{sub.name}</span>
-                  </Link>
-                )
-              })}
+          {isSidebarExpanded && (
+            <div className={`overflow-hidden transition-all duration-200 ${isExpandedGroup ? 'max-h-[600px] opacity-100 mt-0.5' : 'max-h-0 opacity-0'}`}>
+              <div className="ml-[42px] border-l border-[#7c3aed]/20 pl-3 space-y-0.5 pb-1">
+                {item.subItems.map((sub) => {
+                  const isSubActive = location.pathname === sub.path
+                  return (
+                    <Link
+                      key={sub.path} to={sub.path}
+                      onClick={() => isMobile && setIsMobileOpen(false)}
+                      className={`flex items-center gap-2.5 py-2 px-2.5 rounded-lg text-xs font-semibold transition-all duration-155 ${
+                        isSubActive
+                          ? 'text-[#a78bfa] bg-[#7c3aed]/10'
+                          : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.04]'
+                      }`}
+                    >
+                      <span className={`w-1.5 h-1.5 rounded-full shrink-0 transition-all ${
+                        isSubActive ? 'bg-[#a78bfa] shadow-[0_0_6px_rgba(167,139,250,0.75)]' : 'bg-slate-800'
+                      }`} />
+                      <span>{sub.name}</span>
+                    </Link>
+                  )
+                })}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       )
     }
@@ -197,7 +213,9 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({ children }) => {
         }`}>
           <Icon className="h-[15px] w-[15px] shrink-0" />
         </div>
-        <span>{item.name}</span>
+        <span className={`transition-all duration-355 ${isSidebarExpanded ? 'opacity-100 w-auto ml-0' : 'opacity-0 w-0 overflow-hidden ml-0'}`}>
+          {item.name}
+        </span>
       </Link>
     )
   }
@@ -207,40 +225,54 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({ children }) => {
   const additionalItems = allowedGroupedItems.filter((i) => i.section === 'ADDITIONAL')
   const portalItems    = allowedGroupedItems.filter((i) => i.section === 'PORTAL')
 
-  const SectionLabel = ({ label }: { label: string }) => (
-    <div className="px-3 pt-2 pb-1">
-      <span className="text-[9px] font-black text-slate-500 uppercase tracking-[0.20em]">{label}</span>
-    </div>
-  )
+  const SectionLabel = ({ label, isMobile = false }: { label: string; isMobile?: boolean }) => {
+    const isSidebarExpanded = isMobile ? true : isExpanded
+    return (
+      <div className="px-3 pt-2 pb-1">
+        {isSidebarExpanded ? (
+          <span className="text-[9px] font-black text-slate-500 uppercase tracking-[0.20em] transition-all duration-350">
+            {label}
+          </span>
+        ) : (
+          <div className="h-px bg-white/5 my-1 mx-1 transition-all duration-350" />
+        )}
+      </div>
+    )
+  }
 
   const renderNavMenuContent = (isMobile: boolean) => (
     <div className="space-y-4">
       {appsItems.length > 0 && (
-        <div><SectionLabel label="Modules" /><div className="space-y-0.5">{appsItems.map((i) => renderSidebarItem(i, isMobile))}</div></div>
+        <div><SectionLabel label="Modules" isMobile={isMobile} /><div className="space-y-0.5">{appsItems.map((i) => renderSidebarItem(i, isMobile))}</div></div>
       )}
       {reportsItems.length > 0 && (
-        <div><SectionLabel label="Analytics" /><div className="space-y-0.5">{reportsItems.map((i) => renderSidebarItem(i, isMobile))}</div></div>
+        <div><SectionLabel label="Analytics" isMobile={isMobile} /><div className="space-y-0.5">{reportsItems.map((i) => renderSidebarItem(i, isMobile))}</div></div>
       )}
       {additionalItems.length > 0 && (
-        <div><SectionLabel label="System" /><div className="space-y-0.5">{additionalItems.map((i) => renderSidebarItem(i, isMobile))}</div></div>
+        <div><SectionLabel label="System" isMobile={isMobile} /><div className="space-y-0.5">{additionalItems.map((i) => renderSidebarItem(i, isMobile))}</div></div>
       )}
       {portalItems.length > 0 && (
-        <div><SectionLabel label="Portal" /><div className="space-y-0.5">{portalItems.map((i) => renderSidebarItem(i, isMobile))}</div></div>
+        <div><SectionLabel label="Portal" isMobile={isMobile} /><div className="space-y-0.5">{portalItems.map((i) => renderSidebarItem(i, isMobile))}</div></div>
       )}
     </div>
   )
 
-  const BrandLogo = () => (
-    <>
-      <div className="relative shrink-0 p-2 bg-gradient-to-br from-[#7c3aed] to-[#6366f1] rounded-xl shadow-lg shadow-purple-500/25 text-white">
-        <HardHat className="h-[18px] w-[18px]" />
-      </div>
-      <div className="relative">
-        <span className="font-black text-[15px] tracking-tight text-white">ConstructPro</span>
-        <span className="block text-[9px] text-[#00d2ff] font-bold tracking-[0.15em] uppercase mt-0.5">Munaf &amp; Sons</span>
-      </div>
-    </>
-  )
+  const BrandLogo = ({ isMobile = false }: { isMobile?: boolean }) => {
+    const isSidebarExpanded = isMobile ? true : isExpanded
+    return (
+      <>
+        <div className="relative shrink-0 p-2 bg-[#7c3aed] rounded-xl text-white">
+          <svg className="h-[18px] w-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M4 4l8 12 8-12" />
+          </svg>
+        </div>
+        <div className={`relative transition-all duration-350 ${isSidebarExpanded ? 'opacity-100 translate-x-0 w-auto' : 'opacity-0 -translate-x-2 w-0 overflow-hidden'}`}>
+          <span className="font-black text-[15px] tracking-tight text-white block">The Builders</span>
+          <span className="block text-[9px] text-[#00d2ff] font-bold tracking-[0.15em] uppercase mt-0.5">ConstructPro</span>
+        </div>
+      </>
+    )
+  }
 
   return (
     <div className="h-screen w-screen bg-[#060b14] text-slate-100 flex overflow-hidden relative">
@@ -249,12 +281,34 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({ children }) => {
       <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-[#00d2ff]/10 blur-[120px] pointer-events-none z-0" />
 
       {/* ════ SIDEBAR — Desktop ════ */}
-      <aside className="hidden md:flex flex-col w-[260px] bg-[#0d1322]/80 border-r border-white/10 shrink-0 h-full overflow-hidden backdrop-blur-xl relative z-10">
+      <aside
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        className={`hidden md:flex flex-col bg-[#0d1322]/80 border-r border-white/10 shrink-0 h-full overflow-hidden backdrop-blur-xl relative z-10 transition-all duration-350 ease-in-out ${
+          isExpanded ? 'w-[260px]' : 'w-[76px]'
+        }`}
+      >
         {/* Brand Header */}
-        <div className="relative h-16 flex items-center px-5 border-b border-white/10 gap-3 shrink-0 overflow-hidden">
+        <div className="relative h-16 flex items-center px-5 border-b border-white/10 gap-3 shrink-0 overflow-hidden justify-between">
           <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#7c3aed]/[0.04] to-transparent pointer-events-none" />
-          <BrandLogo />
+          <div className="flex items-center gap-3">
+            <BrandLogo />
+          </div>
+          {isExpanded && (
+            <button
+              type="button"
+              onClick={() => {
+                const newVal = !isPinned
+                setIsPinned(newVal)
+                localStorage.setItem('sidebar-pinned', JSON.stringify(newVal))
+              }}
+              className="p-1 rounded-full text-slate-500 hover:text-white hover:bg-white/[0.06] transition-colors cursor-pointer focus:outline-none"
+              title={isPinned ? "Unpin Sidebar" : "Pin Sidebar"}
+            >
+              <CircleDot className={`h-4.5 w-4.5 ${isPinned ? 'text-[#7c3aed] fill-[#7c3aed]/20' : 'text-slate-500'}`} />
+            </button>
+          )}
         </div>
 
         {/* User Card */}
@@ -267,10 +321,12 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({ children }) => {
               </div>
               <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-[#0d1322] shadow-[0_0_6px_rgba(16,185,129,0.7)]" />
             </div>
-            <div className="overflow-hidden flex-1 relative">
-              <span className="block font-bold text-[13px] text-white truncate">{user?.name}</span>
-              <span className="block text-[10px] font-semibold text-[#00d2ff] tracking-wider uppercase mt-0.5">{user?.role?.replace('_', ' ')}</span>
-            </div>
+            {isExpanded && (
+              <div className="overflow-hidden flex-1 relative transition-all duration-350">
+                <span className="block font-bold text-[13px] text-white truncate">{user?.name}</span>
+                <span className="block text-[10px] font-semibold text-[#00d2ff] tracking-wider uppercase mt-0.5">{user?.role?.replace('_', ' ')}</span>
+              </div>
+            )}
           </div>
         </div>
 
@@ -286,7 +342,9 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({ children }) => {
             <div className="p-1.5 rounded-lg bg-white/[0.04] text-slate-700 group-hover:bg-rose-500/15 group-hover:text-rose-400 transition-colors duration-200">
               <LogOut className="h-[15px] w-[15px]" />
             </div>
-            <span>Sign Out</span>
+            {isExpanded && (
+              <span className="transition-all duration-350">Sign Out</span>
+            )}
           </button>
         </div>
       </aside>
@@ -298,7 +356,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({ children }) => {
           <aside className="relative w-[270px] bg-[#0d1322]/90 flex flex-col h-full overflow-hidden border-r border-white/10 backdrop-blur-xl">
             <div className="relative h-16 flex items-center justify-between px-5 border-b border-white/10 shrink-0">
               <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
-              <div className="flex items-center gap-3"><BrandLogo /></div>
+              <div className="flex items-center gap-3"><BrandLogo isMobile={true} /></div>
               <button onClick={() => setIsMobileOpen(false)} className="p-1.5 rounded-lg bg-white/[0.05] text-slate-500 hover:text-white transition-colors cursor-pointer">
                 <X className="h-4 w-4" />
               </button>

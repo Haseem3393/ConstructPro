@@ -92,8 +92,8 @@ const MaterialDetailsPage: React.FC = () => {
     return (
       <SidebarLayout>
         <div className="flex flex-col items-center justify-center py-40 space-y-3">
-          <Loader2 className="h-10 w-10 text-blue-505 animate-spin" />
-          <p className="text-slate-500 text-sm font-semibold">Loading material details...</p>
+          <Loader2 className="h-10 w-10 text-[#7c3aed] animate-spin" />
+          <p className="text-slate-400 text-sm font-semibold">Loading material details...</p>
         </div>
       </SidebarLayout>
     )
@@ -102,11 +102,11 @@ const MaterialDetailsPage: React.FC = () => {
   if (isError || !material) {
     return (
       <SidebarLayout>
-        <div className="p-8 text-center text-rose-455 bg-rose-500/10 border border-rose-500/22 rounded-xl space-y-4 max-w-md mx-auto">
-          <AlertTriangle className="h-12 w-12 mx-auto text-rose-400 animate-pulse" />
-          <p className="font-extrabold text-sm uppercase tracking-wider">Material Registry Error</p>
-          <p className="text-xs text-slate-400">The requested material details could not be retrieved.</p>
-          <Link to="/materials" className="inline-flex text-xs font-bold text-blue-405 hover:text-blue-300">
+        <div className="p-8 text-center text-rose-455 bg-[#0d1322]/70 border border-rose-500/22 rounded-2xl space-y-4 max-w-md mx-auto backdrop-blur-xl">
+          <AlertTriangle className="h-12 w-12 mx-auto text-rose-450 animate-bounce" />
+          <p className="font-extrabold text-sm uppercase tracking-widest">Material Registry Error</p>
+          <p className="text-xs text-slate-400 font-semibold">The requested material details could not be retrieved.</p>
+          <Link to="/materials" className="inline-flex text-xs font-bold text-[#00d2ff] hover:text-[#00d2ff]/80 cursor-pointer">
             Back to Registry
           </Link>
         </div>
@@ -124,7 +124,7 @@ const MaterialDetailsPage: React.FC = () => {
         <div className="flex items-center justify-between">
           <Link
             to="/materials"
-            className="inline-flex items-center text-xs font-bold text-slate-400 hover:text-white uppercase tracking-wider transition-colors"
+            className="inline-flex items-center text-xs font-bold text-slate-400 hover:text-white uppercase tracking-widest transition-colors cursor-pointer"
           >
             <ArrowLeft className="h-4 w-4 mr-1.5" />
             Back to Materials
@@ -133,14 +133,14 @@ const MaterialDetailsPage: React.FC = () => {
           <div className="flex items-center gap-2">
             <Link
               to={`/materials/${material.id}/stock?mode=in`}
-              className="inline-flex items-center px-3 py-1.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-405 border border-emerald-500/22 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors"
+              className="inline-flex items-center px-3 py-1.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/22 rounded-xl font-bold text-xs uppercase tracking-widest transition-colors cursor-pointer"
             >
               <ArrowDownLeft className="h-4 w-4 mr-1.5" />
               Stock In
             </Link>
             <Link
               to={`/materials/${material.id}/stock?mode=out`}
-              className="inline-flex items-center px-3 py-1.5 bg-rose-500/10 hover:bg-rose-500/20 text-rose-455 border border-rose-500/22 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors"
+              className="inline-flex items-center px-3 py-1.5 bg-rose-500/10 hover:bg-rose-500/20 text-rose-455 border border-rose-500/22 rounded-xl font-bold text-xs uppercase tracking-widest transition-colors cursor-pointer"
             >
               <ArrowUpRight className="h-4 w-4 mr-1.5" />
               Stock Out
@@ -151,17 +151,18 @@ const MaterialDetailsPage: React.FC = () => {
         {/* Dashboard Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Material Info Card */}
-          <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-6 shadow-xl space-y-4">
+          <div className="bg-[#0d1322]/70 border border-white/10 rounded-2xl p-6 shadow-xl space-y-4 backdrop-blur-xl relative">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
             <div className="flex justify-between items-start">
               <div>
-                <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/22">
+                <span className="text-[10px] font-black text-[#00d2ff] uppercase tracking-widest bg-[#7c3aed]/10 px-2 py-0.5 rounded border border-[#7c3aed]/22">
                   {material.category || 'Other'}
                 </span>
                 <h2 className="text-2xl font-black text-white mt-2.5 tracking-tight">{material.name}</h2>
               </div>
             </div>
 
-            <div className="space-y-3.5 pt-4 border-t border-[#1a2535]">
+            <div className="space-y-3.5 pt-4 border-t border-white/10">
               <div className="flex items-center text-xs text-slate-400 space-x-2.5">
                 <Building className="h-4 w-4 text-slate-500 shrink-0" />
                 <div>
@@ -195,12 +196,12 @@ const MaterialDetailsPage: React.FC = () => {
                 <span className="text-xs font-bold">Stock level is below threshold ({material.minimumLevel} {material.unit})</span>
               </div>
             )}
-          </div>
-
+          </div>          
           {/* Current Stock Large Display */}
-          <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-6 shadow-xl flex flex-col justify-between">
+          <div className="bg-[#0d1322]/70 border border-white/10 rounded-2xl p-6 shadow-xl flex flex-col justify-between backdrop-blur-xl relative">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
             <div>
-              <span className="block text-[10px] font-black text-slate-500 uppercase tracking-widest">Current Inventory Balance</span>
+              <span className="block text-[10px] font-black text-slate-400 uppercase tracking-widest">Current Inventory Balance</span>
               <div className="flex items-baseline space-x-2 mt-4">
                 <span className={`text-6xl font-black tracking-tight ${isLowStock ? 'text-rose-455' : 'text-emerald-400'}`}>
                   {material.currentStock}
@@ -209,7 +210,7 @@ const MaterialDetailsPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 mt-6 pt-4 border-t border-[#1a2535]">
+            <div className="grid grid-cols-2 gap-4 mt-6 pt-4 border-t border-white/10">
               <div>
                 <span className="block text-[9px] text-slate-500 font-bold uppercase tracking-wider">Total Received</span>
                 <span className="text-white text-base font-extrabold">{material.stockIn}</span>
@@ -222,31 +223,32 @@ const MaterialDetailsPage: React.FC = () => {
           </div>
 
           {/* Stock Level Line Chart */}
-          <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl p-6 shadow-xl flex flex-col justify-between">
+          <div className="bg-[#0d1322]/70 border border-white/10 rounded-2xl p-6 shadow-xl flex flex-col justify-between backdrop-blur-xl relative">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
             <div>
-              <span className="block text-[10px] font-black text-slate-500 uppercase tracking-widest">Stock Movement Level</span>
+              <span className="block text-[10px] font-black text-slate-400 uppercase tracking-widest">Stock Movement Level</span>
             </div>
 
             {chartPoints.length < 2 ? (
-              <div className="h-32 flex items-center justify-center text-xs text-slate-500 font-semibold">
+              <div className="h-32 flex items-center justify-center text-xs text-slate-500 font-bold">
                 Not enough transactions to plot line chart.
               </div>
             ) : (
               <div className="mt-4">
                 <svg viewBox="0 0 500 150" className="w-full overflow-visible">
                   {/* Grid Lines */}
-                  <line x1="15" y1="15" x2="485" y2="15" stroke="#1a2535" strokeWidth="1" strokeDasharray="3" />
-                  <line x1="15" y1="135" x2="485" y2="135" stroke="#1a2535" strokeWidth="1" />
+                  <line x1="15" y1="15" x2="485" y2="15" stroke="rgba(255,255,255,0.05)" strokeWidth="1" strokeDasharray="3" />
+                  <line x1="15" y1="135" x2="485" y2="135" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
                   
                   {/* SVG Line Graph */}
                   <path
                     d={svgPath}
                     fill="none"
-                    stroke="#3b82f6"
+                    stroke="#00d2ff"
                     strokeWidth="3.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="drop-shadow-[0_4px_12px_rgba(59,130,246,0.25)]"
+                    className="drop-shadow-[0_4px_12px_rgba(0,210,255,0.25)]"
                   />
 
                   {/* Chart Dots */}
@@ -262,10 +264,10 @@ const MaterialDetailsPage: React.FC = () => {
                           cx={x}
                           cy={y}
                           r="4.5"
-                          fill="#0d1526"
-                          stroke="#60a5fa"
+                          fill="#0d1322"
+                          stroke="#7c3aed"
                           strokeWidth="2.5"
-                          className="hover:r-6 hover:fill-blue-400 transition-all"
+                          className="hover:r-6 hover:fill-[#00d2ff] transition-all"
                         />
                         <title>{`${p.date}: ${p.stock} ${material.unit}`}</title>
                       </g>
@@ -284,22 +286,23 @@ const MaterialDetailsPage: React.FC = () => {
         {/* Audit Ledgers Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Stock In Log */}
-          <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl overflow-hidden shadow-xl">
-            <div className="px-6 py-4 border-b border-[#1a2535] bg-white/[0.01]">
-              <h3 className="font-extrabold text-xs text-white uppercase tracking-wider flex items-center text-emerald-450">
+          <div className="bg-[#0d1322]/70 border border-white/10 rounded-2xl overflow-hidden shadow-xl backdrop-blur-xl relative">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
+            <div className="px-6 py-4 border-b border-white/10 bg-white/[0.01]">
+              <h3 className="font-extrabold text-xs text-emerald-400 uppercase tracking-widest flex items-center">
                 <ArrowDownLeft className="h-4 w-4 mr-1.5" /> Stock In Deliveries
               </h3>
             </div>
 
             {stockInTxns.length === 0 ? (
-              <div className="p-12 text-center text-slate-500 text-xs font-semibold">
+              <div className="p-12 text-center text-slate-500 text-xs font-bold bg-[#0d1322]/70">
                 No delivery transactions recorded.
               </div>
             ) : (
               <div className="overflow-x-auto w-full">
                 <table className="w-full text-left border-collapse">
                   <thead>
-                    <tr className="text-[10px] text-slate-500 font-bold tracking-wider uppercase bg-white/[0.005] border-b border-[#1a2535]">
+                    <tr className="text-[10px] text-slate-400 font-black tracking-widest uppercase bg-white/[0.01] border-b border-white/10">
                       <th className="py-3 px-6">DATE</th>
                       <th className="py-3 px-4 text-center">QUANTITY</th>
                       <th className="py-3 px-4 text-right">UNIT PRICE</th>
@@ -307,20 +310,20 @@ const MaterialDetailsPage: React.FC = () => {
                       <th className="py-3 px-6">SUPPLIER / REF</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#1a2535] text-xs">
+                  <tbody className="divide-y divide-white/10 text-xs text-slate-300">
                     {stockInTxns.map((t: any) => (
-                      <tr key={t.id} className="hover:bg-white/[0.02] transition-colors">
-                        <td className="py-3.5 px-6 font-semibold text-slate-300">{formatDate(t.date)}</td>
+                      <tr key={t.id} className="hover:bg-white/[0.015] transition-colors">
+                        <td className="py-3.5 px-6 font-semibold">{formatDate(t.date)}</td>
                         <td className="py-3.5 px-4 text-center font-bold text-white">
                           +{t.quantity}
                         </td>
-                        <td className="py-3.5 px-4 text-right text-slate-400 font-medium">
+                        <td className="py-3.5 px-4 text-right text-slate-400 font-semibold">
                           {t.unitPrice > 0 ? formatCurrency(t.unitPrice) : '-'}
                         </td>
-                        <td className="py-3.5 px-4 text-right text-emerald-405 font-bold">
+                        <td className="py-3.5 px-4 text-right text-emerald-400 font-black tabular-nums">
                           {t.unitPrice > 0 ? formatCurrency(t.quantity * t.unitPrice) : '-'}
                         </td>
-                        <td className="py-3.5 px-6 text-slate-400">
+                        <td className="py-3.5 px-6 text-slate-400 font-semibold">
                           {t.supplier?.name || 'Opening Stock / System'}
                           {t.invoiceNumber && <span className="block text-[9px] text-slate-500 font-bold mt-0.5">Inv: {t.invoiceNumber}</span>}
                         </td>
@@ -333,35 +336,36 @@ const MaterialDetailsPage: React.FC = () => {
           </div>
 
           {/* Stock Out Log */}
-          <div className="bg-[#0d1526] border border-[#1a2535] rounded-xl overflow-hidden shadow-xl">
-            <div className="px-6 py-4 border-b border-[#1a2535] bg-white/[0.01]">
-              <h3 className="font-extrabold text-xs text-white uppercase tracking-wider flex items-center text-rose-455">
+          <div className="bg-[#0d1322]/70 border border-white/10 rounded-2xl overflow-hidden shadow-xl backdrop-blur-xl relative">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#7c3aed] via-[#00d2ff] to-transparent" />
+            <div className="px-6 py-4 border-b border-white/10 bg-white/[0.01]">
+              <h3 className="font-extrabold text-xs text-rose-455 uppercase tracking-widest flex items-center">
                 <ArrowUpRight className="h-4 w-4 mr-1.5" /> Stock Out Consumptions
               </h3>
             </div>
 
             {stockOutTxns.length === 0 ? (
-              <div className="p-12 text-center text-slate-500 text-xs font-semibold">
+              <div className="p-12 text-center text-slate-500 text-xs font-bold bg-[#0d1322]/70">
                 No consumption logs recorded.
               </div>
             ) : (
               <div className="overflow-x-auto w-full">
                 <table className="w-full text-left border-collapse">
                   <thead>
-                    <tr className="text-[10px] text-slate-550 font-bold tracking-wider uppercase bg-white/[0.005] border-b border-[#1a2535]">
+                    <tr className="text-[10px] text-slate-400 font-black tracking-widest uppercase bg-white/[0.01] border-b border-white/10">
                       <th className="py-3 px-6">DATE</th>
                       <th className="py-3 px-4 text-center">QUANTITY</th>
                       <th className="py-3 px-6">USAGE DESCRIPTION / DESTINATION</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#1a2535] text-xs">
+                  <tbody className="divide-y divide-white/10 text-xs text-slate-300">
                     {stockOutTxns.map((t: any) => (
-                      <tr key={t.id} className="hover:bg-white/[0.02] transition-colors">
-                        <td className="py-3.5 px-6 font-semibold text-slate-300">{formatDate(t.date)}</td>
+                      <tr key={t.id} className="hover:bg-white/[0.015] transition-colors">
+                        <td className="py-3.5 px-6 font-semibold">{formatDate(t.date)}</td>
                         <td className="py-3.5 px-4 text-center font-bold text-rose-455">
                           -{t.quantity}
                         </td>
-                        <td className="py-3.5 px-6 text-slate-400 leading-normal">
+                        <td className="py-3.5 px-6 text-slate-400 font-semibold leading-normal">
                           {t.description}
                         </td>
                       </tr>
